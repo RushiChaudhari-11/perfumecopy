@@ -1,0 +1,1047 @@
+/* src/components/TrendingSeason.css */
+/* Ultra-Premium Luxury "Trending This Season" Section */
+/* Uses Luxurious Marble and Gold Floral Stage background with Ivory & Champagne Gold Palette */
+
+:root {
+  --ts-ivory: #FFF8EF;
+  --ts-ivory-soft: #FFFDF9;
+  --ts-gold: #C89B52;
+  --ts-gold-hover: #b6873e;
+  --ts-gold-light: #E8D4BB;
+  --ts-gold-soft: rgba(200, 155, 82, 0.15);
+  --ts-burgundy: #790D2D;
+  --ts-burgundy-dark: #5c0922;
+  --ts-burgundy-soft: rgba(121, 13, 45, 0.08);
+  --ts-text-dark: #241A18;
+  --ts-text-muted: #6b5a55;
+  --ts-font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --ts-font-sans: "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.trending-section {
+  position: relative;
+  width: 100%;
+  min-height: 820px;
+  padding: 80px 0 75px;
+  overflow: hidden;
+  font-family: var(--ts-font-sans);
+  color: var(--ts-text-dark);
+  background-color: var(--ts-ivory);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+
+/* Subtle warm overlay to guarantee maximum text and card readability */
+.trending-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(255, 248, 239, 0.45) 0%,
+    rgba(255, 248, 239, 0.65) 60%,
+    rgba(250, 244, 235, 0.82) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.trending-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 36px;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+/* ─── 1. Elegant Centered Heading ────────────────────────────────────────── */
+.trending-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 34px;
+}
+
+.trending-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--ts-gold);
+  margin-bottom: 12px;
+}
+
+.trending-eyebrow-star {
+  font-size: 12px;
+  color: var(--ts-gold);
+}
+
+.trending-title {
+  font-family: var(--ts-font-serif);
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ts-text-dark);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+}
+
+.trending-gold-text {
+  color: var(--ts-gold);
+  font-style: italic;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* Delicate Gold Decorative Divider */
+.trending-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto 18px;
+  max-width: 240px;
+}
+
+.trending-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ts-gold-light), transparent);
+}
+
+.trending-divider-diamond {
+  color: var(--ts-gold);
+  font-size: 13px;
+  line-height: 1;
+  transform: rotate(0deg);
+}
+
+.trending-subtitle {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ts-text-muted);
+  margin: 0 auto;
+  max-width: 560px;
+}
+
+/* ─── 2. Functional Category Filters ─────────────────────────────────────── */
+.trending-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-bottom: 40px;
+}
+
+.trending-filter-btn {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid var(--ts-gold-light);
+  border-radius: 999px;
+  padding: 9px 24px;
+  font-family: var(--ts-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ts-text-dark);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  outline: none;
+}
+
+.trending-filter-btn:hover {
+  background: #ffffff;
+  border-color: var(--ts-gold);
+  color: var(--ts-burgundy);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 14px rgba(200, 155, 82, 0.18);
+}
+
+.trending-filter-btn.active {
+  background: var(--ts-burgundy);
+  border-color: var(--ts-burgundy);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(121, 13, 45, 0.25);
+}
+
+/* ─── 3. Carousel Viewport ──────────────────────────────────────────────── */
+.trending-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+/* Horizontal Track (Powered by GSAP, no CSS snap/smooth fighting) */
+.trending-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  align-items: stretch; /* Forces equal height across every card */
+  padding: 10px 4px 24px;
+  scroll-behavior: auto !important; /* GSAP controls the smooth scroll curve */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.trending-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Navigation Buttons (< and >) ──────────────────────────────────────── */
+.trending-nav-btn {
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--ts-burgundy);
+  border: 1.5px solid var(--ts-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 25;
+  box-shadow: 0 8px 24px rgba(36, 26, 24, 0.12);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.trending-nav-btn:hover:not(:disabled) {
+  background: var(--ts-burgundy);
+  color: #ffffff;
+  border-color: var(--ts-burgundy);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 10px 28px rgba(121, 13, 45, 0.35);
+}
+
+.trending-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.trending-nav-btn.prev {
+  left: -22px;
+}
+
+.trending-nav-btn.next {
+  right: -22px;
+}
+
+/* ─── Ultra-Premium Product Card (4 EQUAL BOXES per desktop row) ────────── */
+.trending-card {
+  opacity: 1;
+  visibility: visible;
+  flex: 0 0 calc((100% - 72px) / 4);
+  width: calc((100% - 72px) / 4);
+  min-width: 275px;
+  max-width: 315px;
+  background: #ffffff;
+  border: 1.5px solid var(--ts-gold-light);
+  border-radius: 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(36, 26, 24, 0.06);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+.trending-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--ts-gold);
+  box-shadow: 0 18px 45px rgba(121, 13, 45, 0.14), 0 0 16px rgba(200, 155, 82, 0.18);
+}
+
+/* Fixed Studio Perfume Stage (Balanced Compact Height) */
+.trending-img-box {
+  position: relative;
+  width: 100%;
+  height: 195px;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #FFF9F2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(200, 155, 82, 0.2);
+  flex-shrink: 0;
+}
+
+.trending-product-img {
+  max-width: 85%;
+  max-height: 165px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 8px 14px rgba(36, 26, 24, 0.08));
+}
+
+.trending-card:hover .trending-product-img {
+  transform: scale(1.06);
+}
+
+/* Category Badges */
+.trending-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.trending-badge.bestseller {
+  background: var(--ts-burgundy);
+}
+
+.trending-badge.limited {
+  background: var(--ts-gold);
+}
+
+.trending-badge.new {
+  background: #15803d;
+}
+
+.trending-badge.sold-out {
+  background: #78716c;
+}
+
+/* Floating Circular Heart Wishlist Button */
+.trending-wishlist-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--ts-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ts-text-dark);
+  box-shadow: 0 4px 12px rgba(36, 26, 24, 0.08);
+  transition: all 0.2s ease;
+  outline: none;
+  padding: 0;
+}
+
+.trending-wishlist-btn:hover {
+  transform: scale(1.1);
+  border-color: var(--ts-burgundy);
+  color: var(--ts-burgundy);
+  background: #ffffff;
+}
+
+.trending-wishlist-btn.active {
+  color: var(--ts-burgundy);
+  border-color: var(--ts-burgundy);
+  background: var(--ts-burgundy-soft);
+}
+
+/* ─── Product Card Information (Equalized Box Anatomy) ───────────────────── */
+.trending-info {
+  padding: 13px 15px 15px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.trending-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--ts-gold);
+  margin-bottom: 3px;
+  height: 14px;
+  display: block;
+}
+
+.trending-name {
+  font-family: var(--ts-font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.28;
+  color: var(--ts-text-dark);
+  margin: 0 0 4px 0;
+  height: 38px; /* Clamped 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Ratings */
+.trending-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 16px;
+  margin-bottom: 6px;
+}
+
+.trending-stars {
+  display: flex;
+  gap: 2px;
+  color: var(--ts-gold);
+  font-size: 12px;
+}
+
+.trending-reviews {
+  font-size: 11.5px;
+  color: var(--ts-text-muted);
+  font-weight: 500;
+}
+
+/* Size Variant Pills (50ml / 100ml) */
+.trending-variant-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  margin-bottom: 6px;
+}
+
+.trending-variant-pill {
+  padding: 2.5px 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid rgba(200, 155, 82, 0.45);
+  background: rgba(255, 248, 239, 0.7);
+  color: #6b5a55;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.2;
+  font-family: inherit;
+}
+
+.trending-variant-pill:hover {
+  border-color: #790D2D;
+  color: #790D2D;
+}
+
+.trending-variant-pill.active {
+  background: #790D2D;
+  color: #ffffff;
+  border-color: #790D2D;
+  box-shadow: 0 2px 6px rgba(121, 13, 45, 0.2);
+}
+
+/* Pricing Row */
+.trending-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: auto; /* Anchors to bottom consistently */
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.trending-price {
+  font-family: var(--ts-font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ts-text-dark);
+}
+
+.trending-original-price {
+  font-size: 12px;
+  color: #a89f9b;
+  text-decoration: line-through;
+}
+
+.trending-discount-badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--ts-burgundy);
+  background: var(--ts-burgundy-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+/* Primary Burgundy Add to Cart Button */
+.trending-action-btn {
+  width: 100%;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px 4px 16px;
+  background-color: var(--ts-burgundy);
+  color: #ffffff;
+  border: 1.5px solid var(--ts-burgundy);
+  border-radius: 24px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(121, 13, 45, 0.2);
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.trending-action-btn:hover:not(:disabled) {
+  background-color: var(--ts-burgundy-dark);
+  border-color: var(--ts-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(121, 13, 45, 0.28), 0 0 10px rgba(200, 155, 82, 0.2);
+}
+
+.trending-btn-arrow-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--ts-burgundy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  font-weight: bold;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.trending-action-btn:hover:not(:disabled) .trending-btn-arrow-circle {
+  transform: translateX(2px);
+}
+
+.trending-action-btn.added {
+  background-color: #15803d;
+  border-color: #15803d;
+}
+
+.trending-action-btn.disabled {
+  background-color: #e5e5e5;
+  border-color: #e5e5e5;
+  color: #a3a3a3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Card Quantity Stepper */
+.trending-card .card-qty-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFDF9;
+  border: 1.5px solid #E8D4BB;
+  border-radius: 24px;
+  height: 38px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 3px 5px;
+  box-shadow: 0 2px 6px rgba(121, 13, 45, 0.05);
+}
+
+.trending-card .card-qty-btn {
+  background: #F6EADB;
+  color: #790D2D;
+  border: none;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.trending-card .card-qty-btn:hover {
+  background: #edd8bf;
+  color: #55071d;
+  transform: scale(1.05);
+}
+
+.trending-card .card-qty-val {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14.5px;
+  color: #262626;
+  min-width: 24px;
+  text-align: center;
+  user-select: none;
+}
+
+/* ─── GSAP Animated Scrollbar ────────────────────────────────────────────── */
+.trending-scrollbar-container {
+  max-width: 380px;
+  margin: 18px auto 38px;
+  padding: 0 20px;
+}
+
+.trending-scrollbar-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(200, 155, 82, 0.25);
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.trending-scrollbar-thumb {
+  width: 32%;
+  height: 100%;
+  background: var(--ts-gold);
+  border-radius: 999px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: background 0.2s ease;
+}
+
+.trending-scrollbar-track:hover .trending-scrollbar-thumb {
+  background: var(--ts-burgundy);
+}
+
+/* ─── 4. View All Collections Link CTA ──────────────────────────────────── */
+.trending-footer-cta {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.trending-view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: var(--ts-text-dark);
+  border: 1.5px solid var(--ts-gold);
+  border-radius: 999px;
+  padding: 13px 34px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(200, 155, 82, 0.12);
+  outline: none;
+}
+
+.trending-view-all-btn:hover {
+  background: var(--ts-burgundy);
+  border-color: var(--ts-burgundy);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(121, 13, 45, 0.28);
+}
+
+.trending-view-all-btn svg {
+  transition: transform 0.25s ease;
+}
+
+.trending-view-all-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* ─── RESPONSIVE BREAKPOINTS (All Devices) ──────────────────────────────── */
+@media (max-width: 1200px) {
+  .trending-card {
+    flex: 0 0 calc((100% - 48px) / 3);
+    width: calc((100% - 48px) / 3);
+  }
+}
+
+@media (max-width: 900px) {
+  .trending-section {
+    padding: 48px 0 40px;
+    min-height: auto;
+  }
+
+  .trending-container {
+    padding: 0 16px;
+  }
+
+  .trending-card {
+    flex: 0 0 calc((100% - 16px) / 2);
+    width: calc((100% - 16px) / 2);
+    min-width: 155px;
+    max-width: 260px;
+    border-radius: 14px;
+  }
+
+  .trending-img-box {
+    height: 160px;
+    padding: 12px;
+  }
+
+  .trending-product-img {
+    max-height: 135px;
+  }
+
+  .trending-info {
+    padding: 10px 12px 12px;
+  }
+
+  .trending-name {
+    font-size: 13.5px;
+    height: 34px;
+  }
+
+  .trending-price {
+    font-size: 15.5px;
+  }
+
+  .trending-action-btn {
+    height: 36px;
+    padding: 3px 6px 3px 12px;
+    font-size: 11.5px;
+    white-space: nowrap;
+  }
+
+  .trending-btn-arrow-circle {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+
+  .trending-nav-btn.prev {
+    left: -8px;
+  }
+
+  .trending-nav-btn.next {
+    right: -8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trending-filter-bar {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px 6px 12px;
+    margin-bottom: 20px;
+    gap: 8px;
+  }
+
+  .trending-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .trending-filter-btn {
+    flex-shrink: 0;
+    padding: 7px 16px;
+    font-size: 11.5px;
+    white-space: nowrap;
+  }
+
+  .trending-title {
+    font-size: clamp(24px, 5.2vw, 32px);
+  }
+
+  .trending-subtitle {
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .trending-section {
+    padding: 32px 0 28px;
+  }
+
+  .trending-container {
+    padding: 0 10px;
+  }
+
+  .trending-track {
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Compact Balanced Mobile Cards */
+  .trending-card {
+    flex: 0 0 162px;
+    width: 162px;
+    min-width: 148px;
+    max-width: 180px;
+    border-radius: 12px;
+  }
+
+  .trending-badge {
+    top: 6px;
+    left: 6px;
+    padding: 2px 5px;
+    font-size: 7.5px;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+  }
+
+  .trending-wishlist-btn {
+    top: 6px;
+    right: 6px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .trending-wishlist-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .trending-img-box {
+    height: 130px;
+    padding: 10px;
+  }
+
+  .trending-product-img {
+    max-height: 105px;
+  }
+
+  .trending-info {
+    padding: 8px 10px 10px;
+  }
+
+  .trending-cat {
+    font-size: 8.5px;
+    letter-spacing: 0.8px;
+    margin-bottom: 2px;
+    height: 12px;
+  }
+
+  .trending-name {
+    font-size: 12px;
+    line-height: 1.2;
+    margin-bottom: 2px;
+    height: 28px;
+  }
+
+  .trending-rating {
+    height: 13px;
+    margin-bottom: 4px;
+    gap: 4px;
+  }
+
+  .trending-stars {
+    font-size: 9px;
+  }
+
+  .trending-reviews {
+    font-size: 9px;
+  }
+
+  .trending-variant-bar {
+    gap: 4px;
+    margin-top: 2px;
+    margin-bottom: 5px;
+  }
+
+  .trending-variant-pill {
+    padding: 2px 5px;
+    font-size: 9.5px;
+    border-radius: 3px;
+  }
+
+  .trending-price-row {
+    gap: 4px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+
+  .trending-price {
+    font-size: 13.5px;
+  }
+
+  .trending-original-price {
+    font-size: 10px;
+  }
+
+  .trending-discount-badge {
+    font-size: 8.5px;
+    padding: 1.5px 4px;
+  }
+
+  .trending-action-btn {
+    height: 32px;
+    padding: 2px 6px 2px 10px;
+    font-size: 11px;
+    letter-spacing: 0;
+    white-space: nowrap;
+    border-radius: 20px;
+  }
+
+  .trending-btn-arrow-circle {
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+  }
+
+  .trending-card .card-qty-stepper {
+    height: 32px;
+    padding: 2px 4px;
+    border-radius: 20px;
+  }
+
+  .trending-card .card-qty-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+
+  .trending-card .card-qty-val {
+    font-size: 12px;
+    min-width: 18px;
+  }
+
+  .trending-nav-btn {
+    display: none;
+  }
+
+  .trending-scrollbar-track {
+    margin: 10px auto 14px;
+    height: 3px;
+  }
+}
+
+@media (max-width: 360px) {
+  .trending-container {
+    padding: 0 8px;
+  }
+
+  .trending-card {
+    flex: 0 0 152px;
+    width: 152px;
+    min-width: 145px;
+  }
+
+  .trending-img-box {
+    height: 140px;
+    padding: 10px;
+  }
+
+  .trending-body {
+    padding: 8px 8px 10px;
+  }
+
+  .trending-card-title {
+    font-size: 12px;
+    min-height: 30px;
+  }
+
+  .trending-price {
+    font-size: 13.5px;
+  }
+
+  .trending-add-cart-btn {
+    padding: 7px 8px;
+    font-size: 9.5px;
+  }
+
+  .trending-title {
+    font-size: 22px;
+  }
+}
+
+/* ─── Skeleton Loading, Error & Empty States ────────────────────────────── */
+.trending-skeleton-card {
+  pointer-events: none;
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(232, 212, 187, 0.3) 0%,
+    rgba(255, 248, 239, 0.7) 50%,
+    rgba(232, 212, 187, 0.3) 100%
+  );
+  background-size: 200% 100%;
+  animation: ts-shimmer 1.5s infinite ease-in-out;
+  border-radius: 8px;
+}
+
+@keyframes ts-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.trending-empty-state,
+.trending-error-state {
+  text-align: center;
+  padding: 60px 24px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px dashed rgba(200, 155, 82, 0.45);
+  border-radius: 18px;
+  max-width: 620px;
+  margin: 30px auto;
+  backdrop-filter: blur(8px);
+}
+
+.trending-empty-title,
+.trending-error-title {
+  font-family: var(--ts-font-serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ts-text-dark);
+  margin: 0 0 10px 0;
+}
+
+.trending-empty-desc,
+.trending-error-desc {
+  font-size: 14px;
+  color: var(--ts-text-muted);
+  margin: 0 0 22px 0;
+  line-height: 1.6;
+}
+
+.trending-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 26px;
+  background: var(--ts-burgundy);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--ts-font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.trending-retry-btn:hover {
+  background: var(--ts-burgundy-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(121, 13, 45, 0.25);
+}

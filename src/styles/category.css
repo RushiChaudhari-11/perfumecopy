@@ -1,0 +1,507 @@
+/* src/styles/category.css
+   Shared stylesheet for both:
+   1) CategoryPage.jsx    — full /collections/:category page (cp- prefixed)
+   2) CategorySection.jsx — homepage Men/Women preview blocks (cat- prefixed;
+      the skeleton/empty states here are the ones actually used today, since
+      CategorySection itself now renders with featured-section/grid/view-all
+      classes from featured.css to match Featured Collection exactly)
+
+   THEME UPDATE: moved off the dark noir/gold background to the same clean
+   white background as featured.css. Pink → purple is kept as the one
+   accent (titles, buttons, count pill, price-adjacent UI) so everything
+   reads as one consistent light, soft brand language across Featured
+   Collection, "For Him"/"For Her", and the full category page.
+*/
+
+/* ============================================================
+   PART 1 — CategoryPage (full collection page) — cp- prefixed
+   ============================================================ */
+
+.cp-page {
+  --cp-pink: #ff2d78;
+  --cp-purple: #9b2dff;
+  --cp-ink: #2b2620;
+  --cp-muted: #8a8177;
+  --cp-line: #ece6db;
+  --cp-cream: #fdfbf7;
+  --cp-max-width: 1100px;
+
+  position: relative;
+  min-height: 70vh;
+  padding: 10px 0 50px;
+  color: var(--cp-ink);
+  overflow: hidden;
+  scroll-margin-top: 90px;
+  
+}
+
+
+/* Single source of truth for this page's background — plain white,
+   same as .featured-section, so there's no dark-to-light seam. */
+section.cp-page {
+  background: #ffffff;
+}
+
+.cp-container {
+  width: 90%;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* Sparkle field removed — flat white background matches the rest of
+   the light theme (no floating decor, see featured.css). */
+.cp-sparkle { display: none; }
+
+/* Back button — soft outline pill, pink-purple fill on hover */
+.cp-back {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--cp-ink);
+  text-decoration: none;
+  border: 1px solid var(--cp-line);
+  background: transparent;
+  padding: 10px 22px;
+  border-radius: 999px;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  cursor: pointer;
+  margin-bottom: 8px !important;   /* 20px se 8px */
+
+}
+.cp-back:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(120deg, var(--cp-pink), var(--cp-purple));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(255, 45, 120, 0.22);
+}
+
+.cp-hero {
+  position: relative;
+  z-index: 2;
+  margin-top: 6px;
+  margin: 22px 0 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cp-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cp-purple);
+  opacity: 0.85;
+}
+
+.cp-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(26px, 3.6vw, 38px);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: -0.01em;
+  background: linear-gradient(120deg, var(--cp-pink), var(--cp-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  width: fit-content;
+}
+
+.cp-subtitle {
+  font-size: 15px;
+  color: var(--cp-muted);
+  margin: 0;
+  max-width: 52ch;
+}
+
+.cp-divider {
+  height: 2px;
+  width: 88px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--cp-pink), var(--cp-purple));
+  opacity: 0.6;
+}
+
+.cp-count-pill {
+  align-self: flex-start;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cp-purple);
+  border: 1px solid var(--cp-line);
+  background: #faf6ef;
+  padding: 5px 14px;
+  border-radius: 999px;
+}
+
+/* ---------- Search / Filter / Sort controls ---------- */
+.cp-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.cp-search-wrap {
+  flex: 1 1 100%;
+}
+.cp-search-wrap input {
+  width: 100%;
+  max-width: 520px;
+  min-width: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--cp-line);
+  background: #fdfbf7;
+  color: var(--cp-ink);
+  transition: all 0.18s ease;
+}
+.cp-search-wrap input::placeholder {
+  color: var(--cp-muted);
+}
+.cp-search-wrap input:focus {
+  outline: none;
+  border-color: var(--cp-purple);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(155, 45, 255, 0.12);
+}
+
+.cp-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Custom select — matches shop/ProductsPage's CustomSelect component */
+.cp-page .custom-select {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  min-width: 180px;
+  user-select: none;
+  z-index: 10;
+}
+.cp-page .custom-select .select-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #fdfbf7;
+  border: 1px solid var(--cp-line);
+  color: var(--cp-ink);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.cp-page .custom-select .select-btn:hover {
+  border-color: var(--cp-purple);
+  background: #ffffff;
+}
+.cp-page .custom-select .caret {
+  margin-left: 10px;
+  font-size: 12px;
+  color: var(--cp-muted);
+  transform: rotate(0deg);
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.cp-page .custom-select.open .caret {
+  transform: rotate(180deg);
+  color: var(--cp-pink);
+}
+.cp-page .custom-select .menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  color: var(--cp-ink);
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 12px 28px rgba(43, 38, 32, 0.1);
+  border: 1px solid var(--cp-line);
+  display: none;
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 1200;
+  transform-origin: top center;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+  opacity: 1;
+  will-change: transform, opacity;
+}
+.cp-page .custom-select.open .menu {
+  display: block;
+}
+.cp-page .custom-select .menu li {
+  list-style: none;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--cp-ink);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.cp-page .custom-select .menu li:hover,
+.cp-page .custom-select .menu li[aria-current="true"] {
+  background: rgba(255, 45, 120, 0.08);
+  color: var(--cp-pink);
+}
+.cp-page .custom-select.drop-up .menu {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform-origin: bottom center;
+}
+.cp-page .custom-select,
+.cp-page .custom-select .menu {
+  z-index: 1400;
+}
+
+.cp-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* "Discover More" row under the grid */
+.cp-actions-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 36px;
+}
+.cp-discover-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--cp-line);
+  background: transparent;
+  color: var(--cp-ink);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  padding: 12px 32px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.cp-discover-more:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(120deg, var(--cp-pink), var(--cp-purple));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(155, 45, 255, 0.22);
+}
+.cp-end-note {
+  font-size: 13px;
+  color: var(--cp-muted);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cp-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.cp-skeleton-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--cp-line);
+}
+.cp-skeleton-media {
+  height: 220px;
+  background: linear-gradient(180deg, #faf6ef 0%, #f4ede1 100%);
+  position: relative;
+  overflow: hidden;
+}
+.cp-skeleton-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.65) 40%, transparent 60%);
+  transform: translateX(-100%);
+  animation: cp-shimmer 1.6s ease-in-out infinite;
+}
+.cp-skeleton-lines { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.cp-skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  background: #ece6db;
+  position: relative;
+  overflow: hidden;
+}
+.cp-skeleton-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.75) 40%, transparent 60%);
+  transform: translateX(-100%);
+  animation: cp-shimmer 1.6s ease-in-out infinite;
+}
+.cp-skeleton-line.cp-w-60 { width: 60%; }
+.cp-skeleton-line.cp-w-40 { width: 40%; height: 16px; margin-top: 4px; }
+
+@keyframes cp-shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.cp-empty {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 70px 24px;
+  border-radius: 18px;
+  border: 1px dashed var(--cp-line);
+  background: #faf6ef;
+}
+.cp-empty-mark {
+  font-size: 30px;
+  margin-bottom: 10px;
+  background: linear-gradient(120deg, var(--cp-pink), var(--cp-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+.cp-empty-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--cp-ink);
+}
+.cp-empty-sub {
+  font-size: 14px;
+  color: var(--cp-muted);
+  margin: 0 0 20px;
+}
+
+.cp-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--cp-line);
+  background: transparent;
+  color: var(--cp-ink);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.cp-empty-cta:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(120deg, var(--cp-pink), var(--cp-purple));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(255, 45, 120, 0.22);
+}
+
+@media (max-width: 640px) {
+  .cp-page { padding: 40px 0 70px; }
+  .cp-hero { margin: 16px 0 22px; gap: 8px; }
+  .cp-title { font-size: clamp(22px, 6.5vw, 28px); }
+  .cp-subtitle { font-size: 13.5px; }
+  .cp-grid, .cp-skeleton-grid { grid-template-columns: 1fr; gap: 16px; }
+  .cp-empty { padding: 50px 18px; }
+  .cp-controls { gap: 8px; }
+  .cp-page .custom-select { min-width: 0; flex: 1 1 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-skeleton-media::after,
+  .cp-skeleton-line::after { animation: none; }
+  .cp-back, .cp-empty-cta, .cp-discover-more { transition: none; }
+}
+
+
+/* ============================================================
+   PART 2 — CategorySection (homepage Men/Women preview)
+   cat- prefixed. Note: the section/grid/title/view-all markup now
+   comes from featured.css (.featured-section, .grid, .section-title,
+   .view-all) so this section only styles the skeleton loader and the
+   empty state, which CategorySection.jsx still uses directly.
+   ============================================================ */
+
+.cat-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+.cat-skeleton-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #ece6db;
+}
+.cat-skeleton-media {
+  height: 210px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #faf6ef 0%, #f4ede1 100%);
+}
+.cat-skeleton-media::after,
+.cat-skeleton-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.7) 40%, transparent 60%);
+  transform: translateX(-100%);
+  animation: cat-shimmer 1.6s ease-in-out infinite;
+}
+.cat-skeleton-lines { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.cat-skeleton-line {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #ece6db;
+}
+@keyframes cat-shimmer { 100% { transform: translateX(100%); } }
+
+.cat-empty {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 46px 20px;
+  border-radius: 16px;
+  border: 1px dashed #ece6db;
+  background: #faf6ef;
+}
+.cat-empty p { margin: 0; font-size: 14px; color: #8a8177; }
+.cat-empty code {
+  background: #f4e3d3;
+  color: #7a5236;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12.5px;
+}
+
+.cat-end-note {
+  font-size: 13px;
+  color: #8a8177;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-skeleton-media::after,
+  .cat-skeleton-line::after { animation: none; }
+}

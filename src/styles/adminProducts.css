@@ -1,0 +1,552 @@
+/* src/styles/adminProducts.css — Perfume Admin (Aura design system, mobile-first) */
+:root {
+  /* Aura core tokens — white / lightweight pass */
+  --bg-900: #ffffff;
+  --bg-800: #fdfcfa;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fffaf0;
+
+  --gold: #c9a86a;
+  --gold-deep: #a8823f;
+  --accent-gradient: linear-gradient(120deg, #ff2d78, #7b4dff);
+
+  --text-primary: #2c1f26;
+  --text-muted: #5a4650;
+  --text-faint: #8c7681;
+  --text-on-dark: #fdf8f3;
+
+  --border-soft: rgba(201, 151, 74, 0.16);
+  --border-strong: rgba(201, 151, 74, 0.32);
+  --border-accent: rgba(123, 77, 255, 0.28);
+
+  --shadow-card: 0 4px 12px rgba(44, 31, 38, 0.04);
+  --shadow-card-hover: 0 10px 22px rgba(255, 45, 120, 0.08);
+  --shadow-glow: 0 0 0 4px rgba(255, 45, 120, 0.1);
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; }
+
+/* ════════════════════════════
+   PAGE
+════════════════════════════ */
+.admin-products-page {
+  position: relative;
+  padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 28px);
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255, 45, 120, 0.03), transparent 40%),
+    radial-gradient(circle at 90% 15%, rgba(123, 77, 255, 0.03), transparent 45%),
+    #ffffff;
+}
+
+.admin-products-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════════════════════════
+   HEADER — sassy pill header, stacks clean on mobile
+════════════════════════════ */
+.admin-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
+}
+
+.admin-header h1 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.3px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+
+.admin-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+/* Back button — sits inline before the page title */
+.admin-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border-soft);
+  background: #fdfcfa;
+  color: var(--gold-deep);
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 160px;
+  max-width: 380px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #fdfcfa;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input::placeholder { color: var(--text-faint); }
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-surface);
+}
+
+/* ════════════════════════════
+   BUTTONS — pill, icon + label, never clip
+════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn.primary {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(255, 45, 120, 0.2);
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 45, 120, 0.28);
+}
+
+.btn.ghost {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+}
+
+/* FIX: .danger previously used a distinct reddish color/border at rest
+   (#c1584a text + reddish border), which made the Delete button visibly
+   different from the Edit button even though both use `.btn.ghost`.
+   Now .danger matches `.btn.ghost` exactly at rest — same grey text,
+   same soft border — so Edit and Delete look identical until hovered/
+   focused/pressed, where the shared gradient rules below kick in for
+   both the same way. */
+.btn.danger {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+}
+
+/* Disabled state — used while Import is running so the buttons can't be
+   double-clicked mid-write to Firestore. */
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ════════════════════════════
+   ALL buttons — force the same pink-purple gradient
+   (same as "+ Add Product"), overriding .ghost / .danger
+   everywhere on this page: header Export/Import/Back,
+   card Edit/Delete, everything. Gradient shows the moment
+   the cursor is over the button (hover), and stays through
+   click (active) and keyboard focus — never falls back to
+   the plain/native browser look.
+════════════════════════════ */
+.btn.ghost:hover,
+.btn.danger:hover,
+.admin-back:hover {
+  transform: translateY(-2px);
+  background: var(--accent-gradient) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 10px 20px rgba(255, 45, 120, 0.28) !important;
+}
+
+.btn.ghost:active,
+.btn.danger:active,
+.admin-back:active,
+.btn.primary:active {
+  transform: translateY(0) scale(0.97);
+  background: var(--accent-gradient) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 10px rgba(255, 45, 120, 0.24) !important;
+}
+
+.btn.ghost:focus,
+.btn.ghost:focus-visible,
+.btn.danger:focus,
+.btn.danger:focus-visible,
+.admin-back:focus,
+.admin-back:focus-visible {
+  background: var(--accent-gradient) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(123, 77, 255, 0.28) !important;
+}
+
+/* ════════════════════════════
+   IMPORT STATUS LINE
+════════════════════════════ */
+.admin-import-status {
+  margin: -8px 0 16px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background: #fffaf0;
+  border: 1px solid var(--border-soft);
+  color: var(--gold-deep);
+}
+
+/* ════════════════════════════
+   GRID
+════════════════════════════ */
+.admin-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+/* ════════════════════════════
+   CARD
+════════════════════════════ */
+.admin-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--gold);
+}
+
+/* ── Media ── */
+.admin-card-media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+  position: relative;
+  background: #fdfcfa;
+}
+
+.admin-card-media img,
+.admin-card-media .admin-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, opacity 0.35s ease;
+}
+
+.admin-media { width: 100%; height: 100%; position: relative; }
+
+.thumb-row.small {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  z-index: 6;
+}
+
+.thumb-row.small .thumb-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.16s ease, border-color 0.16s ease;
+}
+
+.thumb-row.small .thumb-btn:hover { transform: translateY(-2px); }
+
+.thumb-row.small .thumb-btn.active {
+  border-color: var(--gold);
+  box-shadow: 0 3px 10px rgba(201, 168, 106, 0.36);
+}
+
+/* ── Body ── */
+.admin-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  min-width: 0;
+}
+
+.admin-card-body h3 {
+  margin: 0;
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.1px;
+}
+
+.admin-card-body .muted {
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.admin-card-body .tiny {
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.admin-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+/* ── Prices ── */
+.admin-prices { margin-top: 12px; }
+
+.price-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.price-item {
+  background: #fdfcfa;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  min-width: 68px;
+}
+
+.price-item .vol { font-size: 11px; color: var(--text-faint); }
+
+.price-item .amt {
+  font-weight: 700;
+  font-size: 14px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ════════════════════════════
+   MODAL
+════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 31, 38, 0.35);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 16px;
+}
+
+.modal-content {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 48px rgba(44, 31, 38, 0.12);
+  color: var(--text-primary);
+}
+
+/* ── ProductForm ── */
+.product-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.product-form input,
+.product-form textarea,
+.product-form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  background: #fdfcfa;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-form input:focus,
+.product-form textarea:focus,
+.product-form select:focus {
+  outline: none;
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-surface);
+}
+
+.product-form input[type="file"] { background: none; padding: 6px 0; }
+
+.product-form .price-inputs-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.product-form button { margin-top: 12px; }
+
+.product-form .images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.product-form .image-tile {
+  background: #fdfcfa;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.product-form .image-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ════════════════════════════
+   RESPONSIVE
+════════════════════════════ */
+@media (max-width: 880px) {
+  .admin-products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 16px;
+  }
+  .admin-header h1 {
+    text-align: center;
+    white-space: normal;
+  }
+  .admin-header-actions {
+    justify-content: stretch;
+    width: 100%;
+  }
+  .search-input { max-width: 100%; }
+  .admin-header .btn.primary,
+  .admin-header-actions .btn.primary {
+    display: flex;
+    width: 100%;
+    order: 3;
+  }
+  .admin-header-actions .btn.ghost {
+    flex: 1;
+    order: 2;
+  }
+  .admin-back {
+    padding: 7px 14px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .admin-products-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .admin-card-media { aspect-ratio: 16 / 10; }
+  .admin-card-actions .btn { flex: 1; }
+  .modal-content { padding: 18px; max-width: 100%; }
+}
+
+/* ════════════════════════════
+   ACCESSIBILITY / HELPERS
+════════════════════════════ */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-glow);
+}
+
+.muted { color: var(--text-muted); }
+.small { font-size: 13px; }

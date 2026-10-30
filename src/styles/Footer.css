@@ -1,0 +1,262 @@
+.footer-min {
+  background: #000;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  padding: 56px 0 64px;
+}
+
+.footer-min-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 24px);
+}
+
+/* Brand — same logo + wordmark as the header */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 40px;
+}
+
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-brand-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+
+  background: linear-gradient(135deg, #e8d5b0 0%, #c9a96e 55%, #e8d5b0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Grid — align-items: start keeps every column pinned to the same top
+   line even though Contact Us has far more content than the other two,
+   which is what was causing the "uneven/crowded" look before. */
+.footer-min-container {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(220px, 1.3fr) minmax(160px, 1fr);
+  align-items: start;
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.footer-min-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  /* lets long text (address, email) wrap instead of forcing column width */
+}
+
+.footer-min-col h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  letter-spacing: 0.2px;
+}
+
+.footer-min-col a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  margin-bottom: 14px;
+  width: fit-content;
+  opacity: 0.92;
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.footer-min-col a:hover {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.footer-min-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e6e6e6;
+  margin: 0 0 18px;
+  max-width: 360px;
+}
+
+.footer-min-social {
+  display: flex;
+  gap: 16px;
+  margin-top: 22px;
+  margin-bottom: 4px;
+}
+
+.footer-min-social a {
+  color: #fff;
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  transition: 0.3s;
+  margin-bottom: 0;
+  /* override the generic .footer-min-col a margin-bottom */
+}
+
+.footer-min-social a:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-3px);
+}
+
+/* Contact Us block */
+
+.footer-min-contact {
+  margin-top: 2px;
+}
+
+.footer-min-contact-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #e6e6e6;
+}
+
+.footer-min-contact-line:last-child {
+  margin-bottom: 0;
+}
+
+.footer-min-contact-line span,
+.footer-min-contact-line a {
+  min-width: 0;
+  /* allows the address/email text to wrap inside the column
+                   instead of overflowing or squeezing the icon */
+}
+
+.footer-min-contact-line a {
+  color: #e6e6e6;
+  text-decoration: none;
+  word-break: break-word;
+  transition: color 0.25s;
+}
+
+.footer-min-contact-line a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-min-contact-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  font-size: 13px;
+  color: #fff;
+  opacity: 0.85;
+}
+
+/* Responsive */
+
+/* Tablet — was jumping straight from 3 columns to 2 at 900px, which
+   squeezed the 3-column layout right before the breakpoint. This step
+   gives the grid room to breathe with a smaller gap first. */
+@media (max-width: 1100px) {
+  .footer-min-container {
+    gap: clamp(22px, 3vw, 32px);
+  }
+}
+
+@media (max-width: 900px) {
+  .footer-min-container {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 36px;
+  }
+
+  /* Contact Us needs the most room, so give it the full row on its own
+     rather than squeezing it into a half-width column. */
+  .footer-min-col:nth-child(2) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-min {
+    padding: 44px 0 50px;
+  }
+
+  .footer-min-inner {
+    padding: 0 22px;
+  }
+
+  .footer-logo-img {
+    height: 50px;
+    max-width: 180px;
+  }
+
+  .footer-brand-text {
+    font-size: 11px;
+    letter-spacing: 0.26em;
+  }
+
+  .footer-min-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
+  }
+
+  /* Support - top left */
+  .footer-min-col:nth-child(1) {
+    order: 1;
+  }
+
+  /* Orders and Shipping - top right */
+  .footer-min-col:nth-child(3) {
+    order: 2;
+  }
+
+  /* Contact Us - full width, below */
+  .footer-min-col:nth-child(2) {
+    order: 3;
+    grid-column: 1 / -1;
+  }
+
+  .footer-min-text {
+    max-width: 100%;
+  }
+
+  .footer-min-contact-line {
+    font-size: 13px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-min {
+    padding: 36px 0 44px;
+  }
+
+  .footer-brand {
+    margin-bottom: 28px;
+  }
+
+  .footer-min-container {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .footer-min-col:nth-child(1),
+  .footer-min-col:nth-child(2),
+  .footer-min-col:nth-child(3) {
+    order: unset;
+    grid-column: unset;
+  }
+}

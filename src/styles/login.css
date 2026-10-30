@@ -1,0 +1,646 @@
+/* src/styles/login.css */
+/* Luxury "Signature" Perfume Atelier Login Visual System */
+/* Ivory, Cream, Champagne Gold, and Deep Burgundy Palette with 4K Ruby Bottle Background */
+
+:root {
+  --lp-ivory: #FFF8EF;
+  --lp-ivory-soft: #FFFDF9;
+  --lp-cream: #FAF4EB;
+  --lp-gold: #C89B52;
+  --lp-gold-hover: #b4853e;
+  --lp-gold-light: #E8D4BB;
+  --lp-gold-soft: rgba(200, 155, 82, 0.16);
+  --lp-burgundy: #790D2D;
+  --lp-burgundy-hover: #5c0922;
+  --lp-burgundy-soft: rgba(121, 13, 45, 0.08);
+  --lp-text-dark: #241A18;
+  --lp-text-muted: #6B5A55;
+  --lp-font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --lp-font-sans: "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ─── Page Container ────────────────────────────────────────────────────── */
+.luxury-login-page {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Harmoniously centers the card on the luxury stage */
+  padding: 56px 24px;
+  background-color: var(--lp-cream);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  box-sizing: border-box;
+  font-family: var(--lp-font-sans);
+  color: var(--lp-text-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle cream vignette overlay — preserves ruby bottle & gold arches in 4K clarity */
+.luxury-login-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 248, 239, 0.32) 0%,
+    rgba(255, 248, 239, 0.18) 55%,
+    rgba(240, 228, 214, 0.35) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Main Floating Luxury Card Container ───────────────────────────────── */
+.luxury-login-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  background: rgba(255, 253, 249, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid rgba(200, 155, 82, 0.38);
+  border-radius: 20px;
+  box-shadow: 
+    0 24px 70px rgba(36, 26, 24, 0.16),
+    0 4px 20px rgba(200, 155, 82, 0.12);
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  overflow: hidden;
+  box-sizing: border-box;
+  animation: loginFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes loginFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Left Brand Welcome Panel ──────────────────────────────────────────── */
+.luxury-login-brand-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 248, 239, 0.96) 0%,
+    rgba(245, 236, 224, 0.94) 100%
+  );
+  border-right: 1.5px solid rgba(200, 155, 82, 0.25);
+  padding: 48px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.brand-panel-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-panel-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--lp-gold);
+  margin-bottom: 12px;
+}
+
+.brand-panel-script {
+  font-family: "Alex Brush", "Great Vibes", cursive, serif;
+  font-size: 44px;
+  color: var(--lp-gold);
+  line-height: 1;
+  margin-bottom: 14px;
+  user-select: none;
+}
+
+.brand-panel-title {
+  font-family: var(--lp-font-serif);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--lp-text-dark);
+  margin: 0 0 12px 0;
+}
+
+.brand-panel-desc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--lp-text-muted);
+  margin: 0 0 24px 0;
+}
+
+/* Perks list */
+.brand-perks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.brand-perk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--lp-text-dark);
+}
+
+.brand-perk-bullet {
+  color: var(--lp-burgundy);
+  font-size: 14px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.brand-panel-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(200, 155, 82, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--lp-text-muted);
+}
+
+.brand-shield-icon {
+  color: var(--lp-gold);
+  flex-shrink: 0;
+}
+
+/* ─── Right Form Side ───────────────────────────────────────────────────── */
+.luxury-login-form-panel {
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+/* Mobile Brand Header — hidden on desktop, active on mobile */
+.luxury-mobile-brand-header {
+  display: none;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.luxury-mobile-brand-header .brand-panel-eyebrow {
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.luxury-mobile-brand-header .brand-panel-script {
+  font-size: 38px;
+  margin-bottom: 6px;
+}
+
+.luxury-mobile-brand-header .brand-panel-title {
+  font-size: 21px;
+  margin: 0;
+}
+
+/* Mode Switcher Tabs (Sign In / Create Account) */
+.luxury-auth-tabs {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 26px;
+  border-bottom: 1.5px solid rgba(200, 155, 82, 0.22);
+  position: relative;
+}
+
+.luxury-auth-tab-btn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 4px 12px 4px;
+  font-family: var(--lp-font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--lp-text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.luxury-auth-tab-btn:hover {
+  color: var(--lp-text-dark);
+}
+
+.luxury-auth-tab-btn.active {
+  color: var(--lp-burgundy);
+}
+
+.luxury-auth-tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1.5px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background-color: var(--lp-burgundy);
+  border-radius: 2px 2px 0 0;
+}
+
+/* Disables all unwanted browser focus rings or active button borders */
+.luxury-auth-tab-btn:focus,
+.luxury-auth-tab-btn:focus-visible,
+.luxury-auth-tab-btn:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Google Sign In Button */
+.luxury-google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--lp-ivory-soft);
+  border: 1.5px solid var(--lp-gold-light);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--lp-text-dark);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.22s ease;
+  font-family: inherit;
+  outline: none;
+}
+
+.luxury-google-btn:hover:not(:disabled) {
+  background: #ffffff;
+  border-color: var(--lp-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(200, 155, 82, 0.16);
+}
+
+.luxury-google-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.luxury-google-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Elegant Divider */
+.luxury-form-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+  color: var(--lp-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.luxury-form-divider::before,
+.luxury-form-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--lp-gold-light), transparent);
+}
+
+/* Form inputs */
+.luxury-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.luxury-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.luxury-field-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.luxury-field-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--lp-text-dark);
+}
+
+.luxury-forgot-btn {
+  background: none;
+  border: none;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--lp-burgundy);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-family: inherit;
+  outline: none;
+}
+
+.luxury-forgot-btn:hover {
+  color: var(--lp-gold);
+}
+
+.luxury-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.luxury-input {
+  width: 100%;
+  background: var(--lp-ivory-soft);
+  border: 1.5px solid var(--lp-gold-light);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--lp-text-dark);
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* Padding allowance for eye toggle button in password inputs */
+.luxury-field-group:has(.luxury-pwd-toggle-btn) .luxury-input,
+.luxury-input-wrap .luxury-input {
+  padding-right: 44px;
+}
+
+.luxury-input:focus {
+  background: #ffffff;
+  border-color: var(--lp-gold);
+  box-shadow: 0 0 0 3px rgba(200, 155, 82, 0.18);
+  outline: none;
+}
+
+.luxury-input::placeholder {
+  color: #a89f9b;
+}
+
+/* Chrome / Safari Autofill Override: Keeps inputs warm ivory instead of bright blue */
+.luxury-input:-webkit-autofill,
+.luxury-input:-webkit-autofill:hover,
+.luxury-input:-webkit-autofill:focus,
+.luxury-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #FFFDF9 inset !important;
+  -webkit-text-fill-color: #241A18 !important;
+  caret-color: #241A18 !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Password Toggle Eye Button */
+.luxury-pwd-toggle-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--lp-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  transition: color 0.15s ease;
+  outline: none;
+}
+
+.luxury-pwd-toggle-btn:hover {
+  color: var(--lp-text-dark);
+}
+
+/* Error and Success Alerts */
+.luxury-alert {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.luxury-alert.error {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #be123c;
+}
+
+.luxury-alert.success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+/* Primary Burgundy Sign In Button */
+.luxury-submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--lp-burgundy);
+  color: #ffffff;
+  border: 1.5px solid var(--lp-burgundy);
+  border-radius: 8px;
+  padding: 13px 24px;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(121, 13, 45, 0.22);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+  margin-top: 6px;
+  outline: none;
+}
+
+.luxury-submit-btn:hover:not(:disabled) {
+  background-color: var(--lp-burgundy-hover);
+  border-color: var(--lp-gold);
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 26px rgba(121, 13, 45, 0.32), 0 0 12px rgba(200, 155, 82, 0.3);
+}
+
+.luxury-submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.luxury-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Terms and Privacy policy footer note */
+.luxury-form-footer-note {
+  margin-top: 18px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--lp-text-muted);
+  text-align: center;
+}
+
+.luxury-form-footer-note a {
+  color: var(--lp-burgundy);
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.luxury-form-footer-note a:hover {
+  color: var(--lp-gold);
+}
+
+/* ─── Responsive Breakpoints ────────────────────────────────────────────── */
+
+/* Laptop / Medium Desktop (<= 1024px) */
+@media (max-width: 1024px) {
+  .luxury-login-page {
+    padding: 40px 20px;
+  }
+
+  .luxury-login-card {
+    max-width: 860px;
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  .luxury-login-brand-panel {
+    padding: 38px 28px;
+  }
+
+  .luxury-login-form-panel {
+    padding: 38px 30px;
+  }
+}
+
+/* Tablet Portrait & Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .luxury-login-page {
+    padding: 32px 16px;
+    align-items: flex-start;
+  }
+
+  .luxury-login-card {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 16px auto;
+    border-radius: 18px;
+  }
+
+  /* Hide left heavy brand panel on mobile, reveal sleek mobile brand header */
+  .luxury-login-brand-panel {
+    display: none;
+  }
+
+  .luxury-mobile-brand-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .luxury-login-form-panel {
+    padding: 36px 26px;
+  }
+
+  .luxury-auth-tabs {
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 22px;
+  }
+}
+
+/* Small Smartphone (<= 480px) */
+@media (max-width: 480px) {
+  .luxury-login-page {
+    padding: 20px 12px;
+  }
+
+  .luxury-login-card {
+    border-radius: 16px;
+    max-width: 100%;
+    margin: 8px auto;
+  }
+
+  .luxury-login-form-panel {
+    padding: 28px 18px;
+  }
+
+  .luxury-mobile-brand-header .brand-panel-script {
+    font-size: 34px;
+  }
+
+  .luxury-mobile-brand-header .brand-panel-title {
+    font-size: 19px;
+  }
+
+  .luxury-auth-tabs {
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+
+  .luxury-auth-tab-btn {
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+  }
+
+  .luxury-google-btn {
+    padding: 11px 14px;
+    font-size: 13px;
+  }
+
+  .luxury-input {
+    padding: 11px 12px;
+    font-size: 13.5px;
+  }
+
+  .luxury-submit-btn {
+    padding: 12px 18px;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+}

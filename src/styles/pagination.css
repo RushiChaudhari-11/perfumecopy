@@ -1,0 +1,38 @@
+/* src/styles/pagination.css
+   Standalone styling for the reusable <Pagination /> component. Kept
+   separate from blog.css since Pagination isn't blog-specific. */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.pagination-btn {
+  background: transparent;
+  border: 1px solid var(--journal-gold, #b8860b);
+  color: var(--journal-gold, #b8860b);
+  padding: 0.7rem 2rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--journal-gold, #b8860b);
+  color: #ffffff;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pagination-done {
+  text-align: center;
+  color: var(--journal-text-muted, #7a5f6c);
+  font-size: 0.85rem;
+  margin-top: 2.5rem;
+}

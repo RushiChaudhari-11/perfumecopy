@@ -1,0 +1,315 @@
+/* src/styles/adminDash.css — recolored to match Aura design system (adminProducts.css) */
+:root {
+  --brand-start: #ff2d78;
+  --brand-mid:   #c04fd9;
+  --brand-end:   #7b4dff;
+  --brand-gradient: linear-gradient(120deg, #ff2d78, #7b4dff);
+
+  --text-primary: #2c1f26;
+  --text-muted:   #5a4650;
+  --text-faint:   #8c7681;
+
+  --surface:      #ffffff;
+  --surface-soft: #ffffff;
+  --page-bg:
+    radial-gradient(circle at 15% 0%, rgba(255, 45, 120, 0.03), transparent 40%),
+    radial-gradient(circle at 90% 15%, rgba(123, 77, 255, 0.03), transparent 45%),
+    #ffffff;
+
+  --border:       rgba(201, 151, 74, 0.16);
+  --border-hover: rgba(123, 77, 255, 0.28);
+
+  --shadow-sm:    0 4px 12px rgba(44, 31, 38, 0.04);
+  --shadow-md:    0 10px 22px rgba(255, 45, 120, 0.08);
+  --shadow-lg:    0 14px 30px rgba(255, 45, 120, 0.12);
+
+  --radius-sm:  10px;
+  --radius-md:  14px;
+  --radius-lg:  18px;
+
+  --gold: #c9a86a;
+  --gold-deep: #a8823f;
+  --danger: #c1584a;
+}
+
+/* ══════════════════════════
+   WRAP
+══════════════════════════ */
+.adminDash-wrap {
+  position: relative;
+  max-width: 1300px;
+  margin: 24px auto;
+  padding: 20px;
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text-primary);
+  background: var(--page-bg);
+  min-height: 100vh;
+}
+
+/* ══════════════════════════
+   HEADER
+══════════════════════════ */
+.adminDash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.adminDash-header h1 {
+  margin: 0;
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.adminDash-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ══════════════════════════
+   BUTTONS
+══════════════════════════ */
+.admin-btn {
+  background: var(--brand-gradient);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(255, 45, 120, 0.25);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  letter-spacing: 0.2px;
+}
+
+.admin-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 45, 120, 0.32);
+}
+
+.admin-btn.ghost {
+  background: var(--surface-soft);
+  color: var(--gold-deep);
+  border: 1.5px solid var(--border-hover);
+  box-shadow: none;
+}
+
+.admin-btn.ghost:hover {
+  background: rgba(255, 45, 120, 0.06);
+  border-color: var(--gold);
+  box-shadow: 0 4px 12px rgba(255, 45, 120, 0.12);
+}
+
+/* ══════════════════════════
+   ERROR
+══════════════════════════ */
+.adminDash-error {
+  margin: 14px 0;
+  padding: 12px 16px;
+  background: rgba(193, 88, 74, 0.08);
+  color: var(--danger);
+  border: 1px solid rgba(193, 88, 74, 0.3);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ══════════════════════════
+   KPI CARDS
+══════════════════════════ */
+.adminDash-kpis {
+  margin: 20px 0;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.kpi {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--brand-gradient);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.kpi:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-label {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kpi-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-top: 6px;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ══════════════════════════
+   QUICK TILES
+══════════════════════════ */
+.adminDash-quick {
+  margin: 20px 0;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.tile {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 18px;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-hover);
+}
+
+.tile-ico {
+  font-size: 28px;
+  display: inline-block;
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(255, 45, 120, 0.1), rgba(123, 77, 255, 0.1));
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+.tile-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 12px;
+  letter-spacing: -0.1px;
+}
+
+.tile-sub {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ══════════════════════════
+   CARD
+══════════════════════════ */
+.adminDash-card {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-steps {
+  margin: 10px 0 0;
+  line-height: 1.75;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ══════════════════════════
+   RESPONSIVE
+══════════════════════════ */
+@media (max-width: 768px) {
+  .adminDash-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .adminDash-actions {
+    width: 100%;
+  }
+  .admin-btn {
+    flex: 1;
+    text-align: center;
+  }
+  .adminDash-wrap {
+    padding: 14px;
+    margin: 12px auto;
+  }
+}
+
+/* ══════════════════════════
+   BACK BUTTON (inline, inside container, top of the page)
+   CHANGED: was position:fixed floating over the whole viewport
+   (and could get covered by any higher z-index global header). Now
+   it's a normal in-flow element sitting inside .adminDash-wrap, in
+   its own top bar above the header — no more overlap/stacking issues.
+══════════════════════════ */
+.adminDash-topbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.back-float {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-deep);
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  background: #ffffff;
+  padding: 9px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.back-float:hover {
+  transform: translateY(-2px);
+  background: var(--brand-gradient);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .adminDash-topbar {
+    margin-bottom: 10px;
+  }
+  .back-float {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}

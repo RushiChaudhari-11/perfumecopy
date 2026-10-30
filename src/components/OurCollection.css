@@ -1,0 +1,463 @@
+/* ── OUR COLLECTION SECTION ── */
+.our-collection-section {
+  position: relative;
+  width: 100%;
+  padding: 24px 0 75px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.our-collection-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* Header Area - Perfectly Centered */
+.our-collection-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.our-collection-header-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.our-collection-eyebrow-wrap {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.our-collection-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #7a1638;
+  background: rgba(122, 22, 56, 0.05);
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 22, 56, 0.14);
+}
+
+.eyebrow-star {
+  color: #d97706;
+  font-size: 11px;
+}
+
+.our-collection-title {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(38px, 5.2vw, 64px);
+  font-weight: 850;
+  color: #0f172a;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin: 0 0 16px 0;
+  perspective: 1000px;
+  text-align: center;
+}
+
+/* GSAP Masked Word Animations */
+.col-title-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.col-word {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-origin: 50% 100%;
+}
+
+.our-collection-accent {
+  color: #7a1638;
+  position: relative;
+  display: inline-block;
+}
+
+.col-accent-underline {
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 4.5px;
+  background: linear-gradient(90deg, #7a1638 0%, #b82352 100%);
+  border-radius: 3px;
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.our-collection-sub {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(15px, 1.25vw, 18px);
+  color: #475569;
+  margin: 0 auto;
+  max-width: 580px;
+  line-height: 1.6;
+  font-weight: 480;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* Controls */
+.our-collection-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.our-collection-arrow {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.our-collection-arrow:hover:not(:disabled) {
+  background: #7a1638;
+  border-color: #7a1638;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(122, 22, 56, 0.25);
+}
+
+.our-collection-arrow.disabled,
+.our-collection-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Wrapper & Track */
+.our-collection-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.our-collection-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 6px 28px 6px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.our-collection-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Collection Card (Matching Reference Structure) */
+.our-collection-card {
+  opacity: 1;
+  visibility: visible;
+  flex: 0 0 230px;
+  scroll-snap-align: start;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  user-select: none;
+  outline: none;
+}
+
+@media (min-width: 1024px) {
+  .our-collection-card {
+    flex: 0 0 calc((100% - (24px * 4)) / 5); /* 5 full cards visible like in reference */
+    min-width: 210px;
+    max-width: 250px;
+  }
+}
+
+.our-collection-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 36px rgba(122, 22, 56, 0.12), 0 10px 18px rgba(226, 180, 72, 0.16);
+}
+
+/* Media Box */
+.our-collection-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f8fafc;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.our-collection-img-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.our-collection-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.our-collection-card:hover .our-collection-img {
+  transform: scale(1.08);
+}
+
+/* Badge Tag */
+.our-collection-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #7a1638;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Hover Overlay Pill */
+.our-collection-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 18, 20, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.our-collection-hover-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #ffffff;
+  color: #121214;
+  border-radius: 999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transform: translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.our-collection-card:hover .our-collection-hover-overlay {
+  opacity: 1;
+}
+
+.our-collection-card:hover .our-collection-hover-btn {
+  transform: translateY(0);
+}
+
+/* Iconic Golden Bottom Bar (Matching user screenshot) */
+.our-collection-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 14px;
+  background: linear-gradient(180deg, #ecc358 0%, #ddaf46 100%);
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.our-collection-card:hover .our-collection-bar {
+  background: linear-gradient(180deg, #f2cd66 0%, #e2b448 100%);
+}
+
+.our-collection-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #211913;
+  text-align: center;
+  transition: transform 0.25s ease;
+}
+
+.our-collection-arrow-icon {
+  position: absolute;
+  right: 12px;
+  opacity: 0;
+  transform: translateX(-4px);
+  color: #211913;
+  display: flex;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+
+.our-collection-card:hover .our-collection-arrow-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Floating Circular Gold Arrow on Track (Exact match to screenshot) */
+.our-collection-floating-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5d061 0%, #e0ad38 100%);
+  border: 2px solid #ffffff;
+  color: #2a1b08;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(224, 173, 56, 0.45), 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.our-collection-floating-arrow.prev {
+  left: -8px;
+}
+
+.our-collection-floating-arrow.next {
+  right: -8px;
+}
+
+.our-collection-floating-arrow:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 12px 30px rgba(224, 173, 56, 0.6);
+  background: linear-gradient(135deg, #ffe07a 0%, #e8b642 100%);
+}
+
+/* Mobile & Tablet Adjustments for All Devices */
+@media (max-width: 1024px) {
+  .our-collection-container {
+    padding: 0 20px;
+  }
+  .our-collection-title {
+    font-size: clamp(32px, 5vw, 52px);
+  }
+  .our-collection-card {
+    flex: 0 0 210px;
+  }
+}
+
+@media (max-width: 768px) {
+  .our-collection-section {
+    padding: 45px 0 55px;
+  }
+
+  .our-collection-container {
+    padding: 0 16px;
+  }
+
+  .our-collection-header {
+    text-align: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .our-collection-title {
+    font-size: clamp(26px, 6vw, 38px);
+    margin-bottom: 10px;
+  }
+
+  .our-collection-subtext {
+    font-size: 13.5px;
+    padding: 0 10px;
+  }
+
+  .our-collection-track {
+    gap: 16px;
+    padding: 8px 4px 18px;
+  }
+
+  .our-collection-card {
+    flex: 0 0 175px;
+    border-radius: 14px;
+  }
+
+  .our-collection-bar {
+    padding: 10px 12px;
+  }
+
+  .our-collection-name {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .our-collection-floating-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .our-collection-card {
+    flex: 0 0 155px;
+    border-radius: 12px;
+  }
+
+  .our-collection-tag {
+    top: 8px;
+    left: 8px;
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+
+  .our-collection-bar {
+    padding: 9px 10px;
+  }
+
+  .our-collection-name {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 350px) {
+  .our-collection-card {
+    flex: 0 0 140px;
+  }
+}
+

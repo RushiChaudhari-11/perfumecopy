@@ -1,0 +1,303 @@
+/* src/styles/blog-admin.css
+   Admin panel styling for managing journal posts — reuses the same
+   --journal-* CSS variables defined in blog.css so it stays visually
+   consistent with the public-facing pages (white background, soft
+   hairlines, lightweight shadows). Fallback values below are kept in
+   sync with blog.css's white/lightweight pass in case this file loads
+   on its own.
+   Button pass: every button/pill (primary, secondary, and inline text
+   actions) now uses the site-wide pink → purple brand gradient on
+   hover/primary state, with !important so nothing upstream can
+   silently override it. */
+
+.admin-journal {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+  color: var(--journal-text, #2b1620);
+  font-family: var(--journal-font-body, "Jost", sans-serif);
+  background: #ffffff;
+}
+
+.admin-journal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.admin-journal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.admin-journal-header h1 {
+  font-family: var(--journal-font-display, "Cormorant Garamond", serif);
+  font-size: 2rem;
+  margin: 0;
+}
+
+.admin-muted {
+  color: var(--journal-text-muted, #7a5f6c);
+}
+
+.admin-error {
+  background: rgba(255, 45, 120, 0.08);
+  border: 1px solid var(--journal-pink, #ff2d78);
+  color: var(--journal-pink, #ff2d78);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────── */
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent !important;
+  border: 1px solid var(--journal-border, rgba(107, 58, 86, 0.14));
+  color: var(--journal-text, #2b1620) !important;
+  padding: 0.6rem 1.3rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease,
+              transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-btn:hover:not(:disabled) {
+  background: linear-gradient(
+    120deg,
+    var(--journal-pink, #ff2d78),
+    var(--journal-violet, #9b2dff)
+  ) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(155, 45, 255, 0.2);
+}
+
+.admin-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.admin-btn-primary {
+  background: linear-gradient(
+    120deg,
+    var(--journal-pink, #ff2d78),
+    var(--journal-violet, #9b2dff)
+  ) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(155, 45, 255, 0.22);
+}
+
+.admin-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(155, 45, 255, 0.3);
+}
+
+.admin-btn-ghost {
+  background: transparent !important;
+  color: var(--journal-text, #2b1620) !important;
+}
+
+/* ── Table (post list) ──────────────────────────────────────────────── */
+
+.admin-journal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-journal-table th {
+  text-align: left;
+  color: var(--journal-text-muted, #7a5f6c);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--journal-border, rgba(107, 58, 86, 0.14));
+}
+
+.admin-journal-table td {
+  padding: 0.9rem 0.8rem;
+  border-bottom: 1px solid var(--journal-border, rgba(107, 58, 86, 0.14));
+  vertical-align: middle;
+}
+
+.admin-post-title {
+  display: block;
+  font-weight: 600;
+}
+
+.admin-post-slug {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--journal-text-muted, #7a5f6c);
+}
+
+.admin-status-pill {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+.admin-status-pill.published {
+  background: rgba(84, 214, 143, 0.12);
+  color: #2e9d69;
+}
+
+.admin-status-pill.draft {
+  background: rgba(217, 180, 106, 0.14);
+  color: var(--journal-gold, #b8860b);
+}
+
+.admin-row-actions {
+  display: flex;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+/* Inline row actions (Edit / Publish / Delete) — small pill buttons that
+   flip to the pink → purple gradient on hover, matching every other
+   interactive control on the site. */
+.admin-link-btn {
+  background: transparent !important;
+  border: 1px solid var(--journal-border, rgba(107, 58, 86, 0.14));
+  color: var(--journal-text-muted, #7a5f6c) !important;
+  cursor: pointer;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+              transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-link-btn:hover {
+  background: linear-gradient(
+    120deg,
+    var(--journal-pink, #ff2d78),
+    var(--journal-violet, #9b2dff)
+  ) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(155, 45, 255, 0.2);
+}
+
+.admin-link-btn-danger:hover {
+  background: linear-gradient(120deg, #e24b4a, #ff2d78) !important;
+  box-shadow: 0 6px 14px rgba(226, 75, 74, 0.22);
+}
+
+/* ── Editor form ─────────────────────────────────────────────────────── */
+
+.admin-editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--journal-text-muted, #7a5f6c);
+}
+
+.admin-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+
+@media (max-width: 640px) {
+  .admin-field-row { grid-template-columns: 1fr; }
+}
+
+.admin-field input,
+.admin-field textarea {
+  background: #fdfcfa;
+  border: 1px solid var(--journal-border, rgba(107, 58, 86, 0.14));
+  border-radius: 8px;
+  color: var(--journal-text, #2b1620);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.admin-field input:focus,
+.admin-field textarea:focus {
+  outline: none;
+  border-color: var(--journal-pink, #ff2d78);
+  box-shadow: 0 0 0 3px rgba(155, 45, 255, 0.12);
+}
+
+.admin-content-textarea {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.admin-slug-row {
+  display: flex;
+  align-items: center;
+  background: #fdfcfa;
+  border: 1px solid var(--journal-border, rgba(107, 58, 86, 0.14));
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.admin-slug-row:focus-within {
+  border-color: var(--journal-pink, #ff2d78);
+  box-shadow: 0 0 0 3px rgba(155, 45, 255, 0.12);
+}
+
+.admin-slug-prefix {
+  padding: 0 0 0 0.85rem;
+  color: var(--journal-text-muted, #7a5f6c);
+  font-size: 0.9rem;
+}
+
+.admin-slug-row input {
+  border: none;
+  background: none;
+  flex: 1;
+}
+
+.admin-seo-fields {
+  border: 1px solid var(--journal-border, rgba(107, 58, 86, 0.14));
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+}
+
+.admin-seo-fields summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--journal-text-muted, #7a5f6c);
+}
+
+.admin-seo-fields .admin-field {
+  margin-top: 1rem;
+}
+
+.admin-editor-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}

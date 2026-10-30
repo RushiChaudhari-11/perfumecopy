@@ -1,0 +1,808 @@
+/* src/components/ShopByOccasion.css */
+/* Ultra-Luxury "Shop by Occasion" Visual System */
+/* Matching reference image layout, pills, typography, and 4K product cards */
+
+.shop-occasion-section {
+  position: relative;
+  width: 100%;
+  min-height: 880px;
+  padding: 95px 0 85px;
+  background-color: #FFF8EF;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  font-family: var(--ts-font-sans, "Plus Jakarta Sans", sans-serif);
+  color: #241A18;
+  box-sizing: border-box;
+}
+
+.shop-occasion-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 36px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── Top Floating Editorial Accents ────────────────────────────────────── */
+.occasion-moment-tag {
+  position: absolute;
+  top: 50px;
+  left: 48px;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.8px;
+  color: #C89B52;
+  text-transform: uppercase;
+  line-height: 1.5;
+  padding-bottom: 6px;
+  border-bottom: 1.5px solid rgba(200, 155, 82, 0.4);
+  user-select: none;
+}
+
+.occasion-script-tag {
+  position: absolute;
+  top: 36px;
+  right: 48px;
+  font-family: "Alex Brush", "Great Vibes", cursive, serif;
+  font-size: 40px;
+  color: #C89B52;
+  line-height: 0.95;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  opacity: 0.92;
+}
+
+/* ─── Center Header Area ────────────────────────────────────────────────── */
+.shop-occasion-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.shop-occasion-lotus {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.shop-occasion-eyebrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: #C89B52;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.shop-occasion-eyebrow::before,
+.shop-occasion-eyebrow::after {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C89B52);
+}
+
+.shop-occasion-eyebrow::after {
+  background: linear-gradient(90deg, #C89B52, transparent);
+}
+
+.shop-occasion-title {
+  font-family: var(--ts-font-serif, "Playfair Display", Georgia, serif);
+  font-size: clamp(2.6rem, 4.8vw, 4rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: #241A18;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+}
+
+.shop-occasion-title-gold {
+  color: #C89B52;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.shop-occasion-sub {
+  font-size: 15.5px;
+  color: #6b5a55;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 620px;
+  font-weight: 400;
+}
+
+/* ─── The 5 Occasion Navigation Pills (Horizontal Row) ──────────────────── */
+.shop-occasion-pills-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+  overflow-x: auto;
+  padding: 6px 12px 16px;
+  scrollbar-width: none;
+}
+
+.shop-occasion-pills-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.shop-occasion-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  background: rgba(255, 252, 247, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(200, 155, 82, 0.35);
+  color: #241A18;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+  white-space: nowrap;
+  outline: none;
+}
+
+.shop-occasion-pill:hover {
+  border-color: #C89B52;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(200, 155, 82, 0.18);
+}
+
+.shop-occasion-pill.active {
+  background: #790D2D;
+  color: #ffffff;
+  border-color: #790D2D;
+  box-shadow: 0 8px 26px rgba(121, 13, 45, 0.32);
+  transform: translateY(-2px);
+}
+
+.pill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C89B52;
+  transition: color 0.2s ease;
+}
+
+.shop-occasion-pill.active .pill-icon {
+  color: #E8D4BB;
+}
+
+.pill-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: left;
+  line-height: 1.25;
+}
+
+.pill-arrow {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(200, 155, 82, 0.15);
+  color: #C89B52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.shop-occasion-pill:hover .pill-arrow {
+  transform: translateX(2px);
+}
+
+.shop-occasion-pill.active .pill-arrow {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+/* ─── Product Cards Grid (4 Columns on Desktop) ─────────────────────────── */
+.shop-occasion-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  margin-bottom: 42px;
+}
+
+/* Card Surface */
+.occasion-card {
+  opacity: 1;
+  visibility: visible;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1.5px solid rgba(232, 212, 187, 0.7);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.occasion-card:hover {
+  transform: translateY(-6px);
+  border-color: #C89B52;
+  box-shadow: 0 16px 36px rgba(121, 13, 45, 0.12);
+}
+
+/* Media Box */
+.occasion-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.occasion-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.occasion-card:hover .occasion-img {
+  transform: scale(1.05);
+}
+
+/* Badges */
+.occasion-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.occasion-badge.hot {
+  background: #790D2D;
+}
+
+.occasion-badge.bestseller {
+  background: #C89B52;
+}
+
+.occasion-badge.limited {
+  background: #5b2149;
+}
+
+.occasion-badge.sold-out {
+  background: #78716c;
+}
+
+/* Floating Wishlist Heart */
+.occasion-wish-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(232, 212, 187, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #241A18;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.occasion-wish-btn:hover {
+  transform: scale(1.1);
+  color: #790D2D;
+  border-color: #790D2D;
+}
+
+.occasion-wish-btn.active {
+  color: #790D2D;
+  border-color: #790D2D;
+  background: rgba(121, 13, 45, 0.08);
+}
+
+/* Card Body */
+.occasion-info {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #ffffff;
+}
+
+.occasion-cat {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #C89B52;
+  margin-bottom: 6px;
+}
+
+.occasion-name {
+  font-family: var(--ts-font-serif, "Playfair Display", Georgia, serif);
+  font-size: 17.5px;
+  font-weight: 600;
+  color: #241A18;
+  margin: 0 0 4px 0;
+  line-height: 1.35;
+}
+
+.occasion-subtitle {
+  font-size: 13px;
+  color: #6b5a55;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* Ratings */
+.occasion-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.occasion-stars {
+  color: #C89B52;
+  font-size: 13px;
+  display: flex;
+  gap: 2px;
+}
+
+.occasion-reviews-text {
+  font-size: 12px;
+  color: #6b5a55;
+  font-weight: 500;
+}
+
+/* Size Variant Selector Pills (50ml / 100ml) */
+.occasion-variant-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.occasion-variant-pill {
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid rgba(200, 155, 82, 0.45);
+  background: rgba(255, 248, 239, 0.7);
+  color: #6b5a55;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.2;
+  font-family: inherit;
+}
+
+.occasion-variant-pill:hover {
+  border-color: #790D2D;
+  color: #790D2D;
+}
+
+.occasion-variant-pill.active {
+  background: #790D2D;
+  color: #ffffff;
+  border-color: #790D2D;
+  box-shadow: 0 2px 6px rgba(121, 13, 45, 0.2);
+}
+
+/* Pricing */
+.occasion-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: auto;
+  margin-bottom: 16px;
+}
+
+.occasion-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #241A18;
+  font-feature-settings: "tnum";
+}
+
+.occasion-original-price {
+  font-size: 14px;
+  color: #8c7a75;
+  text-decoration: line-through;
+  font-feature-settings: "tnum";
+}
+
+.occasion-discount-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #790D2D;
+  background: rgba(121, 13, 45, 0.08);
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+/* Primary Burgundy Add to Cart Button */
+.occasion-action-btn {
+  width: 100%;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px 4px 16px;
+  background: #790D2D;
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(121, 13, 45, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.occasion-action-btn:hover:not(:disabled) {
+  background: #5c0922;
+  box-shadow: 0 5px 16px rgba(121, 13, 45, 0.28);
+}
+
+.occasion-btn-arrow-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #790D2D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  font-weight: bold;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.occasion-action-btn:hover:not(:disabled) .occasion-btn-arrow-circle {
+  transform: translateX(2px);
+}
+
+.occasion-action-btn:disabled {
+  background: #e5e5e5;
+  color: #a3a3a3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.occasion-action-btn.added {
+  background: #15803d;
+}
+
+/* Card Quantity Stepper for Occasion */
+.occasion-card .card-qty-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFDF9;
+  border: 1.5px solid #E8D4BB;
+  border-radius: 24px;
+  height: 38px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 3px 5px;
+  box-shadow: 0 2px 6px rgba(121, 13, 45, 0.05);
+}
+
+.occasion-card .card-qty-btn {
+  background: #F6EADB;
+  color: #790D2D;
+  border: none;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.occasion-card .card-qty-btn:hover {
+  background: #edd8bf;
+  color: #55071d;
+  transform: scale(1.05);
+}
+
+.occasion-card .card-qty-val {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14.5px;
+  color: #262626;
+  min-width: 24px;
+  text-align: center;
+  user-select: none;
+}
+
+/* ─── Bottom "VIEW ALL OCCASIONS" CTA ───────────────────────────────────── */
+.shop-occasion-footer-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.shop-occasion-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 32px;
+  border-radius: 9999px;
+  background: rgba(255, 252, 247, 0.94);
+  border: 1.5px solid #C89B52;
+  color: #C89B52;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(200, 155, 82, 0.12);
+  font-family: inherit;
+}
+
+.shop-occasion-view-all:hover {
+  background: #790D2D;
+  color: #ffffff;
+  border-color: #790D2D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(121, 13, 45, 0.25);
+}
+
+/* ─── Responsive Breakpoints for All Devices ────────────────────────────── */
+@media (max-width: 1200px) {
+  .shop-occasion-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+}
+
+@media (max-width: 860px) {
+  .occasion-moment-tag,
+  .occasion-script-tag {
+    display: none;
+  }
+  .shop-occasion-section {
+    padding: 55px 0 50px;
+    min-height: auto;
+  }
+  .shop-occasion-container {
+    padding: 0 20px;
+  }
+  .shop-occasion-pills-bar {
+    justify-content: flex-start;
+    padding: 6px 4px 14px;
+    gap: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .shop-occasion-pill {
+    padding: 10px 18px;
+    gap: 10px;
+  }
+  .pill-label {
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-occasion-section {
+    padding: 38px 0 34px;
+  }
+  .shop-occasion-container {
+    padding: 0 12px;
+  }
+  .shop-occasion-title {
+    font-size: clamp(24px, 5.8vw, 32px);
+  }
+  .shop-occasion-sub {
+    font-size: 12.5px;
+    line-height: 1.45;
+    padding: 0 6px;
+    margin-bottom: 18px;
+  }
+  .shop-occasion-pills-bar {
+    margin-bottom: 20px;
+    gap: 8px;
+    padding: 4px 2px 10px;
+  }
+  .shop-occasion-pill {
+    padding: 7px 13px;
+    gap: 6px;
+  }
+  .pill-arrow {
+    display: none;
+  }
+  /* Modern Compact 2-Column Responsive Product Grid */
+  .shop-occasion-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .occasion-card {
+    border-radius: 12px;
+  }
+  .occasion-media {
+    aspect-ratio: 1 / 1;
+  }
+  .occasion-badge {
+    top: 8px;
+    left: 8px;
+    padding: 2.5px 6px;
+    font-size: 8.5px;
+    letter-spacing: 0.6px;
+    border-radius: 3px;
+  }
+  .occasion-wish-btn {
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+  }
+  .occasion-wish-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+  .occasion-info {
+    padding: 10px 10px 12px;
+  }
+  .occasion-cat {
+    font-size: 9px;
+    letter-spacing: 0.8px;
+    margin-bottom: 2px;
+  }
+  .occasion-name {
+    font-size: 13px;
+    line-height: 1.25;
+    margin-bottom: 3px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 32px;
+  }
+  .occasion-subtitle {
+    font-size: 11px;
+    line-height: 1.3;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .occasion-rating {
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+  .occasion-stars {
+    font-size: 10px;
+    gap: 1px;
+  }
+  .occasion-reviews-text {
+    font-size: 10px;
+  }
+  .occasion-variant-bar {
+    gap: 4px;
+    margin-top: 4px;
+    margin-bottom: 6px;
+  }
+  .occasion-variant-pill {
+    padding: 2.5px 7px;
+    font-size: 10px;
+  }
+  .occasion-price-row {
+    gap: 5px;
+    margin-top: auto;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .occasion-price {
+    font-size: 14.5px;
+  }
+  .occasion-original-price {
+    font-size: 11.5px;
+  }
+  .occasion-discount-badge {
+    font-size: 9px;
+    padding: 1.5px 5px;
+  }
+  .occasion-action-btn {
+    height: 32px;
+    padding: 2px 6px 2px 10px;
+    font-size: 11px;
+    letter-spacing: 0;
+    white-space: nowrap;
+    border-radius: 20px;
+  }
+  .occasion-btn-arrow-circle {
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+  }
+  .occasion-card .card-qty-stepper {
+    height: 32px;
+    padding: 2px 4px;
+    border-radius: 20px;
+  }
+  .occasion-card .card-qty-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+  .occasion-card .card-qty-val {
+    font-size: 12px;
+    min-width: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .shop-occasion-container {
+    padding: 0 8px;
+  }
+  .shop-occasion-grid {
+    gap: 8px;
+  }
+  .shop-occasion-pill {
+    padding: 6px 10px;
+  }
+  .pill-label {
+    font-size: 11px;
+  }
+  .occasion-info {
+    padding: 8px 8px 10px;
+  }
+  .occasion-name {
+    font-size: 12px;
+    min-height: 30px;
+  }
+  .occasion-price {
+    font-size: 13.5px;
+  }
+  .occasion-action-btn {
+    padding: 7px 8px;
+    font-size: 9.5px;
+    letter-spacing: 0.4px;
+  }
+}

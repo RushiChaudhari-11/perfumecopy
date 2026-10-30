@@ -1,0 +1,655 @@
+/* src/findYourScent.css
+   Shop by Mood / Find Your Scent — soft white luxury theme.
+   Background is now plain white (matches featured.css / the rest of the
+   site) instead of the dark noir/gold backdrop. Mood-orb cards use their
+   own photo art, so they stay visually rich even on a white page; the
+   glass panels, text, and buttons around them were all relit for a light
+   surface. Pink → purple stays as the one accent color (title, price,
+   buttons), matching the rest of the site's theme.
+*/
+
+:root {
+  --fy-pink: #ff2d78;
+  --fy-purple: #9b2dff;
+  --fy-ink: #2b2620;
+  --fy-muted: #8a8177;
+  --fy-line: #ece6db;
+  --fy-cream: #fdfbf7;
+  --fy-card: #ffffff;
+  --max-width: 1100px;
+}
+
+.find-scent-section {
+  padding: 64px 0;
+  background: #ffffff;
+  color: var(--fy-ink);
+  position: relative;
+  overflow: hidden;
+
+  scroll-margin-top: 130px; /* header height */
+}
+.find-scent-section .container {
+  max-width: 90%;
+  padding: 0;
+}
+
+/* header */
+.fy-header .section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px;
+  margin: 0 0 6px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: linear-gradient(120deg, var(--fy-pink), var(--fy-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+.fy-header .section-sub { color: var(--fy-muted); margin: 0 0 18px; font-size: 15px; }
+
+/* mood row */
+.mood-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-bottom: 22px;
+}
+.mood-orb {
+  position: relative;
+  background: var(--fy-card);
+  border: 1px solid var(--fy-line);
+  padding: 0;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  color: #ffffff; /* text sits on the photo art, kept white for legibility there */
+  overflow: visible;
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 220px;
+  box-shadow: 0 6px 18px rgba(43, 38, 32, 0.08);
+}
+.mood-orb:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(43, 38, 32, 0.16);
+  border-color: #e2d9c8;
+}
+
+/* Tap/click feedback — replaces the old Framer Motion whileTap (which
+   used to conflict with the transform-based keyframe animations below).
+   Pure CSS now, so there's nothing left to fight with the animations. */
+.mood-orb:active {
+  transform: scale(0.97);
+}
+
+.mood-orb.active {
+  border-color: var(--fy-pink);
+  box-shadow: 0 0 0 2px rgba(255, 45, 120, 0.16), 0 18px 36px rgba(43, 38, 32, 0.16);
+}
+
+.mood-orb .orb-title { font-weight: 700; margin-top: 6px; }
+.mood-orb .orb-desc { color: rgba(255,255,255,0.85); font-size: 13px; margin-top: 4px; }
+
+/* ring decorative */
+.mood-orb .orb-ring {
+  position: absolute;
+  right: -22px;
+  top: -22px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.5);
+  transform: rotate(12deg);
+  opacity: 0.6;
+  transition: transform .6s ease, opacity .4s ease;
+  z-index: 2;
+}
+.mood-orb:hover .orb-ring {
+  transform: rotate(70deg) scale(1.12);
+  opacity: 0.85;
+}
+
+/* shimmer sweep across the card on hover */
+.mood-orb .orb-shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0) 60%);
+  transform: translateX(-130%);
+  transition: transform 0.9s ease;
+}
+.mood-orb:hover .orb-shimmer {
+  transform: translateX(130%);
+}
+
+/* ════════════════════════════
+   Per-mood hover motion on the card itself.
+   FIX: these used to be silently overridden because the button was
+   also a Framer Motion element with whileHover={{ scale: 1.03 }} —
+   Framer wrote an inline `transform` style on every hover frame,
+   which stomped on these keyframe animations (also targeting
+   `transform`). whileHover/whileTap were removed from the JSX, so
+   these now run uncontested. Amplitude bumped slightly so the effect
+   reads clearly.
+════════════════════════════ */
+.mood-orb-romantic:hover { animation: romanticHeartbeat 1.1s ease-in-out infinite; }
+@keyframes romanticHeartbeat {
+  0%, 100% { transform: translateY(-6px) scale(1.01); }
+  25%      { transform: translateY(-8px) scale(1.05); }
+  40%      { transform: translateY(-6px) scale(1.01); }
+  60%      { transform: translateY(-7px) scale(1.04); }
+}
+
+.mood-orb-fresh:hover { animation: freshRipple 1.8s ease-in-out infinite; }
+@keyframes freshRipple {
+  0%, 100% { box-shadow: 0 18px 36px rgba(104,195,255,0.18), 0 0 0 0 rgba(104,195,255,0.35); }
+  50%      { box-shadow: 0 22px 44px rgba(104,195,255,0.32), 0 0 0 16px rgba(104,195,255,0); }
+}
+
+.mood-orb-mysterious:hover { animation: mysteriousSwirl 2.4s ease-in-out infinite; }
+@keyframes mysteriousSwirl {
+  0%, 100% { transform: translateY(-6px) scale(1.01) rotate(0deg); }
+  50%      { transform: translateY(-9px) scale(1.03) rotate(-1.5deg); }
+}
+
+.mood-orb-bright:hover { animation: brightFlash 0.9s ease-in-out infinite; }
+@keyframes brightFlash {
+  0%, 100% { box-shadow: 0 18px 36px rgba(255,209,102,0.2), 0 0 18px rgba(255,209,102,0.12); }
+  50%      { box-shadow: 0 22px 46px rgba(255,209,102,0.4), 0 0 34px rgba(255,209,102,0.3); }
+}
+
+.mood-orb-comfort:hover { animation: comfortGlow 2s ease-in-out infinite; }
+@keyframes comfortGlow {
+  0%, 100% { box-shadow: 0 18px 36px rgba(255,138,61,0.18); }
+  50%      { box-shadow: 0 24px 48px rgba(255,138,61,0.36); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mood-orb-romantic:hover,
+  .mood-orb-fresh:hover,
+  .mood-orb-mysterious:hover,
+  .mood-orb-bright:hover,
+  .mood-orb-comfort:hover {
+    animation: none;
+  }
+}
+
+/* ════════════════════════════
+   Mood-specific hover particles — unchanged, they sit on top of each
+   card's own photo art so they stay readable regardless of page bg.
+════════════════════════════ */
+.mood-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: visible;
+  pointer-events: none;
+}
+.mood-orb > .mood-particles {
+  z-index: 6;
+}
+
+.mood-particles .particle {
+  position: absolute;
+  bottom: 4%;
+  opacity: 0;
+  line-height: 1;
+  display: inline-block;
+}
+
+@keyframes bubbleFloat {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.5) rotate(0deg); }
+  10%  { opacity: 1; }
+  30%  { transform: translate(8px, -50px) scale(0.9) rotate(8deg); }
+  50%  { transform: translate(-10px, -100px) scale(1.15) rotate(-8deg); }
+  70%  { transform: translate(10px, -150px) scale(0.95) rotate(6deg); opacity: 1; }
+  100% { opacity: 0; transform: translate(-6px, -210px) scale(1.3) rotate(-4deg); }
+}
+
+.mood-orb:hover .mood-particles .particle {
+  animation: bubbleFloat 2.6s ease-in infinite;
+}
+
+.particle.p1  { left: 10%; animation-delay: 0s;   }
+.particle.p2  { left: 24%; animation-delay: .3s;  }
+.particle.p3  { left: 42%; animation-delay: .6s;  }
+.particle.p4  { left: 58%; animation-delay: .2s;  }
+.particle.p5  { left: 74%; animation-delay: .5s;  }
+.particle.p6  { left: 88%; animation-delay: .8s;  }
+.particle.p7  { left: 18%; animation-delay: .15s; }
+.particle.p8  { left: 34%; animation-delay: .45s; }
+.particle.p9  { left: 64%; animation-delay: .75s; }
+.particle.p10 { left: 80%; animation-delay: .1s;  }
+
+.particle.p1  { --psize: 16px; }
+.particle.p2  { --psize: 24px; }
+.particle.p3  { --psize: 18px; }
+.particle.p4  { --psize: 28px; }
+.particle.p5  { --psize: 20px; }
+.particle.p6  { --psize: 15px; }
+.particle.p7  { --psize: 22px; }
+.particle.p8  { --psize: 17px; }
+.particle.p9  { --psize: 26px; }
+.particle.p10 { --psize: 19px; }
+
+.mood-orb-romantic .particle::before {
+  content: "";
+  display: block;
+  width: var(--psize);
+  height: var(--psize);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,143,192,0.6));
+  box-shadow: 0 0 12px rgba(255, 143, 192, 0.75);
+}
+.mood-orb-romantic:hover .mood-particles .particle {
+  animation: bubbleFloat 2.2s ease-in infinite;
+}
+
+.mood-orb-fresh .particle::before {
+  content: "";
+  display: block;
+  width: var(--psize);
+  height: var(--psize);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(104,195,255,0.6));
+  box-shadow: 0 0 14px rgba(104, 195, 255, 0.75);
+}
+
+.mood-orb-mysterious .particle::before {
+  content: "";
+  display: block;
+  width: var(--psize);
+  height: var(--psize);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(198,176,255,0.75), rgba(198,176,255,0));
+  filter: blur(3px);
+}
+.mood-orb-mysterious:hover .mood-particles .particle {
+  animation: smokeWisp 3s ease-in infinite;
+}
+@keyframes smokeWisp {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.6) rotate(0deg); }
+  12%  { opacity: 0.9; }
+  40%  { transform: translate(-16px, -70px) scale(1.1) rotate(-12deg); }
+  70%  { transform: translate(14px, -140px) scale(1.4) rotate(14deg); opacity: 0.6; }
+  100% { opacity: 0; transform: translate(-10px, -210px) scale(1.8) rotate(-10deg); }
+}
+
+.mood-orb-bright .particle::before {
+  content: "";
+  display: block;
+  width: var(--psize);
+  height: var(--psize);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,209,102,0.7));
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.9);
+}
+.mood-orb-bright:hover .mood-particles .particle {
+  animation: sparkleBurst 1.7s ease-out infinite;
+}
+@keyframes sparkleBurst {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+  15%  { opacity: 1; transform: translate(0, -10px) scale(1.3) rotate(20deg); }
+  40%  { opacity: 1; transform: translate(6px, -60px) scale(0.9) rotate(-15deg); }
+  70%  { opacity: 0.7; transform: translate(-8px, -120px) scale(1.1) rotate(20deg); }
+  100% { opacity: 0; transform: translate(4px, -180px) scale(0.7) rotate(-10deg); }
+}
+
+.mood-orb-comfort .particle::before {
+  content: "";
+  display: block;
+  width: var(--psize);
+  height: var(--psize);
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffb35c, #d9612a);
+  box-shadow: 0 0 12px rgba(255, 138, 61, 0.75), 0 0 6px rgba(255, 138, 61, 0.9);
+}
+.mood-orb-comfort:hover .mood-particles .particle {
+  animation: emberFloat 2.9s ease-in infinite;
+}
+@keyframes emberFloat {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  10%  { opacity: 1; }
+  35%  { transform: translate(-8px, -60px) scale(0.85); }
+  60%  { transform: translate(10px, -120px) scale(1.05); }
+  85%  { opacity: 0.6; transform: translate(-6px, -170px) scale(0.7); }
+  100% { opacity: 0; transform: translate(4px, -220px) scale(0.4); }
+}
+
+/* results area */
+.mood-results { margin-top: 18px; }
+.mood-empty { padding: 18px 12px; color: var(--fy-muted); }
+
+.results-head { display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; gap:12px; }
+.results-head h3 { margin: 0; font-size: 18px; font-weight: 700; color: var(--fy-ink); }
+.results-head .tag {
+  background: linear-gradient(120deg, var(--fy-pink), var(--fy-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+.results-actions { display:flex; gap:8px; align-items:center; }
+
+/* small product grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+/* CARD — light glass on white, soft border, ink text */
+.find-scent-section .product-card-mini {
+  background: #ffffff !important;
+  border-radius: 16px;
+  border: 1px solid var(--fy-line);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  align-items: flex-start;
+  color: var(--fy-ink) !important;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  box-shadow: 0 4px 14px rgba(43, 38, 32, 0.06);
+  width: 100%;
+  box-sizing: border-box;
+}
+.find-scent-section .product-card-mini:hover {
+  transform: translateY(-4px);
+  border-color: #e2d9c8;
+  box-shadow: 0 14px 28px rgba(43, 38, 32, 0.12);
+}
+.find-scent-section .pcm-media {
+  width: 100%;
+  height: 96px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #faf6ef 0%, #f4ede1 100%);
+  border-radius: 10px;
+}
+.find-scent-section .pcm-media img { max-height: 80px; max-width: 80px; object-fit: contain; display:block; }
+.find-scent-section .pcm-body { flex: 1; width: 100%; display:flex; flex-direction:column; gap:6px; min-width: 0; }
+.find-scent-section .pcm-body h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fy-ink) !important;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.find-scent-section .pcm-body .muted.small {
+  color: var(--fy-muted) !important;
+  font-size: 12.5px;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.find-scent-section .pcm-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.find-scent-section .pcm-foot .price {
+  font-weight: 700;
+  font-size: 15px;
+  background: linear-gradient(120deg, var(--fy-pink), var(--fy-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+
+.find-scent-section .pcm-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+/* Quick View button — pink-purple pill, the one accent on this card */
+.find-scent-section button.btn.ghost.quickview-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  background: linear-gradient(120deg, var(--fy-pink), var(--fy-purple)) !important;
+  border: none !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  box-shadow: 0 4px 12px rgba(255, 45, 120, 0.2);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.find-scent-section button.btn.ghost.quickview-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(155, 45, 255, 0.28);
+}
+
+.quickview-btn .qv-icon {
+  font-size: 13px;
+  transform: translateY(-1px);
+  transition: transform .3s ease;
+}
+
+.quickview-btn:hover .qv-icon {
+  transform: scale(1.12) translateY(-1px);
+}
+
+.find-scent-section button.btn.ghost.quickview-btn:active {
+  transform: scale(0.94);
+}
+
+.find-scent-section button.btn.ghost.quickview-btn.qv-pressed {
+  transform: scale(0.94);
+  box-shadow: 0 2px 8px rgba(255, 45, 120, 0.4);
+}
+
+.quickview-btn .qv-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(0);
+  pointer-events: none;
+  animation: qvRipple 0.55s ease-out forwards;
+}
+
+@keyframes qvRipple {
+  0%   { transform: scale(0); opacity: 0.65; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.quickview-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%);
+  transform: translateX(-140%);
+  transition: transform .7s ease;
+  pointer-events: none;
+}
+.quickview-btn:hover::after {
+  transform: translateX(140%);
+}
+
+/* show more */
+.mood-showmore { display:flex; justify-content:center; margin-top:12px; }
+
+/* decorative particles removed — flat white background now */
+.find-scent-section::after { content: none; }
+
+/* responsive */
+@media (max-width: 640px) {
+  .results-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .results-head h3 { font-size: 16px; }
+  .results-actions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .results-actions .btn {
+    flex: 1 1 auto;
+    min-width: 120px;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+}
+
+canvas { z-index: 1000 !important; }
+
+/* mood art image (photo inside mood orbs) */
+.orb-text {
+  position: relative;
+  z-index: 3;
+  padding: 14px 10px 16px;
+  background: linear-gradient(180deg, rgba(18,13,10,0) 0%, rgba(18,13,10,0.4) 55%, rgba(18,13,10,0.8) 100%);
+  border-radius: 0 0 20px 20px;
+}
+
+.orb-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: #ffffff;
+}
+
+.orb-desc {
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.orb-art-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.orb-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transform: scale(1.1);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  filter: saturate(1.05);
+}
+
+.mood-orb:hover .orb-art {
+  transform: scale(1.16);
+  opacity: 1;
+}
+
+.mood-orb > *:not(.orb-art-wrap) {
+  position: relative;
+  z-index: 2;
+}
+
+.mood-orb > .mood-particles {
+  position: absolute !important;
+  inset: 0;
+  z-index: 6;
+}
+
+/* subtle bottom-darkening on each card so the label always reads,
+   independent of the section's own (now white) background */
+.mood-orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(18,13,10,0.08) 0%, rgba(18,13,10,0.4) 100%);
+  opacity: 0.7;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  border-radius: 20px;
+}
+.mood-orb:hover::after {
+  opacity: 0.5;
+}
+
+/* ════════════════════════════
+   Clear / Show more / Show less pills — light outline, pink-purple on hover
+════════════════════════════ */
+.find-scent-section button.btn.ghost {
+  background: transparent !important;
+  color: var(--fy-ink) !important;
+  -webkit-text-fill-color: var(--fy-ink) !important;
+  border: 1px solid var(--fy-line) !important;
+  border-radius: 999px;
+  font-weight: 600;
+  opacity: 1 !important;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.find-scent-section button.btn.ghost:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(120deg, var(--fy-pink), var(--fy-purple)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  box-shadow: 0 10px 22px rgba(255, 45, 120, 0.2);
+}
+
+.find-scent-section button.btn.ghost::before {
+  content: none !important;
+}
+
+.find-scent-section button.btn.small.ghost {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+}
+
+/* "Show all (n) →" primary button — pink-purple fill */
+.find-scent-section button.btn.primary {
+  background: linear-gradient(120deg, var(--fy-pink), var(--fy-purple));
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.find-scent-section button.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(155, 45, 255, 0.24);
+}

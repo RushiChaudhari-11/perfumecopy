@@ -1,0 +1,1287 @@
+/* src/styles.css
+   Aura — soft, light, smooth homepage.
+   Warm ivory background, gentle diffused shadows, calmer motion,
+   with the pink/violet accent kept for CTAs to match the header.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --accent1: #ff2d78;
+  /* magenta/pink — CTAs only */
+  --accent2: #9b2dff;
+  /* violet/purple — CTAs only */
+  --gold: #c9a578;
+  --gold-light: #b08d5f;
+  --muted: #3d332a;
+  /* darkened further per request — subtitle text */
+  --ink: #1c1712;
+  /* deepened slightly for crisper contrast */
+  --bg: #fffdf9;
+  /* ivory instead of stark white */
+  --card: #ffffff;
+  --card-border: rgba(201, 165, 120, 0.16);
+  --shadow-soft: rgba(44, 38, 32, 0.07);
+  --shadow-softer: rgba(44, 38, 32, 0.045);
+  --max-width: 100%;
+  --gutter: 0px;
+  /* fallback only used if the .hero element doesn't set this inline;
+     keeps things from breaking if this component is ever reused
+     without Homepage.jsx's inline --fog-image style */
+  --fog-image: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  overflow-x: clip;
+  font-family: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.homepage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ─── HERO ─────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 620px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Hero Banner Image Mode */
+.hero.hero-banner-section {
+  min-height: unset;
+  background: #080d1a;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero.hero-banner-section::before,
+.hero.hero-banner-section::after {
+  display: none !important;
+}
+
+.hero-banner-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.hero-banner-img {
+  width: 100%;
+  height: auto;
+  max-height: 850px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.hero-banner-link:hover .hero-banner-img {
+  transform: scale(1.012);
+  filter: brightness(1.03);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-banner-img {
+    min-height: 260px;
+    object-position: center left;
+  }
+}
+
+/* FIX: no more hardcoded url("/smoke-fallback.png") or url("/public/...")
+   in this stylesheet — that's what broke the build, because css-loader
+   tries to resolve root-absolute url()s as JS module imports relative to
+   src/, and the file only exists in public/.
+
+   Instead, the image is now supplied by Homepage.jsx as an inline CSS
+   custom property on the .hero element:
+     style={{ "--fog-image": `url(${process.env.PUBLIC_URL}/smoke-fallback.png)` }}
+   which resolves the public/ path correctly at runtime with zero
+   webpack involvement. This stylesheet just consumes var(--fog-image).
+
+   Overlay opacity also lightened (was 0.55/0.8 — nearly opaque white,
+   which hid anything behind it) so the fog/video actually shows through. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -6%;
+  background-image:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.12), rgba(255, 253, 249, 0.2)),
+    var(--fog-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 2;
+  animation: fog-drift 26s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes fog-drift {
+  0% {
+    transform: scale(1.06) translate(0%, 0%);
+  }
+
+  50% {
+    transform: scale(1.14) translate(-2.5%, -1.5%);
+  }
+
+  100% {
+    transform: scale(1.06) translate(2%, 1%);
+  }
+}
+
+/* Ambient color wash — softened, slower drift, lower contrast */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 2;
+  background:
+    radial-gradient(460px 460px at 15% 20%, rgba(255, 45, 120, 0.05), transparent 60%),
+    radial-gradient(420px 420px at 85% 75%, rgba(155, 45, 255, 0.05), transparent 60%),
+    radial-gradient(360px 360px at 50% 100%, rgba(201, 165, 120, 0.08), transparent 60%);
+  opacity: 0.8;
+  animation: ambient-drift 20s ease-in-out infinite;
+  pointer-events: none;
+  filter: blur(3px);
+}
+
+@keyframes ambient-drift {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(2%, -2%) scale(1.04);
+  }
+}
+
+/* Pin the video and any decorative hero-bg elements (e.g. .scent blobs
+   defined elsewhere) strictly below the white overlay above, so they
+   can only ever add a faint texture — never darken the text. */
+.hero-video-bg,
+.hero-bg {
+  z-index: 0 !important;
+}
+
+.hero-bg {
+  opacity: 0.35 !important;
+}
+
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* FIX: video was opacity 0.08 with a heavy brightness/blur filter,
+   making it nearly invisible even with the overlay lightened above.
+   Bumped to fully visible with a light, non-destructive filter. */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  filter: brightness(1.05) saturate(1.05);
+  transform: scale(1.02);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  max-width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 80px;
+  align-items: center;
+  padding: 88px var(--gutter);
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform 0.35s ease-out;
+}
+
+.hero-left {
+  padding: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-left::before {
+  content: "";
+  position: absolute;
+  inset: -40px -60px -40px -50px;
+  filter: blur(14px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-deep) !important;
+  margin-bottom: 18px;
+}
+
+.hero-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero-title {
+  font-family: "Fraunces", serif;
+  font-optical-sizing: auto;
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+  margin: 0 0 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-title .accent {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero-sub {
+  color: var(--muted) !important;
+  margin-bottom: 32px;
+  max-width: 48ch;
+  font-size: 16.5px;
+  line-height: 1.75;
+  font-weight: 500;
+  position: relative;
+  z-index: 3;
+}
+
+/* ==========================================================
+   HERO TEXT COLORS
+   Scope: hero/top section ONLY. Nothing under .about /
+   .about-text (Our Atelier) is affected by this block.
+
+   - Whole heading (both "Scents that linger." and "Stories
+     that stay.") → flat white, no gradient/shimmer/shadow.
+   - "Stories that stay." sits on its own line (via <br /> in
+     JSX) and is rendered smaller than the first line.
+   - Subtitle, eyebrow, feature labels (Hand-blended / Natural
+     extracts / Sustainable), carousel floating label → plain
+     white, no shadow.
+   ========================================================== */
+.hero-title {
+  color: #ffffff !important;
+  text-shadow: none !important;
+  animation: none !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+}
+
+.hero-title .accent {
+  color: #ffffff !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  animation: none !important;
+  text-shadow: none !important;
+  font-size: 0.6em;
+  /* smaller than "Scents that linger." */
+  display: inline-block;
+  /* keeps it tight on its own line after <br> */
+}
+
+.hero-eyebrow,
+.hero-sub,
+.feature strong,
+.feature span,
+.floating-label .label-name,
+.floating-label .label-price {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.hero-ctas .btn {
+  min-width: 180px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  white-space: nowrap;
+}
+
+.hero-ctas .btn.primary {
+  min-width: 180px;
+  text-align: center;
+}
+
+.hero-ctas .btn.ghost {
+  min-width: 180px;
+  text-align: center;
+}
+
+.btn {
+  position: relative;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  font-family: "Manrope", sans-serif;
+}
+
+.btn.primary {
+  background: linear-gradient(120deg, var(--accent1), var(--accent2));
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(255, 45, 120, 0.22);
+}
+
+.btn.primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  animation: btn-sweep 4.2s ease-in-out infinite;
+}
+
+@keyframes btn-sweep {
+  0% {
+    left: -60%;
+  }
+
+  55%,
+  100% {
+    left: 130%;
+  }
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  letter-spacing: 0.18em;
+  box-shadow: 0 14px 32px rgba(255, 45, 120, 0.32);
+}
+
+.btn.ghost,
+.btn.ghost:link,
+.btn.ghost:visited,
+button.btn.ghost {
+  color: var(--ink) !important;
+  background: transparent;
+  border: 1px solid rgba(44, 38, 32, 0.18);
+}
+
+.btn.ghost:hover,
+.btn.ghost:focus,
+.btn.ghost:active,
+button.btn.ghost:hover,
+button.btn.ghost:focus,
+button.btn.ghost:active {
+  color: #fff !important;
+  background: linear-gradient(120deg, var(--accent1), var(--accent2));
+  border-color: transparent;
+}
+
+/* FIX: "Our Story" ghost button lives on the dark hero section, where
+   the default .btn.ghost ink-dark text (meant for the light page body,
+   e.g. the "Browse All" button in Our Atelier) was nearly invisible.
+   Scoped strictly to .hero so Our Atelier's ghost button is untouched. */
+.hero .btn.ghost,
+.hero .btn.ghost:link,
+.hero .btn.ghost:visited,
+.hero button.btn.ghost {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.45);
+  border-radius: 24px !important;
+}
+
+.hero-features {
+  margin-top: 22px;
+  display: flex;
+  gap: 14px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.feature {
+  background: rgba(201, 165, 120, 0.05);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+}
+
+.feature strong {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 15px;
+  /* color intentionally not set here — the HERO TEXT COLORS block
+     above (color: #fff !important) is the single source of truth so
+     Hand-blended / Natural extracts / Sustainable stay clearly
+     visible (white) on the dark hero background. */
+}
+
+.feature span {
+  font-size: 12px;
+  font-weight: 500;
+  /* color intentionally not set here — see note on .feature strong above */
+}
+
+.feature:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 165, 120, 0.34);
+  background: rgba(201, 165, 120, 0.09);
+}
+
+/* ─── BOTTLE CAROUSEL ──────────────────────────────────── */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 22px;
+}
+
+.bottle-carousel {
+  position: relative;
+  width: 440px;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(calc(var(--mx, 0px) * -1.2), calc(var(--my, 0px) * -1.2));
+  transition: transform 0.35s ease-out;
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  background: rgba(201, 165, 120, 0.32);
+  cursor: pointer;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.35s ease,
+    transform 0.25s ease;
+}
+
+.carousel-dot:hover {
+  background: rgba(201, 165, 120, 0.55);
+  transform: scale(1.15);
+}
+
+.carousel-dot.active {
+  width: 26px;
+  background: linear-gradient(120deg, var(--accent1), var(--accent2));
+}
+
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 26px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(44, 38, 32, 0.22);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.scroll-cue-line {
+  width: 3px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--gold);
+  animation: scroll-cue-drift 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-drift {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  60% {
+    transform: translateY(14px);
+    opacity: 0.2;
+  }
+
+  61% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 980px) {
+  .scroll-cue {
+    display: none;
+  }
+}
+
+.bottle-wrap {
+  width: 440px;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+  transition: transform 0.6s ease;
+}
+
+.bottle-wrap:hover {
+  transform: translateY(-4px);
+}
+
+.bottle-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, rgba(255, 45, 120, 0.06), rgba(155, 45, 255, 0.04) 45%, transparent 72%);
+  opacity: 0.85;
+  pointer-events: none;
+  filter: blur(8px);
+}
+
+.bottle-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, rgba(201, 165, 120, 0.12), transparent 30%);
+  opacity: 0.5;
+  animation: rim-rotate 14s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rim-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bottle {
+  width: 78%;
+  max-height: 82%;
+  object-fit: contain;
+  transform-origin: center;
+  animation: float-bottle 6s ease-in-out infinite;
+  filter: drop-shadow(0 16px 24px rgba(44, 38, 32, 0.14));
+  z-index: 2;
+}
+
+@keyframes float-bottle {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.bottle-glow {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(201, 165, 120, 0.12), transparent 70%);
+  top: 55px;
+  z-index: 0;
+  filter: blur(28px);
+  pointer-events: none;
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+}
+
+.bottle-shadow {
+  position: absolute;
+  width: 280px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(44, 38, 32, 0.10), transparent 70%);
+  bottom: 46px;
+  z-index: 0;
+  animation: shadow-breathe 6s ease-in-out infinite;
+}
+
+@keyframes shadow-breathe {
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scaleX(0.9);
+    opacity: 0.8;
+  }
+}
+
+.floating-label {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  z-index: 4;
+  white-space: nowrap;
+}
+
+.floating-label .label-name {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--gold-light);
+  text-shadow: none;
+}
+
+.floating-label .label-price {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 2px;
+  text-shadow: none;
+}
+
+/* ─── COLLECTION / PRODUCT CARDS ───────────────────────── */
+.collection {
+  padding: 64px var(--gutter);
+  max-width: var(--max-width);
+  margin: 40px auto 0;
+  background: transparent;
+  animation: section-rise 0.8s ease both;
+}
+
+@keyframes section-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-title {
+  font-family: "Fraunces", serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: 0.005em;
+}
+
+.section-sub {
+  color: var(--muted);
+  margin-top: 10px;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow: auto;
+  padding: 12px 4px 20px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-card {
+  flex: 0 0 260px;
+  scroll-snap-align: center;
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px var(--shadow-softer);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  border: 1px solid var(--card-border);
+  position: relative;
+}
+
+.product-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.5) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.product-card:hover::after {
+  transform: translateX(120%);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 42px var(--shadow-soft);
+  border-color: rgba(201, 165, 120, 0.36);
+}
+
+.pc-media {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #faf7f2;
+  overflow: hidden;
+}
+
+.pc-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.55s ease;
+}
+
+.product-card:hover .pc-media img {
+  transform: scale(1.05);
+}
+
+.pc-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pc-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.price {
+  color: var(--gold-light);
+  font-weight: 600;
+  font-family: "Fraunces", serif;
+  font-size: 17px;
+}
+
+/* ─── ATELIER / ABOUT ──────────────────────────────────── */
+/* NOTE: intentionally untouched — no white-text override reaches here. */
+.about {
+  padding: 72px 0;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-inner {
+  max-width: 90%;
+  margin: 0 auto;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  /* already hai */
+  position: relative;
+  z-index: 2;
+}
+
+.about-text {
+  max-width: 600px;
+  align-self: center;
+  /* NEW — is item ko force se row ke center pe rakhega */
+  margin: auto 0;
+  /* NEW — extra safety, top/bottom gap barabar hoga */
+}
+
+.about-art img {
+  width: 380px;
+  border-radius: 14px;
+  display: block;
+  box-shadow: 0 14px 36px var(--shadow-soft);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.about-art img:hover {
+  transform: translateY(-4px) scale(1.012);
+  box-shadow: 0 18px 44px var(--shadow-soft), 0 0 0 1px rgba(201, 165, 120, 0.18);
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+.about-text .section-title {
+  margin-bottom: 18px;
+}
+
+.about-text p {
+  line-height: 1.75;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.about-cta {
+  margin-top: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.about-cta .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  min-width: 170px;
+  height: 52px;
+
+  padding: 0 28px;
+  /* 14px 28px hatao */
+  line-height: normal;
+  /* line-height:1 hatao */
+
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 13px;
+}
+
+/* ─── VIDEO CTA (after Atelier) ────────────────────────── */
+/* UPDATED: explicit top/left/right/bottom + width/height 100% instead of
+   relying only on the `inset: 0` shorthand, and added height:100% on the
+   section itself. This makes the video reliably fill the ENTIRE section
+   height (no gaps top/bottom), even though the section's actual height
+   is driven dynamically by its centered flex content rather than a fixed
+   value. `min-height`/`min-width: 100%` on the video guarantees
+   object-fit: cover always has enough source area to crop from, so the
+   video never "shrinks" and reveals the dark background behind it. */
+
+.video-cta {
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  /* height: 50%;   */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1c1712;
+}
+
+.video-cta-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.video-cta-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  /* was: center — now anchors to the top edge */
+  filter: brightness(0.9) saturate(1.05);
+}
+
+.video-cta-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.video-cta-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg,
+      rgba(28, 23, 18, 0.55),
+      rgba(28, 23, 18, 0.72));
+}
+
+
+.video-cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  text-align: center;
+  padding: 48px 24px;
+  margin: 0 auto;
+}
+
+.video-cta-inner .btn.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-cta-title {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+
+.video-cta-title .accent {
+  font-style: italic;
+  color: var(--accent2);
+  background: linear-gradient(90deg, var(--accent1), var(--gold), var(--accent2), var(--accent1));
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 6s linear infinite;
+}
+
+@keyframes shimmer-text {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 300% center;
+  }
+}
+
+.video-cta-sub {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 28px;
+}
+
+#men-collection,
+#women-collection,
+#featured-collections,
+#scents,
+#atelier {
+  scroll-margin-top: var(--header-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero::after,
+  .hero::before,
+  .hero-title .accent,
+  .video-cta-title .accent,
+  .btn.primary::after,
+  .bottle-wrap::after,
+  .bottle,
+  .bottle-glow,
+  .bottle-shadow,
+  .scroll-cue-line,
+  .collection {
+    animation: none !important;
+  }
+
+  .hero-inner,
+  .bottle-carousel {
+    transition: none;
+  }
+
+  .product-card::after {
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  :root {
+    --gutter: 24px;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 48px var(--gutter);
+  }
+
+  .hero-title {
+    font-size: 40px;
+  }
+
+  .hero-right {
+    order: -1;
+  }
+
+  .bottle-carousel,
+  .bottle-wrap {
+    width: 320px;
+    height: 320px;
+  }
+
+  .bottle {
+    width: 76%;
+  }
+
+  .collection {
+    padding: 40px var(--gutter);
+  }
+
+  .about {
+    padding: 48px var(--gutter);
+  }
+
+  .about-inner {
+    flex-direction: column;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .about-art img {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .about-text {
+    max-width: 100%;
+  }
+
+  .video-cta {
+    min-height: 340px;
+  }
+
+  .video-cta-title {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 560px) {
+
+  /* Hero */
+  .hero-right {
+    display: none !important;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+
+  .hero-ctas {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .hero-ctas .btn {
+    width: 90%;
+    max-width: 280px;
+    height: 52px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+
+    padding: 0 24px;
+    line-height: 52px;
+  }
+
+  .hero-ctas .btn.primary {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-features {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .feature {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+    text-align: center;
+  }
+
+  .feature strong {
+    font-size: 12px;
+  }
+
+  .feature span {
+    font-size: 10px;
+  }
+
+  .video-cta-inner {
+    padding: 36px 20px;
+  }
+
+  .video-cta-title {
+    font-size: 26px;
+  }
+
+  .video-cta-sub {
+    font-size: 14px;
+  }
+
+  /* About */
+  .about-cta .btn,
+  .about-cta a.btn,
+  .about-cta button.btn {
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    height: 52px;
+    padding: 0 28px !important;
+
+    line-height: normal !important;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+}

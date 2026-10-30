@@ -1,0 +1,177 @@
+/* src/styles/orderStatus.css
+   Matches the actual classNames used in OrderStatus.jsx:
+   .order-status-card, .os-grid, .os-label, .os-value, .track-btn,
+   .tracking-panel, .timeline, .timeline-step, .timeline-dot, .timeline-label
+   Uses the same tokens as checkout.css (--pink, --purple, --ink, --line, --card)
+   so it stays visually consistent with the rest of Aura.
+
+   NOTE: .track-btn rules below are scoped as ".order-status-card .track-btn"
+   with !important on color/background/border. This guarantees the pink/
+   purple theme applies correctly in every state (normal, hover, focus,
+   active) whether this page is embedded inside OrderConfirmation.jsx
+   (which has .checkout + .conf-card wrappers with their own competing
+   button.btn.ghost rules) or rendered standalone at "/orders/:orderId".
+   -webkit-text-fill-color is set explicitly because some ancestor rules
+   in checkout.css set it directly, which overrides a plain `color`
+   declaration in WebKit browsers even when specificity looks equal.
+*/
+
+:root {
+  --cream: #fbf9f6;
+  --card: #fffdfb;
+  --card-2: #fdfcfa;
+  --ink: #2c1f26;
+  --ink-soft: #5a4650;
+  --line: rgba(255, 45, 120, 0.16);
+  --pink: #ff2d78;
+  --purple: #7b4dff;
+  --gradient: linear-gradient(135deg, var(--pink), var(--purple));
+  --danger: #b3261e;
+}
+
+.order-status-card {
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  max-width: 480px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+}
+
+.order-status-card.pending {
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.order-status-card .muted {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.order-status-card .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 12.5px;
+}
+
+.order-status-card .dr-icon {
+  margin-right: 4px;
+}
+
+/* ---------------- status grid ---------------- */
+.os-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 20px;
+}
+.os-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin-bottom: 3px;
+}
+.os-value {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+}
+.os-value.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 480px) {
+  .os-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------------- track button ---------------- */
+.order-status-card .track-btn,
+.order-status-card .track-btn:focus,
+.order-status-card .track-btn:active {
+  margin-top: 14px;
+  width: auto;
+  display: inline-flex;
+  padding: 11px 24px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1.5px solid var(--line) !important;
+  background: #fff !important;
+  color: var(--pink) !important;
+  -webkit-text-fill-color: var(--pink) !important;
+  opacity: 1 !important;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.order-status-card .track-btn:hover {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  border-color: transparent !important;
+  background: var(--gradient) !important;
+  box-shadow: 0 10px 22px rgba(255, 45, 120, 0.22);
+  transform: translateY(-2px);
+}
+
+/* ---------------- tracking timeline ---------------- */
+.tracking-panel {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  position: relative;
+}
+.timeline-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 22px;
+  width: 2px;
+  height: calc(100% - 4px);
+  background: var(--line);
+}
+.timeline-step.done:not(:last-child)::before {
+  background: var(--gradient);
+}
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--line);
+  flex-shrink: 0;
+  z-index: 1;
+}
+.timeline-step.done .timeline-dot {
+  background: var(--gradient);
+  box-shadow: 0 0 0 3px rgba(255, 45, 120, 0.14);
+}
+.timeline-label {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+.timeline-step.done .timeline-label {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.order-status-card .error {
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 6px;
+}

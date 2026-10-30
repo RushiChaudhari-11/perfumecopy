@@ -1,0 +1,264 @@
+/* ── WHY SIGNATURE SECTION ── */
+.why-signature-section {
+  position: relative;
+  width: 100%;
+  padding: 90px 0 100px;
+  background: linear-gradient(180deg, #fdf7f6 0%, #fbf3f1 100%);
+  border-top: 1px solid rgba(122, 22, 56, 0.06);
+  border-bottom: 1px solid rgba(122, 22, 56, 0.06);
+  overflow: hidden;
+}
+
+.why-signature-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* Header Area */
+.why-signature-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+
+.why-signature-eyebrow-wrap {
+  margin-bottom: 14px;
+}
+
+.why-signature-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #7a1638;
+  background: rgba(122, 22, 56, 0.06);
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 22, 56, 0.14);
+}
+
+.why-signature-title {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 850;
+  color: #0f172a;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin: 0 0 16px 0;
+  perspective: 1000px;
+}
+
+/* GSAP Masked Word Animations */
+.why-title-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.why-word {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-origin: 50% 100%;
+}
+
+.why-signature-accent {
+  color: #7a1638;
+  position: relative;
+  display: inline-block;
+}
+
+.why-accent-underline {
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 4.5px;
+  background: linear-gradient(90deg, #7a1638 0%, #d97706 100%);
+  border-radius: 3px;
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.why-signature-sub {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(14px, 1.25vw, 17px);
+  color: #64748b;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 480;
+}
+
+/* 5 Column Grid */
+.why-signature-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+}
+
+/* Individual Feature Card */
+.why-feature-card {
+  opacity: 1;
+  visibility: visible;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 34px 20px 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(122, 22, 56, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, background 0.35s ease;
+  position: relative;
+}
+
+.why-feature-card:hover {
+  transform: translateY(-8px);
+  background: #ffffff;
+  box-shadow: 0 20px 40px rgba(122, 22, 56, 0.09), 0 8px 18px rgba(217, 119, 6, 0.12);
+  border-color: rgba(217, 119, 6, 0.3);
+}
+
+/* Circular Icon Bubble (Matching user screenshot) */
+.why-icon-bubble {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(122, 22, 56, 0.2);
+  background: linear-gradient(135deg, #ffffff 0%, #fff7f5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: 0 4px 14px rgba(122, 22, 56, 0.06);
+  transition: all 0.35s ease;
+}
+
+.why-icon-inner {
+  color: #7a1638;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s ease, color 0.35s ease;
+}
+
+.why-feature-card:hover .why-icon-bubble {
+  border-color: #d97706;
+  background: linear-gradient(135deg, #7a1638 0%, #991b42 100%);
+  box-shadow: 0 8px 24px rgba(122, 22, 56, 0.25);
+  transform: scale(1.08);
+}
+
+.why-feature-card:hover .why-icon-inner {
+  color: #fde047;
+  transform: rotate(6deg);
+}
+
+/* Feature Title */
+.why-feature-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.015em;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+/* Feature Description */
+.why-feature-desc {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0 0 18px 0;
+  flex: 1;
+}
+
+/* Mini Tag Badge */
+.why-feature-badge {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10.5px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a1638;
+  background: rgba(122, 22, 56, 0.06);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 22, 56, 0.1);
+  margin-top: auto;
+}
+
+.why-feature-card:hover .why-feature-badge {
+  background: rgba(217, 119, 6, 0.1);
+  color: #b45309;
+  border-color: rgba(217, 119, 6, 0.25);
+}
+
+/* Responsive for All Devices */
+@media (max-width: 1100px) {
+  .why-signature-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-signature-section {
+    padding: 50px 0 60px;
+  }
+  .why-signature-container {
+    padding: 0 18px;
+  }
+  .why-signature-header {
+    margin-bottom: 36px;
+  }
+  .why-signature-title {
+    font-size: clamp(26px, 5.5vw, 38px);
+    margin-bottom: 12px;
+  }
+  .why-signature-sub {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+  .why-signature-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .why-feature-card {
+    padding: 22px 14px 18px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .why-signature-section {
+    padding: 42px 0 48px;
+  }
+  .why-signature-container {
+    padding: 0 14px;
+  }
+  .why-signature-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .why-feature-card {
+    padding: 20px 16px;
+  }
+  .why-feature-title {
+    font-size: 16px;
+  }
+  .why-feature-desc {
+    font-size: 13px;
+  }
+}
+

@@ -1,0 +1,17 @@
+{
+  "name": "import-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "importProducts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "firebase-admin": "^14.1.0",
+    "xlsx": "^0.18.5"
+  }
+}

@@ -1,0 +1,715 @@
+/* src/styles/AboutPage.css */
+/* Luxury "Signature" Perfume Atelier About & Heritage Visual System */
+/* Ivory, Cream, Champagne Gold, and Deep Burgundy Editorial Palette */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Alex+Brush&display=swap');
+
+:root {
+  --ap-ivory: #FFF8EF;
+  --ap-ivory-soft: #FFFDF9;
+  --ap-cream: #FAF4EB;
+  --ap-gold: #C89B52;
+  --ap-gold-hover: #b4853e;
+  --ap-gold-light: #E8D4BB;
+  --ap-gold-soft: rgba(200, 155, 82, 0.16);
+  --ap-burgundy: #790D2D;
+  --ap-burgundy-hover: #5c0922;
+  --ap-burgundy-soft: rgba(121, 13, 45, 0.08);
+  --ap-text-dark: #241A18;
+  --ap-text-muted: #6B5A55;
+  --ap-border-gold: rgba(200, 155, 82, 0.28);
+  --ap-font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --ap-font-sans: "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+  --ap-font-script: "Alex Brush", "Great Vibes", cursive, serif;
+}
+
+.luxury-about-page {
+  width: 100%;
+  background-color: var(--ap-ivory-soft);
+  color: var(--ap-text-dark);
+  font-family: var(--ap-font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.about-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+/* ─── 1. Hero Section ────────────────────────────────────────────────────── */
+.about-hero-section {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px 120px;
+  background: 
+    radial-gradient(circle at 50% 20%, rgba(200, 155, 82, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 10% 80%, rgba(121, 13, 45, 0.04) 0%, transparent 50%),
+    var(--ap-cream);
+  border-bottom: 1.5px solid var(--ap-border-gold);
+  box-sizing: border-box;
+}
+
+.about-hero-content {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.about-hero-eyebrow {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--ap-gold);
+  margin-bottom: 20px;
+}
+
+.about-hero-title {
+  font-family: var(--ap-font-serif);
+  font-size: clamp(38px, 5.5vw, 64px);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ap-text-dark);
+  margin: 0 0 24px;
+  letter-spacing: -0.5px;
+}
+
+.about-gold-italic {
+  font-style: italic;
+  color: var(--ap-gold);
+  font-weight: 600;
+}
+
+.about-hero-subtitle {
+  font-size: clamp(16px, 1.8vw, 19px);
+  line-height: 1.65;
+  color: var(--ap-text-muted);
+  max-width: 680px;
+  margin: 0 auto 38px;
+  font-weight: 400;
+}
+
+.about-hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.about-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--ap-burgundy);
+  color: #ffffff;
+  border: 1.5px solid var(--ap-burgundy);
+  border-radius: 999px;
+  padding: 14px 34px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(121, 13, 45, 0.24);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.about-primary-btn:hover {
+  background-color: var(--ap-burgundy-hover);
+  border-color: var(--ap-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(121, 13, 45, 0.35), 0 0 14px rgba(200, 155, 82, 0.25);
+}
+
+.about-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: var(--ap-text-dark);
+  border: 1.5px solid var(--ap-border-gold);
+  border-radius: 999px;
+  padding: 14px 30px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.about-ghost-btn:hover {
+  background: var(--ap-ivory-soft);
+  border-color: var(--ap-gold);
+  color: var(--ap-burgundy);
+  transform: translateY(-2px);
+}
+
+/* Floating Stats Bar */
+.about-stats-bar {
+  max-width: 1060px;
+  width: 90%;
+  margin: 60px auto 0;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--ap-border-gold);
+  border-radius: 20px;
+  padding: 24px 36px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 16px 45px rgba(36, 26, 24, 0.08);
+  flex-wrap: wrap;
+  gap: 20px 10px;
+}
+
+.about-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.stat-number {
+  font-family: var(--ap-font-serif);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--ap-burgundy);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ap-text-muted);
+  text-transform: uppercase;
+}
+
+.about-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--ap-border-gold);
+}
+
+/* ─── 2. Brand Genesis & Heritage ────────────────────────────────────────── */
+.about-heritage-section {
+  padding: 110px 0;
+  background: var(--ap-ivory-soft);
+  position: relative;
+}
+
+.about-heritage-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.section-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ap-gold);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--ap-font-serif);
+  font-size: clamp(30px, 3.8vw, 44px);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ap-text-dark);
+  margin: 0 0 24px;
+}
+
+.gold-text {
+  color: var(--ap-gold);
+  font-style: italic;
+}
+
+.heritage-p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--ap-text-muted);
+  margin-bottom: 18px;
+}
+
+.heritage-p.lead {
+  font-size: 17.5px;
+  font-weight: 500;
+  color: var(--ap-text-dark);
+  line-height: 1.6;
+}
+
+.heritage-signature-block {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--ap-border-gold);
+  display: flex;
+  flex-direction: column;
+}
+
+.atelier-script {
+  font-family: var(--ap-font-script);
+  font-size: 48px;
+  color: var(--ap-gold);
+  line-height: 1;
+  margin-bottom: 6px;
+  user-select: none;
+}
+
+.signature-caption {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ap-text-muted);
+  font-weight: 600;
+}
+
+.heritage-visual-col {
+  position: relative;
+}
+
+.heritage-card-frame {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(36, 26, 24, 0.16);
+  border: 2px solid var(--ap-border-gold);
+  height: 480px;
+}
+
+.heritage-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heritage-card-frame:hover .heritage-banner-img {
+  transform: scale(1.04);
+}
+
+.heritage-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(36, 26, 24, 0.1) 0%,
+    rgba(36, 26, 24, 0.4) 50%,
+    rgba(36, 26, 24, 0.88) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 36px;
+  color: #ffffff;
+}
+
+.overlay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200, 155, 82, 0.25);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 155, 82, 0.5);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #fce7b2;
+  margin-bottom: 12px;
+  width: fit-content;
+}
+
+.overlay-title {
+  font-family: var(--ap-font-serif);
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: #ffffff;
+}
+
+.overlay-sub {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+/* ─── 3. Olfactory Architecture ─────────────────────────────────────────── */
+.about-architecture-section {
+  padding: 100px 0;
+  background: var(--ap-cream);
+  border-top: 1.5px solid var(--ap-border-gold);
+  border-bottom: 1.5px solid var(--ap-border-gold);
+}
+
+.section-header-center {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+
+.gold-ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 14px auto 18px;
+  max-width: 200px;
+}
+
+.ornament-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ap-gold-light), transparent);
+}
+
+.ornament-star {
+  color: var(--ap-gold);
+  font-size: 13px;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ap-text-muted);
+  margin: 0;
+}
+
+.architecture-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.architecture-step-card {
+  background: #ffffff;
+  border: 1.5px solid var(--ap-border-gold);
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow: 0 12px 35px rgba(36, 26, 24, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.architecture-step-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ap-gold);
+  box-shadow: 0 18px 45px rgba(121, 13, 45, 0.10);
+}
+
+.step-card-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.step-number {
+  font-family: var(--ap-font-serif);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--ap-gold);
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.step-tag {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ap-burgundy);
+  margin-bottom: 2px;
+}
+
+.step-sub {
+  font-size: 13px;
+  color: var(--ap-text-muted);
+  font-style: italic;
+}
+
+.step-title {
+  font-family: var(--ap-font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ap-text-dark);
+  margin: 0 0 12px;
+}
+
+.step-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ap-text-muted);
+  margin: 0 0 20px;
+}
+
+.step-accords-wrap {
+  border-top: 1px solid rgba(200, 155, 82, 0.2);
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.accords-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ap-gold);
+}
+
+.accords-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.accord-pill {
+  background: var(--ap-ivory);
+  border: 1px solid var(--ap-border-gold);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ap-text-dark);
+}
+
+/* ─── 4. Master Quote Section ────────────────────────────────────────────── */
+.about-quote-section {
+  padding: 85px 0;
+  background: var(--ap-ivory-soft);
+}
+
+.quote-card {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #FFF9F2 100%);
+  border: 1.5px solid var(--ap-gold);
+  border-radius: 24px;
+  padding: 54px 44px;
+  box-shadow: 0 20px 50px rgba(200, 155, 82, 0.12);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.quote-mark {
+  font-family: var(--ap-font-serif);
+  font-size: 72px;
+  line-height: 0.6;
+  color: var(--ap-gold);
+  display: block;
+  margin-bottom: 24px;
+  opacity: 0.7;
+}
+
+.quote-text {
+  font-family: var(--ap-font-serif);
+  font-size: clamp(20px, 2.6vw, 28px);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ap-text-dark);
+  margin: 0 0 28px;
+}
+
+.quote-author-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.author-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ap-burgundy);
+}
+
+.author-title {
+  font-size: 13px;
+  color: var(--ap-text-muted);
+}
+
+/* ─── 5. Pillars of Excellence ───────────────────────────────────────────── */
+.about-pillars-section {
+  padding: 100px 0;
+  background: var(--ap-cream);
+  border-top: 1.5px solid var(--ap-border-gold);
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.pillar-card {
+  background: #ffffff;
+  border: 1.5px solid var(--ap-border-gold);
+  border-radius: 18px;
+  padding: 32px 26px;
+  box-shadow: 0 10px 30px rgba(36, 26, 24, 0.05);
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ap-gold);
+  box-shadow: 0 18px 45px rgba(121, 13, 45, 0.12);
+}
+
+.pillar-icon-halo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--ap-ivory);
+  border: 1.5px solid var(--ap-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ap-gold);
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.pillar-title {
+  font-family: var(--ap-font-serif);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ap-text-dark);
+  margin: 0 0 12px;
+}
+
+.pillar-desc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ap-text-muted);
+  margin: 0;
+}
+
+/* ─── 6. Final Discovery CTA ─────────────────────────────────────────────── */
+.about-cta-section {
+  padding: 80px 0 100px;
+  background: var(--ap-ivory-soft);
+}
+
+.about-cta-card {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+  background: #ffffff;
+  border: 1.5px solid var(--ap-border-gold);
+  border-radius: 24px;
+  padding: 60px 40px;
+  box-shadow: 0 20px 60px rgba(36, 26, 24, 0.08);
+  box-sizing: border-box;
+}
+
+.cta-heading {
+  font-family: var(--ap-font-serif);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 600;
+  color: var(--ap-text-dark);
+  margin: 0 0 16px;
+}
+
+.cta-sub {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ap-text-muted);
+  max-width: 580px;
+  margin: 0 auto 36px;
+}
+
+.cta-btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ─── RESPONSIVE BREAKPOINTS ────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .about-heritage-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .heritage-card-frame {
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 0 20px;
+  }
+
+  .about-hero-section {
+    padding: 60px 16px 80px;
+  }
+
+  .about-stats-bar {
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 20px;
+  }
+
+  .about-stat-divider {
+    width: 60%;
+    height: 1px;
+  }
+
+  .architecture-step-card {
+    padding: 26px 20px;
+  }
+
+  .quote-card {
+    padding: 38px 22px;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-cta-card {
+    padding: 40px 20px;
+  }
+}

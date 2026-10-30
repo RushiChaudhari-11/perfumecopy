@@ -1,0 +1,642 @@
+/* src/styles/header.css
+   ─────────────────────────────────────────────────────────────────────────
+   Restyled to match the reference layout: slim rotating promo bar on top,
+   a clean white nav row below with a centered menu and a compact icon
+   cluster on the right. Nav item labels and the Discover CTA are untouched
+   on purpose — only the surrounding chrome changed in this pass.
+
+   MOBILE LOGIN FIX: the account/avatar block (.header-auth-desktop, wraps
+   the avatar/account icon in Header.jsx) is now hidden under 960px. The
+   hamburger menu's .mobile-footer already shows the same login/account
+   info, so it no longer duplicates in the top icon row on phones.
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --header-height: 72px;
+  /* overwritten at runtime, this is just a sane default */
+
+  --color-wine: #7a1638;       /* promo bar background */
+  --color-wine-dark: #5c0f28;
+  --color-ink: #1c1917;        /* nav text */
+  --color-ink-soft: #4a4542;
+  --color-hairline: #ece7e2;
+  --color-cream: #fdfbf8;
+  --color-gold: #b8935f;
+
+  --color-cta-start: #ec4899; /* pink */
+  --color-cta-end: #7c3aed;   /* purple */
+  --gradient-cta: linear-gradient(90deg, var(--color-cta-start), var(--color-cta-end));
+
+  --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-nav: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ─── Promo bar ─────────────────────────────────────────────────────────── */
+.promo-bar {
+  display: none !important;
+}
+
+.promo-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.promo-link {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-left: 6px;
+}
+
+.promo-link:hover {
+  color: var(--color-gold);
+}
+
+.promo-arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+.promo-arrow:hover { opacity: 1; }
+.promo-arrow-prev { left: 20px; }
+.promo-arrow-next { right: 20px; }
+
+/* ─── Fixed top wrapper (Full Width Clean White Luxury Navbar) ───────────── */
+.site-header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03) !important;
+  pointer-events: auto;
+}
+
+.site-header-fixed.is-scrolled {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ─── Main header (Clean Full-Width Container) ───────────────────────────── */
+.site-header,
+.site-header.pill-site-header,
+.site-header.pill-site-header.is-scrolled,
+.site-header-fixed.is-scrolled .site-header {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  pointer-events: auto;
+}
+
+.site-header.pill-site-header > * {
+  pointer-events: auto;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 14px 40px;
+}
+
+/* ─── Logo ──────────────────────────────────────────────────────────────── */
+.header-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+}
+
+.logo-img{
+    width:auto;
+    height:85px;
+    object-fit:contain;
+    transition:.3s ease;
+}
+
+.logo-img:hover{
+    transform:scale(1.05);
+}
+
+/* ─── Desktop nav ───────────────────────────────────────────────────────── */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  font-family: var(--font-nav);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+  cursor: pointer;
+  padding: 6px 0;
+  position: relative;
+}
+
+.nav-link:hover { color: var(--color-wine); }
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-wine);
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover::after { width: 100%; }
+
+/* Collections dropdown */
+.has-dropdown {
+  position: relative;
+}
+
+.sub-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid var(--color-hairline);
+  box-shadow: 0 12px 32px rgba(28, 25, 23, 0.08);
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform-origin: top center;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 50;
+}
+
+.has-dropdown:hover .sub-menu,
+.has-dropdown:focus-within .sub-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sub-menu li a {
+  display: block;
+  padding: 9px 20px;
+  font-family: var(--font-nav);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sub-menu li a:hover {
+  color: var(--color-wine);
+  background: var(--color-cream);
+}
+
+/* ─── Right-side actions ────────────────────────────────────────────────── */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Wraps the avatar/account block in the top row — hidden on mobile,
+   see the max-width: 960px media query below. */
+.header-auth-desktop {
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: none;
+  color: #1f2937;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.icon-btn svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+.icon-btn:hover {
+  background: transparent;
+  color: #c8952b;
+  transform: translateY(-1px);
+}
+
+.icon-badge,
+.cart-badge {
+  position: absolute;
+  top: -2px;
+  right: -3px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #18181b;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 50% !important;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Avatar / account */
+.user-area { position: relative; }
+
+.avatar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+
+.avatar-btn:hover { background: var(--color-cream); }
+
+.avatar-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-initials {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-wine);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-skeleton {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--color-hairline) 25%, #f6f2ee 37%, var(--color-hairline) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-pulse 1.4s ease infinite;
+}
+
+@keyframes skeleton-pulse {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid var(--color-hairline);
+  box-shadow: 0 12px 32px rgba(28, 25, 23, 0.1);
+  padding: 16px 0;
+  z-index: 50;
+}
+
+.user-display-name {
+  margin: 0 20px 10px;
+  font-family: var(--font-nav);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.admin-badge {
+  display: inline-block;
+  margin: 0 20px 10px;
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--color-wine);
+  color: #fff;
+  border-radius: 0px !important;
+}
+
+.user-dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 9px 20px;
+  border: none;
+  background: none;
+  font-family: var(--font-nav);
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+}
+
+.user-dropdown button:hover {
+  background: var(--color-cream);
+  color: var(--color-wine);
+}
+
+.logout-item {
+  border-top: 1px solid var(--color-hairline);
+  margin-top: 6px;
+  padding-top: 12px !important;
+  color: var(--color-wine-dark) !important;
+}
+
+/* ─── Discover CTA ──────────────────────────────────────────────────────── */
+.cta-btn {
+  padding: 10px 24px;
+  border: none;
+  background: var(--gradient-cta);
+  color: #fff;
+  font-family: var(--font-nav);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 0px !important;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.25);
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.cta-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+/* ─── Hamburger (mobile) ────────────────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--color-ink);
+  margin: 0 auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ─── Spacer ─────────────────────────────────────────────────────────────── */
+.header-spacer {
+  height: var(--header-height);
+}
+
+/* ─── Mobile menu ───────────────────────────────────────────────────────── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  top: var(--header-height);
+  background: #fff;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  z-index: 39;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mobile-menu.open { transform: translateX(0); }
+
+.mobile-nav {
+  list-style: none;
+  margin: 0;
+  padding: 12px 24px;
+}
+
+.mobile-nav-link,
+.mobile-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-hairline);
+  font-family: var(--font-nav);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+}
+
+.mobile-chevron {
+  font-style: normal;
+  transition: transform 0.2s ease;
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+}
+
+.mobile-chevron.rotated { transform: rotate(90deg); }
+
+.mobile-sub {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8px 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+}
+
+.mobile-sub.open { max-height: 240px; }
+
+.mobile-sub li a {
+  display: block;
+  padding: 10px 0;
+  font-family: var(--font-nav);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  text-decoration: none;
+}
+
+.mobile-footer {
+  padding: 20px 24px 28px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.mobile-user-name {
+  margin: 0 0 12px;
+  font-family: var(--font-nav);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.mobile-cta {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--color-ink);
+  background: var(--color-ink);
+  color: #fff;
+  font-family: var(--font-nav);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mobile-cta-login {
+  margin-bottom: 10px;
+  border: none;
+  background: var(--gradient-cta);
+  border-radius: 0px !important;
+}
+
+.mobile-google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-hairline);
+  background: #fff;
+  font-family: var(--font-nav);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.btn-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-hairline);
+  border-top-color: var(--color-wine);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.mobile-footer-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .promo-bar { padding: 8px 40px; }
+  .header-inner { padding: 12px 16px; gap: 10px; }
+  nav[aria-label="Main navigation"] { display: none; }
+  .cta-btn { display: none; }
+  .hamburger { display: flex; }
+
+  /* Login/account details live only inside the hamburger menu on
+     mobile now — the top-row avatar/account icon is redundant with
+     .mobile-footer, so hide it here. */
+  .header-auth-desktop { display: none; }
+
+  .logo-img { height: 26px; }
+  .logo-brand-text { font-size: 0.6rem; letter-spacing: 0.14em; }
+
+  /* Tighten the icon cluster so search/wishlist/cart/hamburger
+     don't crowd or push the logo off-row on narrow screens. */
+  .header-actions { gap: 2px; }
+  .icon-btn,
+  .avatar-btn,
+  .hamburger { width: 34px; height: 34px; }
+}
+
+@media (max-width: 400px) {
+  .header-inner { padding: 10px 12px; gap: 6px; }
+  .logo-img { height: 22px; }
+  .logo-brand-text { font-size: 0.52rem; letter-spacing: 0.1em; }
+  .header-actions { gap: 0; }
+  .icon-btn,
+  .avatar-btn,
+  .hamburger { width: 32px; height: 32px; }
+  .icon-btn svg { width: 18px; height: 18px; }
+}
+
+@media (min-width: 961px) {
+  .mobile-menu,
+  .mobile-footer-icons { display: none; }
+}

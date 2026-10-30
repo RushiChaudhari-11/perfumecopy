@@ -1,0 +1,358 @@
+/* src/quickview.css
+   UPDATED: rebuilt to match the site's dark noir-gold theme (same palette
+   used in featured.css / findYourScent.css / products.css) instead of the
+   previous light pastel-pink glass panel, which looked out of place next
+   to the rest of the dark-themed sections.
+
+   FIXED: cart.css defines a GLOBAL `button.btn.ghost { background:#fff
+   !important; ... }` rule which was leaking into this modal's "Close"
+   button, making it render as a flat white/black cart-style button
+   instead of matching the modal's theme. Overrides are scoped under
+   .qv-panel with !important so they win regardless of load order.
+
+   UPDATED: .qv-panel background lightened — was near-black (#2b1c10 ->
+   #120d0a), now a warmer, lighter brown-noir (#3a2c22 -> #241a14) so the
+   panel doesn't read as pure black while still matching the gold-noir
+   theme.
+*/
+
+:root {
+  --qv-accent1: #ff2d78;
+  --qv-accent2: #7b4dff;
+  --qv-gold-1: #f7d488;
+  --qv-gold-2: #c9974a;
+  --qv-noir-1: #120d0a;
+  --qv-noir-2: #2b1c10;
+  --qv-ink: #fffaf3;
+  --qv-muted: #cdbfae;
+}
+
+.qv-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 9, 8, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.qv-panel {
+  width: min(980px, 96%);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(247, 212, 136, 0.14) 0%, rgba(247, 212, 136, 0) 45%),
+    linear-gradient(180deg, #3a2c22 0%, #241a14 100%);
+  border: 1px solid rgba(247, 212, 136, 0.25);
+  border-radius: 20px;
+  display: flex;
+  gap: 18px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+  color: var(--qv-ink);
+}
+
+.qv-left {
+  width: 44%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(247, 212, 136, 0.20) 0%, rgba(247, 212, 136, 0) 45%);
+  border-radius: 16px;
+}
+
+.qv-bottle {
+  max-width: 92%;
+  max-height: 340px;
+  object-fit: contain;
+  display: block;
+  transform-origin: center;
+  filter: drop-shadow(0 20px 26px rgba(0, 0, 0, 0.5));
+}
+
+.qv-right {
+  width: 56%;
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--qv-ink);
+}
+
+.qv-right h2 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  font-weight: 700;
+  background: linear-gradient(120deg, var(--qv-accent1), var(--qv-accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.qv-right p.muted,
+.qv-right .muted {
+  color: var(--qv-muted);
+}
+
+.qv-notes strong {
+  color: var(--qv-gold-1);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.qv-notes .notes-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.note-pill {
+  background: rgba(247, 212, 136, 0.08);
+  border: 1px solid rgba(247, 212, 136, 0.28);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--qv-ink);
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.note-pill:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 45, 120, 0.14);
+  border-color: var(--qv-accent1);
+}
+
+.qv-volume label strong {
+  color: var(--qv-gold-1);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.qv-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(247, 212, 136, 0.18);
+}
+
+.qv-price {
+  font-weight: 800;
+  font-family: "Cormorant Garamond", serif;
+  background: linear-gradient(120deg, var(--qv-accent1), var(--qv-accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 20px;
+}
+
+.qv-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* ---------- Dropdown (dark glass, gold border, light text) ---------- */
+.qv-right select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(247, 212, 136, 0.28);
+  color: var(--qv-ink);
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  appearance: none;
+}
+
+.qv-right select:hover {
+  border-color: var(--qv-gold-1);
+}
+
+.qv-right select:focus {
+  border-color: var(--qv-accent1);
+  box-shadow: 0 0 0 3px rgba(255, 45, 120, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.qv-right option {
+  background: var(--qv-noir-1);
+  color: var(--qv-ink);
+}
+
+.qv-right option:hover,
+.qv-right option:checked {
+  background: var(--qv-accent1);
+  color: #fff;
+}
+
+/* ════════════════════════════
+   scoped button.btn.ghost / .btn.primary override
+   Fixes cart.css leaking its global
+   `button.btn.ghost { background:#fff !important; ... }`
+   rule into this modal's Close button.
+════════════════════════════ */
+.qv-panel button.btn.ghost {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--qv-ink) !important;
+  -webkit-text-fill-color: var(--qv-ink) !important;
+  border: 1.5px solid rgba(247, 212, 136, 0.3) !important;
+  opacity: 1 !important;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qv-panel button.btn.ghost:hover {
+  background: rgba(247, 212, 136, 0.14) !important;
+  border-color: var(--qv-gold-1) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+.qv-panel button.btn.ghost::before {
+  content: none !important;
+}
+
+.qv-panel button.btn.primary {
+  background: linear-gradient(120deg, var(--qv-accent1), var(--qv-accent2));
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(255, 45, 120, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.qv-panel button.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(123, 77, 255, 0.4);
+}
+
+/* ---------- MOBILE-FRIENDLY LAYOUT ---------- */
+@media (max-width: 900px) {
+  .qv-panel {
+    flex-direction: column;
+    align-items: center;
+    padding: 14px;
+    gap: 16px;
+    width: 94%;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .qv-left, .qv-right {
+    width: 100%;
+  }
+
+  .qv-bottle {
+    max-height: 240px;
+    max-width: 80%;
+  }
+
+  .qv-right {
+    padding: 10px;
+    gap: 14px;
+  }
+
+  .qv-right h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .qv-right p.muted {
+    text-align: center;
+    font-size: 14px;
+    color: var(--qv-muted);
+  }
+
+  .qv-notes strong {
+    display: block;
+    text-align: center;
+  }
+
+  .notes-grid {
+    justify-content: center;
+  }
+
+  .qv-volume {
+    width: 100%;
+  }
+
+  .qv-right select {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .qv-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .qv-price {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .qv-buttons {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .qv-buttons .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .qv-panel {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .qv-bottle {
+    max-height: 200px;
+    max-width: 100%;
+  }
+
+  .qv-right h2 {
+    font-size: 18px;
+  }
+
+  .qv-price {
+    font-size: 18px;
+  }
+
+  .note-pill {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+}
