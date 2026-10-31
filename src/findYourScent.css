@@ -9,8 +9,8 @@
 */
 
 :root {
-  --fy-pink: #ff2d78;
-  --fy-purple: #9b2dff;
+  --fy-pink: #790D2D;
+  --fy-purple: #C89B52;
   --fy-ink: #2b2620;
   --fy-muted: #8a8177;
   --fy-line: #ece6db;
@@ -87,7 +87,7 @@
 
 .mood-orb.active {
   border-color: var(--fy-pink);
-  box-shadow: 0 0 0 2px rgba(255, 45, 120, 0.16), 0 18px 36px rgba(43, 38, 32, 0.16);
+  box-shadow: 0 0 0 2px rgba(121, 13, 45, 0.16), 0 18px 36px rgba(43, 38, 32, 0.16);
 }
 
 .mood-orb .orb-title { font-weight: 700; margin-top: 6px; }
@@ -442,13 +442,13 @@
   border: none !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
-  box-shadow: 0 4px 12px rgba(255, 45, 120, 0.2);
+  box-shadow: 0 4px 12px rgba(121, 13, 45, 0.2);
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .find-scent-section button.btn.ghost.quickview-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(155, 45, 255, 0.28);
+  box-shadow: 0 8px 20px rgba(121, 13, 45, 0.28);
 }
 
 .quickview-btn .qv-icon {
@@ -467,7 +467,7 @@
 
 .find-scent-section button.btn.ghost.quickview-btn.qv-pressed {
   transform: scale(0.94);
-  box-shadow: 0 2px 8px rgba(255, 45, 120, 0.4);
+  box-shadow: 0 2px 8px rgba(121, 13, 45, 0.35);
 }
 
 .quickview-btn .qv-ripple {
@@ -626,7 +626,7 @@ canvas { z-index: 1000 !important; }
   border-color: transparent !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
-  box-shadow: 0 10px 22px rgba(255, 45, 120, 0.2);
+  box-shadow: 0 10px 22px rgba(121, 13, 45, 0.2);
 }
 
 .find-scent-section button.btn.ghost::before {
@@ -651,5 +651,5 @@ canvas { z-index: 1000 !important; }
 }
 .find-scent-section button.btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(155, 45, 255, 0.24);
+  box-shadow: 0 10px 22px rgba(121, 13, 45, 0.24);
 }

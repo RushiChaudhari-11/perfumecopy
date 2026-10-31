@@ -23,9 +23,9 @@
   --color-cream: #fdfbf8;
   --color-gold: #b8935f;
 
-  --color-cta-start: #ec4899; /* pink */
-  --color-cta-end: #7c3aed;   /* purple */
-  --gradient-cta: linear-gradient(90deg, var(--color-cta-start), var(--color-cta-end));
+  --color-cta-start: #790D2D; /* burgundy */
+  --color-cta-end: #5c0922;   /* deep burgundy */
+  --gradient-cta: linear-gradient(135deg, #790D2D 0%, #5c0922 100%);
 
   --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
   --font-nav: "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -418,7 +418,7 @@
   cursor: pointer;
   white-space: nowrap;
   border-radius: 0px !important;
-  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 6px 16px rgba(121, 13, 45, 0.25);
   transition: filter 0.15s ease, transform 0.15s ease;
 }
 

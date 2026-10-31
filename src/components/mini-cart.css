@@ -5,8 +5,8 @@
   --mc-ink-soft: #5a4650;
   --mc-muted: #8c7681;
 
-  --mc-pink: #ff2d78;
-  --mc-violet: #7b4dff;
+  --mc-pink: #790D2D;
+  --mc-violet: #C89B52;
 
   --mc-bg-start: #ffffff;
   --mc-bg-end: #fbfaf7;
@@ -411,27 +411,27 @@
 .mini-cart a.btn.ghost:visited,
 .mini-cart button.btn.ghost {
   background: #ffffff !important;
-  color: var(--mc-violet) !important;
-  -webkit-text-fill-color: var(--mc-violet) !important;
-  border: 1.5px solid var(--mc-violet) !important;
-  box-shadow: 0 4px 12px rgba(123, 77, 255, 0.1);
+  color: #790D2D !important;
+  -webkit-text-fill-color: #790D2D !important;
+  border: 1.5px solid rgba(200, 155, 82, 0.45) !important;
+  box-shadow: 0 4px 12px rgba(121, 13, 45, 0.08);
   opacity: 1 !important;
 }
 
 .mini-cart .btn.ghost:hover,
 .mini-cart a.btn.ghost:hover,
 .mini-cart button.btn.ghost:hover {
-  background: rgba(123, 77, 255, 0.06) !important;
-  border-color: var(--mc-violet) !important;
-  color: var(--mc-pink) !important;
-  -webkit-text-fill-color: var(--mc-pink) !important;
+  background: rgba(121, 13, 45, 0.05) !important;
+  border-color: #790D2D !important;
+  color: #5c0922 !important;
+  -webkit-text-fill-color: #5c0922 !important;
   transform: translateY(-3px);
 }
 
 .btn.primary {
-  background: linear-gradient(90deg, var(--mc-pink) 0%, var(--mc-violet) 100%);
+  background: linear-gradient(135deg, #790D2D 0%, #5c0922 100%);
   color: #ffffff;
-  box-shadow: 0 10px 24px rgba(255, 45, 120, 0.24);
+  box-shadow: 0 10px 24px rgba(121, 13, 45, 0.24);
 }
 .btn.primary::before {
   content: "";

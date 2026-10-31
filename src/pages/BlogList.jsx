@@ -14,8 +14,8 @@ import GridPagination from "../components/Pagination";
 import { fetchPublishedPosts } from "../services/blogService";
 import "../styles/blog.css";
 
-const SITE_URL = "http://www.perfumecopy.com";
-const SITE_NAME = "Perfume Copy";
+const BLOG_SITE_URL = "http://www.perfumecopy.com";
+const BLOG_SITE_NAME = "Perfume Copy";
 const FEATURED_COUNT = 4; // how many of the loaded posts appear in the featured grid
 
 function formatDate(timestamp) {
@@ -112,14 +112,14 @@ export default function BlogList() {
     () => ({
       "@context": "https://schema.org",
       "@type": "Blog",
-      name: `${SITE_NAME} Journal`,
-      url: `${SITE_URL}/journal`,
+      name: `${BLOG_SITE_NAME} Journal`,
+      url: `${BLOG_SITE_URL}/journal`,
       description:
-        "Notes on fragrance, craft, and the world behind Aura's collections.",
+        "Notes on fragrance, craft, and the world behind Perfume Copy's collections.",
       blogPost: posts.map((p) => ({
         "@type": "BlogPosting",
         headline: p.title,
-        url: `${SITE_URL}/journal/${p.slug}`,
+        url: `${BLOG_SITE_URL}/journal/${p.slug}`,
         image: p.coverImage,
       })),
     }),
@@ -146,10 +146,10 @@ export default function BlogList() {
   return (
     <main className="journal-page">
       <SEO
-        title={`Journal — ${SITE_NAME} | Fragrance Notes & Stories`}
+        title={`Journal — ${BLOG_SITE_NAME} | Fragrance Notes & Stories`}
         description="Notes on fragrance, craft, and the world behind Perfume Copy's collections — from raw materials to the art of the pour."
-        url={`${SITE_URL}/journal`}
-        image={`${SITE_URL}/og/journal-cover.jpg`}
+        url={`${BLOG_SITE_URL}/journal`}
+        image={`${BLOG_SITE_URL}/og/journal-cover.jpg`}
         type="website"
         jsonLd={jsonLd}
       />

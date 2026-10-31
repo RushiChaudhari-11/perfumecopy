@@ -44,8 +44,8 @@
 
 .admin-error {
   background: rgba(255, 45, 120, 0.08);
-  border: 1px solid var(--journal-pink, #ff2d78);
-  color: var(--journal-pink, #ff2d78);
+  border: 1px solid var(--journal-pink, #790D2D);
+  color: var(--journal-pink, #790D2D);
   padding: 0.75rem 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -73,8 +73,8 @@
 .admin-btn:hover:not(:disabled) {
   background: linear-gradient(
     120deg,
-    var(--journal-pink, #ff2d78),
-    var(--journal-violet, #9b2dff)
+    var(--journal-pink, #790D2D),
+    var(--journal-violet, #C89B52)
   ) !important;
   border-color: transparent !important;
   color: #fff !important;
@@ -90,8 +90,8 @@
 .admin-btn-primary {
   background: linear-gradient(
     120deg,
-    var(--journal-pink, #ff2d78),
-    var(--journal-violet, #9b2dff)
+    var(--journal-pink, #790D2D),
+    var(--journal-violet, #C89B52)
   ) !important;
   color: #ffffff !important;
   border-color: transparent !important;
@@ -188,8 +188,8 @@
 .admin-link-btn:hover {
   background: linear-gradient(
     120deg,
-    var(--journal-pink, #ff2d78),
-    var(--journal-violet, #9b2dff)
+    var(--journal-pink, #790D2D),
+    var(--journal-violet, #C89B52)
   ) !important;
   border-color: transparent !important;
   color: #fff !important;
@@ -198,7 +198,7 @@
 }
 
 .admin-link-btn-danger:hover {
-  background: linear-gradient(120deg, #e24b4a, #ff2d78) !important;
+  background: linear-gradient(120deg, #e24b4a, #790D2D) !important;
   box-shadow: 0 6px 14px rgba(226, 75, 74, 0.22);
 }
 
@@ -243,7 +243,7 @@
 .admin-field input:focus,
 .admin-field textarea:focus {
   outline: none;
-  border-color: var(--journal-pink, #ff2d78);
+  border-color: var(--journal-pink, #790D2D);
   box-shadow: 0 0 0 3px rgba(155, 45, 255, 0.12);
 }
 
@@ -263,7 +263,7 @@
 }
 
 .admin-slug-row:focus-within {
-  border-color: var(--journal-pink, #ff2d78);
+  border-color: var(--journal-pink, #790D2D);
   box-shadow: 0 0 0 3px rgba(155, 45, 255, 0.12);
 }
 

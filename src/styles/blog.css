@@ -23,12 +23,12 @@
   --journal-bg: var(--color-surface, #ffffff);
   --journal-bg-raised: var(--color-surface-raised, rgba(255, 255, 255, 0.9));
   --journal-plum: var(--color-plum, #6b3a56);
-  --journal-pink: var(--color-accent, #ff2d78);
-  --journal-violet: var(--color-accent-2, #9b2dff);
-  --journal-gold: var(--color-gold, #b8860b);
+  --journal-pink: var(--color-accent, #790D2D);
+  --journal-violet: var(--color-accent-2, #C89B52);
+  --journal-gold: var(--color-gold, #C89B52);
   --journal-text: var(--color-text, #3a2a30);
   --journal-text-muted: var(--color-text-muted, #6e5760);
-  --journal-border: var(--color-border, rgba(214, 120, 152, 0.14));
+  --journal-border: var(--color-border, rgba(200, 155, 82, 0.2));
   --journal-font-display: var(--font-display, "Cormorant Garamond", serif);
   --journal-font-body: var(--font-body, "Jost", "Helvetica Neue", sans-serif);
 }
@@ -112,7 +112,7 @@ body.journal-bg {
   border-color: transparent !important;
   color: #fff !important;
   font-weight: 600;
-  box-shadow: 0 6px 16px rgba(155, 45, 255, 0.22);
+  box-shadow: 0 6px 16px rgba(121, 13, 45, 0.22);
 }
 
 /* ── Grid + cards ────────────────────────────────────────────────────── */
@@ -504,7 +504,7 @@ body.journal-bg {
   color: #fff !important;
   font-weight: 600;
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(155, 45, 255, 0.24);
+  box-shadow: 0 10px 22px rgba(121, 13, 45, 0.24);
 }
 
 /* ── Accessibility ───────────────────────────────────────────────────── */

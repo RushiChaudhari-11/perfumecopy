@@ -7,10 +7,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --accent1: #ff2d78;
-  /* magenta/pink — CTAs only */
-  --accent2: #9b2dff;
-  /* violet/purple — CTAs only */
+  --accent1: #790D2D;
+  /* Signature velvet burgundy */
+  --accent2: #C89B52;
+  /* Signature champagne gold */
   --gold: #c9a578;
   --gold-light: #b08d5f;
   --muted: #3d332a;

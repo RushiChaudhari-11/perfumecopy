@@ -6,8 +6,8 @@
   --ip-ink-soft: #5a4650;
   --ip-muted: #8c7681;
 
-  --ip-sass-pink: #ff2d78;
-  --ip-sass-violet: #7b4dff;
+  --ip-sass-pink: #790D2D;
+  --ip-sass-violet: #C89B52;
 
   --ip-bg-start: #ffffff;
   --ip-bg-end: #ffffff;
@@ -220,7 +220,7 @@
   font-size: 13.5px;
   text-decoration: none;
   transition: 0.35s;
-  box-shadow: 0 12px 24px rgba(255, 45, 120, 0.18);
+  box-shadow: 0 12px 24px rgba(121, 13, 45, 0.22);
 }
 
 .infopage-btn:hover {

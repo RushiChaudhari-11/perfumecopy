@@ -456,6 +456,7 @@ export default function ShopByOccasion({ onAddToCart }) {
                       alt={p.name}
                       className="occasion-img"
                       loading="lazy"
+                      decoding="async"
                     />
                   </div>
 

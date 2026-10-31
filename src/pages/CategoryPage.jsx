@@ -643,7 +643,8 @@ export default function CategoryPage() {
                           src={p.image}
                           alt={p.name}
                           className="cat-card-img"
-                          loading="lazy"
+                          loading={idx < 4 ? "eager" : "lazy"}
+                          decoding="async"
                           onError={(e) => {
                             e.currentTarget.onerror = null;
                             e.currentTarget.src =

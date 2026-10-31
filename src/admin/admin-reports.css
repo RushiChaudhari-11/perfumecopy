@@ -10,7 +10,7 @@
   --ar-radius: 14px;
   --ar-shadow: 0 8px 22px rgba(44, 31, 38, 0.08);
   --ar-condensed-font: 13px;
-  --ar-gradient: linear-gradient(120deg, #ff2d78, #7b4dff);
+  --ar-gradient: linear-gradient(135deg, #790D2D, #C89B52);
 }
 *{ box-sizing: border-box; }
 html,body{ background: var(--ar-bg); }
@@ -30,7 +30,7 @@ html,body{ background: var(--ar-bg); }
 .ar-search{ width:260px; }
 .ar-controls{ display:flex; gap:12px; align-items:center; margin-top:14px; margin-bottom:14px; }
 .ar-pres { padding:7px 12px; border-radius:999px; border:1.5px solid var(--ar-border); background:var(--ar-card); cursor:pointer; font-weight:600; color:var(--ar-text); transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
-.ar-pres:hover{ transform: translateY(-2px); border-color: #7b4dff; }
+.ar-pres:hover{ transform: translateY(-2px); border-color: #790D2D; }
 .ar-pres.active{ background: var(--ar-gradient); border-color: transparent; color:#fffefe; font-weight:700; box-shadow: 0 8px 18px rgba(255, 45, 120, 0.28); }
 .ar-cards{ margin-top:10px; }
 .ar-card{ background:var(--ar-card); border:1px solid var(--ar-border); border-radius:var(--ar-radius); padding:14px; box-shadow:var(--ar-shadow); }
@@ -38,7 +38,7 @@ html,body{ background: var(--ar-bg); }
 .ar-card-row{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
 .ar-card-title{ font-weight:800; font-size:16px; color: var(--ar-text); }
 .ar-chips{ display:flex; gap:8px; align-items:center; margin-left:12px; }
-.ar-chip{ background: var(--ar-accent-soft); padding:6px 10px; border-radius:999px; color:#7b4dff; font-weight:700; border:1px solid rgba(123, 77, 255, 0.18); }
+.ar-chip{ background: var(--ar-accent-soft); padding:6px 10px; border-radius:999px; color:#790D2D; font-weight:700; border:1px solid rgba(123, 77, 255, 0.18); }
 .ar-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:8px; }
 .ar-subcard{ background:transparent; padding:6px; border-radius:8px; }
 .ar-scroll{ max-height: 360px; overflow:auto; border-radius:10px; border:1px solid var(--ar-border); }

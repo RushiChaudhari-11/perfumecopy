@@ -17,7 +17,7 @@
   --ao-danger: #c1584a;
   --ao-radius: 16px;
   --ao-shadow: 0 6px 18px rgba(44, 31, 38, 0.07);
-  --ao-gradient: linear-gradient(120deg, #ff2d78, #7b4dff);
+  --ao-gradient: linear-gradient(135deg, #790D2D, #C89B52);
 }
 
 *{ box-sizing: border-box; }
@@ -94,7 +94,7 @@
 }
 .ao-btn:hover{
   transform: translateY(-2px);
-  border-color: #7b4dff;
+  border-color: #790D2D;
   box-shadow: 0 8px 18px rgba(255, 45, 120, 0.18);
   background: #fdf8ff;
 }
@@ -127,7 +127,7 @@
   outline:none;
   transition: border-color .15s ease, box-shadow .15s ease;
 }
-.ao-input:focus{ border-color: #7b4dff; box-shadow:0 0 0 4px rgba(123, 77, 255, 0.14); }
+.ao-input:focus{ border-color: #790D2D; box-shadow:0 0 0 4px rgba(123, 77, 255, 0.14); }
 
 /* table container */
 .ao-tablewrap{
@@ -154,7 +154,7 @@
 }
 .ao-table tbody td{ padding:13px 14px; border-bottom:1px solid var(--ao-border); vertical-align:top; }
 .ao-tr:hover td{ background: rgba(255, 45, 120, 0.05); }
-.ao-id{ font-weight:800; letter-spacing:0.3px; color: #7b4dff; }
+.ao-id{ font-weight:800; letter-spacing:0.3px; color: #790D2D; }
 .ao-sub{ color:var(--ao-dim); font-size:12px; }
 .ao-strong{ font-weight:700; }
 .ao-ellipsis{ max-width:280px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -164,7 +164,7 @@
   display:inline-flex; align-items:center; gap:6px;
   padding:5px 10px; border-radius:999px; border:1px solid var(--ao-border); font-weight:700; font-size:12px;
 }
-.ao-chip--delivered{ background:#f3eaff; border-color:#d9c2ff; color:#7b4dff; }
+.ao-chip--delivered{ background:#f3eaff; border-color:#d9c2ff; color:#790D2D; }
 .ao-chip--processing{ background:#fdf3e2; border-color:#e6cf9c; color:var(--ao-warn); }
 .ao-chip--done{ background:#e3f9ee; border-color:#b9ecd1; color:var(--ao-good); }
 
@@ -189,7 +189,7 @@
 .ao-items-list{ margin:0; padding-left:16px; }
 
 /* tiny helpers */
-.ao-link{ color: #7b4dff; text-decoration:none; font-weight:600; }
+.ao-link{ color: #790D2D; text-decoration:none; font-weight:600; }
 .ao-link:hover{ text-decoration:underline; }
 
 /* responsive */

@@ -17,8 +17,8 @@
 */
 
 :root {
-  --qv-accent1: #ff2d78;
-  --qv-accent2: #7b4dff;
+  --qv-accent1: #790D2D;
+  --qv-accent2: #C89B52;
   --qv-gold-1: #f7d488;
   --qv-gold-2: #c9974a;
   --qv-noir-1: #120d0a;
@@ -131,7 +131,7 @@
 
 .note-pill:hover {
   transform: translateY(-2px);
-  background: rgba(255, 45, 120, 0.14);
+  background: rgba(121, 13, 45, 0.14);
   border-color: var(--qv-accent1);
 }
 
@@ -189,7 +189,7 @@
 
 .qv-right select:focus {
   border-color: var(--qv-accent1);
-  box-shadow: 0 0 0 3px rgba(255, 45, 120, 0.2);
+  box-shadow: 0 0 0 3px rgba(121, 13, 45, 0.2);
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -242,13 +242,13 @@
   padding: 12px 22px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(255, 45, 120, 0.3);
+  box-shadow: 0 10px 24px rgba(121, 13, 45, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .qv-panel button.btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(123, 77, 255, 0.4);
+  box-shadow: 0 14px 30px rgba(121, 13, 45, 0.35);
 }
 
 /* ---------- MOBILE-FRIENDLY LAYOUT ---------- */

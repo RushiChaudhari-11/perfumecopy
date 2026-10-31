@@ -463,6 +463,7 @@ export default function TrendingSeason({ onAddToCart }) {
                         alt={prod.name}
                         className="trending-product-img"
                         loading="lazy"
+                        decoding="async"
                         onError={(e) => {
                           e.currentTarget.onerror = null;
                           e.currentTarget.src = "/collection-perfumes-4k.jpg";

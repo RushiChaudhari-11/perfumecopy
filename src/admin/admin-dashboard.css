@@ -1,9 +1,9 @@
 /* src/styles/adminDash.css — recolored to match Aura design system (adminProducts.css) */
 :root {
-  --brand-start: #ff2d78;
-  --brand-mid:   #c04fd9;
-  --brand-end:   #7b4dff;
-  --brand-gradient: linear-gradient(120deg, #ff2d78, #7b4dff);
+  --brand-start: #790D2D;
+  --brand-mid:   #a05c3b;
+  --brand-end:   #C89B52;
+  --brand-gradient: linear-gradient(135deg, #790D2D, #C89B52);
 
   --text-primary: #2c1f26;
   --text-muted:   #5a4650;

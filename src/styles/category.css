@@ -18,8 +18,8 @@
    ============================================================ */
 
 .cp-page {
-  --cp-pink: #ff2d78;
-  --cp-purple: #9b2dff;
+  --cp-pink: #790D2D;
+  --cp-purple: #C89B52;
   --cp-ink: #2b2620;
   --cp-muted: #8a8177;
   --cp-line: #ece6db;
@@ -78,7 +78,7 @@ section.cp-page {
   background: linear-gradient(120deg, var(--cp-pink), var(--cp-purple));
   border-color: transparent;
   color: #fff;
-  box-shadow: 0 10px 22px rgba(255, 45, 120, 0.22);
+  box-shadow: 0 10px 22px rgba(121, 13, 45, 0.22);
 }
 
 .cp-hero {
@@ -173,7 +173,7 @@ section.cp-page {
   outline: none;
   border-color: var(--cp-purple);
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(155, 45, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(200, 155, 82, 0.2);
 }
 
 .cp-filters {
@@ -254,7 +254,7 @@ section.cp-page {
 }
 .cp-page .custom-select .menu li:hover,
 .cp-page .custom-select .menu li[aria-current="true"] {
-  background: rgba(255, 45, 120, 0.08);
+  background: rgba(121, 13, 45, 0.08);
   color: var(--cp-pink);
 }
 .cp-page .custom-select.drop-up .menu {
@@ -304,7 +304,7 @@ section.cp-page {
   background: linear-gradient(120deg, var(--cp-pink), var(--cp-purple));
   border-color: transparent;
   color: #fff;
-  box-shadow: 0 10px 22px rgba(155, 45, 255, 0.22);
+  box-shadow: 0 10px 22px rgba(121, 13, 45, 0.22);
 }
 .cp-end-note {
   font-size: 13px;
@@ -411,7 +411,7 @@ section.cp-page {
   background: linear-gradient(120deg, var(--cp-pink), var(--cp-purple));
   border-color: transparent;
   color: #fff;
-  box-shadow: 0 10px 22px rgba(255, 45, 120, 0.22);
+  box-shadow: 0 10px 22px rgba(121, 13, 45, 0.22);
 }
 
 @media (max-width: 640px) {

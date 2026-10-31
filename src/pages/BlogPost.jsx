@@ -11,8 +11,8 @@ import {
 } from "../services/blogService";
 import "../styles/blog.css";
 
-const SITE_URL = "http://www.perfumecopy.com";
-const SITE_NAME = "Perfume Copy";
+const BLOG_POST_SITE_URL = "http://www.perfumecopy.com";
+const BLOG_POST_SITE_NAME = "Perfume Copy";
 
 function sanitizeHtml(html = "") {
   return html
@@ -100,11 +100,11 @@ export default function BlogPost() {
       headline: post.title,
       description: post.metaDescription || post.excerpt,
       image: post.coverImage,
-      author: { "@type": "Person", name: post.author || SITE_NAME },
-      publisher: { "@type": "Organization", name: SITE_NAME },
+      author: { "@type": "Person", name: post.author || BLOG_POST_SITE_NAME },
+      publisher: { "@type": "Organization", name: BLOG_POST_SITE_NAME },
       datePublished: post.publishedAt?.toDate?.().toISOString(),
       dateModified: (post.updatedAt || post.publishedAt)?.toDate?.().toISOString(),
-      mainEntityOfPage: `${SITE_URL}/journal/${post.slug}`,
+      mainEntityOfPage: `${BLOG_POST_SITE_URL}/journal/${post.slug}`,
     };
   }, [post]);
 
@@ -125,9 +125,9 @@ export default function BlogPost() {
   return (
     <main className="journal-post">
       <SEO
-        title={post.metaTitle || `${post.title} — ${SITE_NAME} Journal`}
+        title={post.metaTitle || `${post.title} — ${BLOG_POST_SITE_NAME} Journal`}
         description={post.metaDescription || post.excerpt}
-        url={`${SITE_URL}/journal/${post.slug}`}
+        url={`${BLOG_POST_SITE_URL}/journal/${post.slug}`}
         image={post.coverImage}
         type="article"
         jsonLd={jsonLd}
@@ -149,7 +149,7 @@ export default function BlogPost() {
         )}
         <h1 className="journal-post-title">{post.title}</h1>
         <div className="journal-post-meta">
-          <span>{post.author || SITE_NAME}</span>
+          <span>{post.author || BLOG_POST_SITE_NAME}</span>
           <span className="journal-dot" aria-hidden="true">
             ·
           </span>

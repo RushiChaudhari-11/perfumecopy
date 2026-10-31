@@ -195,8 +195,10 @@ export default function Hero7({ onCtaClick }) {
         {/* Clean isolated perfume bottle (NO box, NO text, NO borders) */}
         <img
           src={item.image}
-          alt="Perfume Bottle"
+          alt="Luxury Perfume Bottle"
           className="hero7-bottle-img"
+          loading={idx < 4 ? "eager" : "lazy"}
+          decoding="async"
           onError={(e) => {
             if (item.fallback && e.target.src !== item.fallback) {
               e.target.src = item.fallback;

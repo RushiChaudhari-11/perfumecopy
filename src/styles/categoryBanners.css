@@ -33,7 +33,7 @@
   transform: scale(1.06);
 }
 .cb-tile:focus-visible {
-  outline: 2px solid #9b2dff;
+  outline: 2px solid #C89B52;
   outline-offset: 3px;
 }
 

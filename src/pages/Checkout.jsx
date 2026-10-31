@@ -152,13 +152,44 @@ export default function CheckoutPage() {
   if (!items || items.length === 0) {
     return (
       <main className="checkout container">
-        <PageHeader navigate={navigate} title="Checkout" />
+        <SEO
+          title="Checkout | Perfume Copy"
+          description="Your bespoke fragrance bag is currently empty. Explore our artisanal extrait de parfums."
+          url="http://www.perfumecopy.com/checkout"
+        />
+        <PageHeader navigate={navigate} title="Checkout" eyebrow="Secure Atelier Checkout" />
         <div className="empty">
+          <div style={{
+            width: 68,
+            height: 68,
+            borderRadius: "50%",
+            background: "rgba(200, 155, 82, 0.12)",
+            border: "1.5px solid rgba(200, 155, 82, 0.28)",
+            color: "#C89B52",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto 18px",
+          }}>
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+          </div>
           <h2>Your bag's feeling a little light.</h2>
-          <p className="muted">Add a scent (or three) before you check out.</p>
-          <div style={{ marginTop: 12 }}>
-            <button className="btn primary" onClick={() => navigate("/collections/perfumes")}>
-              Shop perfumes
+          <p className="muted">Add a rare artisanal extrait (or three) before completing your order.</p>
+          <div style={{ marginTop: 18 }}>
+            <button
+              className="btn primary"
+              type="button"
+              onClick={() => navigate("/collections/perfumes")}
+              style={{ display: "inline-flex", alignItems: "center", gap: 10 }}
+            >
+              <span>Explore Fragrances</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </button>
           </div>
         </div>

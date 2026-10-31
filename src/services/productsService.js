@@ -131,18 +131,56 @@ export async function getProductsOnce({ tag = null, limitNum = 100 } = {}) {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
+// Shared in-memory & persistent cache for lightning-fast mobile loading
+let memoryProductsCache = null;
+const PRODUCTS_CACHE_KEY = "perfumecopy_products_cache_v2";
+
+try {
+  if (typeof window !== "undefined" && window.localStorage) {
+    const stored = localStorage.getItem(PRODUCTS_CACHE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        memoryProductsCache = parsed;
+      }
+    }
+  }
+} catch (e) {
+  // localStorage disabled or private browsing
+}
+
 /* Real-time listener returns unsubscribe function */
 export function getProductsRealtime(callback, { tag = null, onError = null } = {}) {
+  // 1. Instantly return cached products on mobile / slow connections (0ms initial render)
+  if (!tag && memoryProductsCache && Array.isArray(memoryProductsCache) && memoryProductsCache.length > 0) {
+    try {
+      callback(memoryProductsCache);
+    } catch (e) {
+      console.warn("[getProductsRealtime] Cache emit warning:", e);
+    }
+  }
+
   let q = query(productsCol, orderBy("createdAt", "desc"));
   if (tag) q = query(productsCol, where("tags", "array-contains", tag), orderBy("createdAt", "desc"));
   const unsub = onSnapshot(
     q,
     (snapshot) => {
       const arr = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+      if (!tag && arr.length > 0) {
+        memoryProductsCache = arr;
+        try {
+          if (typeof window !== "undefined" && window.localStorage) {
+            localStorage.setItem(PRODUCTS_CACHE_KEY, JSON.stringify(arr));
+          }
+        } catch (e) {}
+      }
       callback(arr);
     },
     (err) => {
       console.error("[getProductsRealtime] Firestore error:", err);
+      if (!tag && memoryProductsCache && memoryProductsCache.length > 0) {
+        callback(memoryProductsCache);
+      }
       if (typeof onError === "function") onError(err);
     }
   );
@@ -179,6 +217,16 @@ function sortByCreatedAtDesc(arr) {
    "Featured Product" checkbox ticked manually.
 */
 export function getFeaturedProductsRealtime(callback, { onError = null } = {}) {
+  // Instantly emit from cache for mobile 0ms render
+  if (memoryProductsCache && Array.isArray(memoryProductsCache) && memoryProductsCache.length > 0) {
+    const cachedFeatured = memoryProductsCache.filter((p) => p.featured === true || p.category === "unisex");
+    if (cachedFeatured.length > 0) {
+      try {
+        callback(cachedFeatured);
+      } catch (e) {}
+    }
+  }
+
   let featuredResults = [];
   let unisexResults = [];
   let gotFeatured = false;

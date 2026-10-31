@@ -17,26 +17,29 @@
 */
 
 :root {
-  --cream: #fbf9f6;
-  --card: #fffdfb;
-  --card-2: #fdfcfa;
-  --ink: #2c1f26;
-  --ink-soft: #5a4650;
-  --line: rgba(255, 45, 120, 0.16);
-  --pink: #ff2d78;
-  --purple: #7b4dff;
-  --gradient: linear-gradient(135deg, var(--pink), var(--purple));
+  --cream: #FAF4EB;
+  --card: #FFFFFF;
+  --card-2: #FFFDF9;
+  --ink: #241A18;
+  --ink-soft: #5c4a45;
+  --line: rgba(200, 155, 82, 0.24);
+  --pink: #790D2D;
+  --purple: #C89B52;
+  --burgundy: #790D2D;
+  --gold: #C89B52;
+  --gradient: linear-gradient(135deg, #790D2D 0%, #5c0922 100%);
   --danger: #b3261e;
 }
 
 .order-status-card {
-  background: var(--card-2);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 18px 20px;
+  background: #ffffff;
+  border: 1px solid rgba(200, 155, 82, 0.28);
+  border-radius: 16px;
+  padding: 20px 22px;
   max-width: 480px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--ink);
+  box-shadow: 0 4px 16px rgba(36, 26, 24, 0.04);
 }
 
 .order-status-card.pending {
@@ -96,24 +99,24 @@
   padding: 11px 24px;
   font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   border-radius: 999px;
-  border: 1.5px solid var(--line) !important;
+  border: 1.5px solid rgba(200, 155, 82, 0.35) !important;
   background: #fff !important;
-  color: var(--pink) !important;
-  -webkit-text-fill-color: var(--pink) !important;
+  color: #790D2D !important;
+  -webkit-text-fill-color: #790D2D !important;
   opacity: 1 !important;
   cursor: pointer;
-  transition: all .25s ease;
+  transition: all .22s ease;
 }
 
 .order-status-card .track-btn:hover {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
-  border-color: transparent !important;
-  background: var(--gradient) !important;
-  box-shadow: 0 10px 22px rgba(255, 45, 120, 0.22);
+  border-color: #790D2D !important;
+  background: #790D2D !important;
+  box-shadow: 0 8px 20px rgba(121, 13, 45, 0.22);
   transform: translateY(-2px);
 }
 
@@ -121,7 +124,7 @@
 .tracking-panel {
   margin-top: 16px;
   padding-top: 14px;
-  border-top: 1px dashed var(--line);
+  border-top: 1px dashed rgba(200, 155, 82, 0.25);
 }
 
 .timeline {
@@ -143,22 +146,22 @@
   top: 22px;
   width: 2px;
   height: calc(100% - 4px);
-  background: var(--line);
+  background: rgba(200, 155, 82, 0.25);
 }
 .timeline-step.done:not(:last-child)::before {
-  background: var(--gradient);
+  background: #790D2D;
 }
 .timeline-dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--line);
+  background: rgba(200, 155, 82, 0.25);
   flex-shrink: 0;
   z-index: 1;
 }
 .timeline-step.done .timeline-dot {
-  background: var(--gradient);
-  box-shadow: 0 0 0 3px rgba(255, 45, 120, 0.14);
+  background: #790D2D;
+  box-shadow: 0 0 0 3px rgba(121, 13, 45, 0.16);
 }
 .timeline-label {
   font-size: 13.5px;
