@@ -1,561 +1,251 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&family=Outfit:wght@500;600;700;800;900&display=swap');
-
 /* src/components/Hero7.css
-   Pure Smooth Floating Perfume Bottle Slider (No Boxes, No Text, Pure Bottles)
-   Light Luxury Premium Edition: Warm Alabaster & Champagne Silk Canvas
-   Left side: Editorial Black & White | Right side: Full Vibrant Color
-   Center Glowing Golden Amber Laser Bar & Particle Sparks | Powered by GSAP
+   Full-Width High-Definition Hero Banner Slider with Pure Ethereal Perfume Mist & Premium GSAP Transitions
+   Brand Palette: Velvet Burgundy (#790D2D), Champagne Gold (#C89B52), Warm Alabaster
 */
 
-.hero7-section {
-  position: relative;
-  background: radial-gradient(circle at 50% 12%, #ffffff 0%, #faf8f5 48%, #f3ece2 100%);
-  color: #111827;
-  /* Fits cleanly in the visible window height below header */
-  height: calc(100vh - var(--header-height, 90px));
-  min-height: 560px;
-  max-height: 780px;
-  padding: 10px 0 20px;
-  box-sizing: border-box;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  font-family: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  user-select: none;
-  border-bottom: 1px solid rgba(217, 119, 6, 0.08);
-}
-
-/* Background ambient bloom */
-.hero7-bg-glow {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 960px;
-  height: 480px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(244, 114, 182, 0.06) 42%, transparent 72%);
-  filter: blur(85px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ─── Top Header (Modern Bold Premium Typography with GSAP Masks) ────────── */
-.hero7-header {
-  position: relative;
-  z-index: 20;
-  text-align: center;
-  max-width: 860px;
-  padding: 0 20px;
-  margin: 0 auto;
-  perspective: 1200px;
-}
-
-.hero7-title {
-  font-family: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(3rem, 6.2vw, 5.2rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.038em;
-  margin: 0 0 14px;
-  color: #111827;
-}
-
-/* Mask for smooth GSAP slide-up reveal */
-.hero7-mask {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  padding-bottom: 8px;
-  margin-bottom: -8px;
-}
-
-.hero7-word {
-  display: inline-block;
-  will-change: transform, opacity;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: center bottom;
-}
-
-.hero7-word:hover {
-  transform: translateY(-3px) scale(1.02);
-}
-
-.hero7-title-accent {
-  color: #7a1638;
-  position: relative;
-  display: inline-block;
-  margin-right: 8px;
-}
-
-/* Smooth Animated Underline Bar (Animated by GSAP) */
-.hero7-accent-line {
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 75%;
-  height: 4.5px;
-  background: #7a1638;
-  border-radius: 9999px;
-  transform-origin: left center;
-  box-shadow: 0 2px 8px rgba(122, 22, 56, 0.35);
-  display: block;
-}
-
-.hero7-sub {
-  font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
-  font-size: clamp(1rem, 1.4vw, 1.18rem);
-  line-height: 1.55;
-  color: #4b5563;
-  max-width: 600px;
-  margin: 0 auto 22px;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  will-change: transform, opacity;
-}
-
-/* Luxury CTA Pill Button */
-.hero7-pill-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #111827;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: #ffffff;
-  padding: 12px 32px;
-  border-radius: 9999px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero7-pill-cta:hover {
-  background: #7a1638;
-  border-color: #7a1638;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(122, 22, 56, 0.38);
-}
-
-.hero7-cta-arrow {
-  transition: transform 0.2s ease;
-}
-
-.hero7-pill-cta:hover .hero7-cta-arrow {
-  transform: translateX(4px);
-}
-
-/* ─── 3D Viewport ───────────────────────────────────────────────────────── */
-.hero7-viewport {
+.hero-slider-section {
   position: relative;
   width: 100%;
   max-width: 100vw;
-  height: 390px;
+  background: #FAF8F5;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  user-select: none;
+  box-sizing: border-box;
 }
 
-/* Dual Split Layers: Left is B&W, Right is Color */
-.hero7-split-layer {
+/* ─── Viewport & Slides Stack ──────────────────────────────────────────── */
+.hero-slider-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  max-height: 88vh;
+  overflow: hidden;
+  display: block;
+  background: #000000;
+}
+
+.hero-slides-stack {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
   overflow: hidden;
 }
 
-/* RIGHT HALF: Full Color */
-.hero7-layer-color {
-  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
-  z-index: 5;
-}
-
-/* LEFT HALF: Black & White */
-.hero7-layer-bw {
-  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-  filter: grayscale(100%) contrast(1.15) brightness(0.96);
-  z-index: 6;
-}
-
-/* Stage Container */
-.hero7-stage {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  will-change: transform;
-}
-
-/* Infinite Marquee Track */
-.hero7-track {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  width: max-content;
-}
-
-/* ─── Pure Floating Perfume Bottle Items (NO BOX, NO TEXT) ──────────────── */
-.hero7-bottle-item {
-  flex: 0 0 280px;
-  width: 280px;
-  height: 370px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+/* ─── Individual Slide (Layered via Absolute Positioning) ──────────────── */
+.hero-slide-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero7-bottle-item:hover {
-  transform: scale(1.08) translateY(-6px);
-}
-
-/* Soft colored aura glow directly behind each bottle */
-.hero7-bottle-aura {
-  position: absolute;
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  filter: blur(40px);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.65;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.hero7-bottle-item:hover .hero7-bottle-aura {
-  opacity: 0.95;
-  transform: scale(1.15);
-}
-
-/* The Pure Perfume Bottle Image (Transparent PNG) */
-.hero7-bottle-img {
-  position: relative;
-  z-index: 2;
-  height: 310px;
-  max-height: 330px;
-  max-width: 95%;
-  object-fit: contain;
+  overflow: hidden;
+  will-change: transform, opacity;
   display: block;
-  filter: drop-shadow(0 14px 22px rgba(28, 25, 23, 0.16));
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Ground shadow reflection */
-.hero7-bottle-reflection {
+.hero-banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+  will-change: transform, filter;
+  filter: contrast(1.02) saturate(1.04);
+}
+
+/* Depth vignette */
+.hero-slide-overlay {
   position: absolute;
-  bottom: 12px;
-  width: 150px;
-  height: 14px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.05) 45%, transparent 70%);
-  filter: blur(4px);
+  inset: 0;
   pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0%, transparent 45%, rgba(0, 0, 0, 0.14) 100%);
   z-index: 1;
 }
 
-/* ─── Center Laser Split Bar & Particle Effects (Golden Champagne Glow) ─── */
-.hero7-laser-bar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 36px;
-  z-index: 30;
-  pointer-events: none;
-}
-
-/* Vertical Laser Core */
-.hero7-laser-core {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 3px;
-  background: linear-gradient(
-    180deg,
-    rgba(217, 119, 6, 0) 0%,
-    rgba(234, 88, 12, 0.9) 15%,
-    #ffffff 50%,
-    rgba(217, 119, 6, 0.9) 85%,
-    rgba(217, 119, 6, 0) 100%
-  );
-  box-shadow: 
-    0 0 8px #ffffff,
-    0 0 16px #ea580c,
-    0 0 32px #f59e0b,
-    0 0 55px rgba(245, 158, 11, 0.6);
-}
-
-/* Radiant Halo */
-.hero7-laser-halo {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 18px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(234, 88, 12, 0.25) 20%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(245, 158, 11, 0.25) 80%,
-    transparent 100%
-  );
-  filter: blur(6px);
-}
-
-/* Laser Flares */
-.hero7-laser-flare {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffffff 15%, #ea580c 50%, rgba(245, 158, 11, 0.5) 80%, transparent 100%);
-  filter: blur(2px);
-}
-
-.hero7-laser-flare.top {
-  top: 15%;
-  width: 20px;
-  height: 20px;
-  opacity: 0.8;
-}
-
-.hero7-laser-flare.center {
-  top: 50%;
-  width: 38px;
-  height: 38px;
-  box-shadow: 0 0 24px #ffffff, 0 0 45px #f59e0b;
-  animation: hero7Pulse 2s ease-in-out infinite alternate;
-}
-
-.hero7-laser-flare.bottom {
-  top: 85%;
-  width: 20px;
-  height: 20px;
-  opacity: 0.8;
-}
-
-@keyframes hero7Pulse {
-  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.85; }
-  100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-}
-
-/* Floating Golden Sparks */
-.hero7-particles {
+/* ─── Pure Atmospheric Smoke & Perfume Mist Canvas ─────────────────────── */
+.hero-smoke-canvas {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-}
-
-.hero7-particle {
-  position: absolute;
-  bottom: -10px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 6px #ea580c, 0 0 14px #f59e0b;
-  animation: hero7ParticleFloat linear infinite;
-}
-
-@keyframes hero7ParticleFloat {
-  0% {
-    transform: translateY(0) scale(0.6);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-340px) scale(1.2);
-    opacity: 0;
-  }
-}
-
-/* Side Vignettes Fading into Warm Light Canvas */
-.hero7-vignette {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 160px;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index: 15;
+  z-index: 3;
 }
 
-.hero7-vignette.left {
+/* Soft ambient mist gradients */
+.hero-smoke-wisps {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 92%, rgba(255, 255, 255, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 88%, rgba(255, 255, 255, 0.09) 0%, transparent 60%),
+    linear-gradient(180deg, transparent 72%, rgba(0, 0, 0, 0.1) 100%);
+  mix-blend-mode: screen;
+  z-index: 2;
+}
+
+/* ─── Floating Navigation Arrows ────────────────────────────────────────── */
+.hero-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 155, 82, 0.35);
+  color: #790D2D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-arrow-btn.prev {
+  left: 24px;
+}
+
+.hero-arrow-btn.next {
+  right: 24px;
+}
+
+.hero-arrow-btn:hover {
+  background: #790D2D;
+  color: #ffffff;
+  border-color: #790D2D;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 12px 30px rgba(121, 13, 45, 0.42);
+}
+
+.hero-arrow-btn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+/* ─── Floating Bottom Controls & Minimal Luxury Dots ───────────────────── */
+.hero-slider-controls {
+  position: absolute;
+  bottom: 22px;
   left: 0;
-  background: linear-gradient(90deg, #faf8f5 0%, rgba(250, 248, 245, 0) 100%);
-}
-
-.hero7-vignette.right {
   right: 0;
-  background: linear-gradient(270deg, #faf8f5 0%, rgba(250, 248, 245, 0) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  pointer-events: none;
 }
 
-/* ─── Responsive Adjustments for All Devices ──────────────────────────────── */
-@media (max-width: 1024px) {
-  .hero7-title {
-    font-size: clamp(2.5rem, 5.2vw, 4.2rem);
-  }
-  .hero7-viewport {
-    height: 340px;
-  }
-  .hero7-bottle-item {
-    flex: 0 0 240px;
-    width: 240px;
-    height: 320px;
-  }
-  .hero7-bottle-img {
-    max-height: 280px;
-  }
-  .hero7-track {
-    gap: 32px;
-  }
+/* Thin Elegant Gold Progress Bar Rail */
+.hero-progress-rail {
+  width: min(220px, 60vw);
+  height: 3px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
-@media (max-width: 768px) {
-  .hero7-section {
-    height: auto;
-    min-height: 480px;
-    padding: 20px 0 32px;
-  }
-
-  .hero7-header {
-    padding: 0 16px;
-  }
-
-  .hero7-title {
-    font-size: clamp(2.2rem, 6.8vw, 3.4rem);
-    margin-bottom: 10px;
-  }
-
-  .hero7-sub {
-    font-size: 0.95rem;
-    line-height: 1.48;
-    margin-bottom: 18px;
-    padding: 0 12px;
-  }
-
-  .hero7-pill-cta {
-    padding: 11px 26px;
-    font-size: 0.825rem;
-  }
-
-  .hero7-viewport {
-    height: 270px;
-  }
-
-  .hero7-bottle-item {
-    flex: 0 0 190px;
-    width: 190px;
-    height: 250px;
-  }
-
-  .hero7-bottle-img {
-    max-height: 220px;
-  }
-
-  .hero7-track {
-    gap: 26px;
-  }
-
-  .hero7-vignette {
-    width: 44px;
-  }
+.hero-progress-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #C89B52, #ffffff);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
-@media (max-width: 480px) {
-  .hero7-section {
-    padding: 16px 0 28px;
-    min-height: 440px;
+/* Minimal Luxury Dots (Zero Name Tags) */
+.hero-slider-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  pointer-events: auto;
+  padding: 4px 8px;
+}
+
+.hero-slider-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 155, 82, 0.45);
+  cursor: pointer;
+  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.hero-slider-dot:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #C89B52;
+  transform: scale(1.2);
+}
+
+.hero-slider-dot.active {
+  width: 28px;
+  background: #790D2D;
+  border-color: #790D2D;
+  box-shadow: 0 2px 14px rgba(121, 13, 45, 0.45);
+}
+
+/* ─── Responsive Optimizations ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-arrow-btn {
+    width: 40px;
+    height: 40px;
   }
 
-  .hero7-title {
-    font-size: clamp(1.85rem, 7.8vw, 2.5rem);
-    letter-spacing: -0.03em;
-    margin-bottom: 8px;
+  .hero-arrow-btn.prev {
+    left: 14px;
   }
 
-  .hero7-accent-line {
-    height: 3.5px;
-    bottom: -4px;
+  .hero-arrow-btn.next {
+    right: 14px;
   }
 
-  .hero7-sub {
-    font-size: 0.86rem;
-    line-height: 1.42;
-    margin-bottom: 14px;
-    padding: 0 6px;
-  }
-
-  .hero7-pill-cta {
-    padding: 9.5px 22px;
-    font-size: 0.78rem;
+  .hero-slider-controls {
+    bottom: 14px;
     gap: 8px;
   }
-
-  .hero7-viewport {
-    height: 220px;
-  }
-
-  .hero7-bottle-item {
-    flex: 0 0 155px;
-    width: 155px;
-    height: 205px;
-  }
-
-  .hero7-bottle-img {
-    max-height: 180px;
-  }
-
-  .hero7-track {
-    gap: 18px;
-  }
-
-  .hero7-laser-flare.center {
-    width: 28px;
-    height: 28px;
-  }
-
-  .hero7-vignette {
-    width: 28px;
-  }
 }
 
-@media (max-width: 350px) {
-  .hero7-title {
-    font-size: 1.7rem;
+@media (max-width: 640px) {
+  .hero-arrow-btn {
+    display: none; /* Touch swipe on mobile */
   }
-  .hero7-sub {
-    font-size: 0.82rem;
+
+  .hero-slider-controls {
+    bottom: 10px;
+    gap: 6px;
   }
-  .hero7-viewport {
-    height: 200px;
-  }
-  .hero7-bottle-item {
-    flex: 0 0 140px;
+
+  .hero-progress-rail {
     width: 140px;
-    height: 185px;
+    height: 2.5px;
   }
-  .hero7-bottle-img {
-    max-height: 160px;
+
+  .hero-slider-dots {
+    gap: 7px;
+  }
+
+  .hero-slider-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .hero-slider-dot.active {
+    width: 22px;
   }
 }

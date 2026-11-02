@@ -1,340 +1,513 @@
 // src/components/Hero7.jsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import "./Hero7.css";
 
-const BOTTLE_ITEMS = [
+export const HERO_SLIDES = [
   {
-    id: 1,
-    image: "/bottle-trans-ruby.png",
-    fallback: "/bottle-clean-ruby.png",
-    glow: "rgba(225, 29, 72, 0.28)",
+    id: "signature-fragrances",
+    index: 0,
+    title: "Signature Fragrances",
+    caption: "Luxury Hero Collection",
+    image: "/Signature Fragrances Luxury Hero Banner.png",
+    alt: "Signature Fragrances Luxury Hero Banner",
+    objectPosition: "center 72%",
   },
   {
-    id: 2,
-    image: "/bottle-trans-gold.png",
-    fallback: "/bottle-auric-gold.jpg",
-    glow: "rgba(234, 179, 8, 0.32)",
+    id: "botanical-freshener",
+    index: 1,
+    title: "Botanical Room Freshener",
+    caption: "Premium Botanical Collection",
+    image: "/Premium Botanical Room Freshener Banner.png",
+    alt: "Premium Botanical Room Freshener Banner",
+    objectPosition: "center center",
   },
   {
-    id: 3,
-    image: "/bottle-trans-amethyst.png",
-    fallback: "/bottle-clean-amethyst.png",
-    glow: "rgba(168, 85, 247, 0.28)",
-  },
-  {
-    id: 4,
-    image: "/bottle-trans-twist.png",
-    fallback: "/bottle-clean-twist.png",
-    glow: "rgba(244, 63, 94, 0.28)",
-  },
-  {
-    id: 5,
-    image: "/bottle-trans-fleur.png",
-    fallback: "/bottle-clean-fleur.png",
-    glow: "rgba(251, 113, 133, 0.28)",
+    id: "stone-series",
+    index: 2,
+    title: "Stone Series",
+    caption: "Fragrance Body Spray Collection",
+    image: "/Stone Series Fragrance Collection.png",
+    alt: "Stone Series Fragrance Collection",
+    objectPosition: "center center",
   },
 ];
 
-// 24 animated sparks floating along the center laser beam
-const PARTICLES = Array.from({ length: 24 }).map((_, i) => ({
-  id: i,
-  left: (Math.random() - 0.5) * 44,
-  delay: Math.random() * 3.5,
-  duration: 2.2 + Math.random() * 2.8,
-  size: 2 + Math.random() * 4,
-  opacity: 0.4 + Math.random() * 0.6,
-}));
+// Lightweight organic perfume smoke particle
+class SmokePuff {
+  constructor(w, h, isBurst = false) {
+    this.reset(w, h, isBurst);
+  }
+
+  reset(w, h, isBurst = false) {
+    this.x = isBurst ? w * (0.25 + Math.random() * 0.5) : Math.random() * w;
+    this.y = isBurst ? h * (0.55 + Math.random() * 0.35) : h + 20 + Math.random() * 40;
+    this.radius = isBurst ? 80 + Math.random() * 90 : 100 + Math.random() * 130;
+    this.maxRadius = this.radius * (1.6 + Math.random() * 0.7);
+    this.vx = (Math.random() - 0.5) * (isBurst ? 1.4 : 0.5);
+    this.vy = -(0.35 + Math.random() * (isBurst ? 1.1 : 0.6));
+    this.alpha = 0;
+    this.maxAlpha = 0.11 + Math.random() * 0.13;
+    this.life = 0;
+    this.maxLife = isBurst ? 80 + Math.random() * 40 : 160 + Math.random() * 90;
+  }
+
+  update(w, h) {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.life += 1;
+    const progress = this.life / this.maxLife;
+
+    if (progress < 0.25) {
+      this.alpha = (progress / 0.25) * this.maxAlpha;
+    } else {
+      this.alpha = (1 - (progress - 0.25) / 0.75) * this.maxAlpha;
+    }
+
+    this.radius += (this.maxRadius - this.radius) * 0.009;
+    return this.life < this.maxLife && this.y > -this.radius;
+  }
+
+  draw(ctx) {
+    if (this.alpha <= 0.003) return;
+    const grad = ctx.createRadialGradient(
+      this.x,
+      this.y,
+      0,
+      this.x,
+      this.y,
+      this.radius
+    );
+    grad.addColorStop(0, `rgba(255, 255, 255, ${this.alpha * 0.85})`);
+    grad.addColorStop(0.35, `rgba(252, 248, 240, ${this.alpha * 0.45})`);
+    grad.addColorStop(0.7, `rgba(245, 240, 230, ${this.alpha * 0.15})`);
+    grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Subtle golden scent mist micro-droplet
+class ScentDroplet {
+  constructor(w, h) {
+    this.reset(w, h);
+  }
+
+  reset(w, h) {
+    this.x = Math.random() * w;
+    this.y = h * 0.4 + Math.random() * (h * 0.6);
+    this.size = 1 + Math.random() * 2;
+    this.vx = (Math.random() - 0.5) * 0.35;
+    this.vy = -(0.25 + Math.random() * 0.45);
+    this.alpha = 0.1 + Math.random() * 0.5;
+    this.vAlpha = 0.01 + Math.random() * 0.015;
+  }
+
+  update(w, h) {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.alpha += this.vAlpha;
+    if (this.alpha > 0.75 || this.alpha < 0.1) {
+      this.vAlpha = -this.vAlpha;
+    }
+    if (this.y < 0) this.reset(w, h);
+  }
+
+  draw(ctx) {
+    ctx.fillStyle = `rgba(238, 215, 168, ${Math.max(0, this.alpha)})`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
 
 export default function Hero7({ onCtaClick }) {
-  const trackColorRef = useRef(null);
-  const trackBwRef = useRef(null);
-  const animRef = useRef(null);
+  const containerRef = useRef(null);
+  const viewportRef = useRef(null);
+  const slideRefs = useRef([]);
+  const canvasRef = useRef(null);
+  const progressRef = useRef(null);
+  const progressTweenRef = useRef(null);
+  const autoPlayTimerRef = useRef(null);
+  const isAnimatingRef = useRef(false);
+  const burstTriggerRef = useRef(null);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // GSAP Text Animation Refs
-  const headerContainerRef = useRef(null);
-  const titleWordsRef = useRef([]);
-  const accentLineRef = useRef(null);
-  const subTextRef = useRef(null);
-  const ctaBtnRef = useRef(null);
+  const totalSlides = HERO_SLIDES.length;
 
-  // Cinematic GSAP Entrance Animation for Header Text
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-      // Animate masked words sliding up smoothly
-      tl.fromTo(
-        titleWordsRef.current,
-        {
-          yPercent: 125,
-          rotateX: -20,
-          opacity: 0,
-        },
-        {
-          yPercent: 0,
-          rotateX: 0,
-          opacity: 1,
-          duration: 1.15,
-          stagger: 0.12,
-        }
-      )
-      // Unfold the signature accent underline bar
-      .fromTo(
-        accentLineRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.85, ease: "power3.inOut" },
-        "-=0.6"
-      )
-      // Fade & float up subtitle
-      .fromTo(
-        subTextRef.current,
-        { y: 22, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.85 },
-        "-=0.5"
-      )
-      // Scale-in CTA button with subtle spring
-      .fromTo(
-        ctaBtnRef.current,
-        { scale: 0.88, y: 16, opacity: 0 },
-        { scale: 1, y: 0, opacity: 1, duration: 0.7, ease: "back.out(1.6)" },
-        "-=0.5"
-      );
-    }, headerContainerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Subtle interactive parallax on mouse move
-  const handleMouseMove = (e) => {
-    if (!headerContainerRef.current) return;
-    const rect = headerContainerRef.current.getBoundingClientRect();
-    const x = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-    const y = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-
-    gsap.to(titleWordsRef.current, {
-      x: x * 8,
-      y: y * 5,
-      duration: 0.6,
-      ease: "power2.out",
-      stagger: 0.02,
-      overwrite: "auto",
-    });
-  };
-
-  const handleMouseLeave = () => {
-    gsap.to(titleWordsRef.current, {
-      x: 0,
-      y: 0,
-      duration: 0.8,
-      ease: "power2.out",
-      overwrite: "auto",
-    });
-  };
-
-  const handleCta = (e) => {
-    if (e) e.preventDefault();
+  // Handle click on banner -> smooth scroll to products
+  const handleBannerClick = () => {
     if (onCtaClick) {
       onCtaClick();
       return;
     }
     const target = document.querySelector("#featured-collections");
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
-  // GSAP continuous smooth marquee animation across both color & B&W tracks
+  // 1. Organic Smoke Canvas Animation Engine
   useEffect(() => {
-    const targets = [trackColorRef.current, trackBwRef.current].filter(Boolean);
-    if (!targets.length) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    gsap.set(targets, { xPercent: 0 });
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let width = 0;
+    let height = 0;
 
-    const tween = gsap.to(targets, {
-      xPercent: -50,
-      duration: 24,
-      ease: "none",
-      repeat: -1,
-    });
+    let puffs = [];
+    let droplets = [];
 
-    animRef.current = tween;
+    const resize = () => {
+      if (!viewportRef.current) return;
+      const rect = viewportRef.current.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+
+      // Initialize ambient smoke puffs & scent droplets
+      puffs = Array.from({ length: 16 }).map(() => new SmokePuff(width, height));
+      droplets = Array.from({ length: 18 }).map(() => new ScentDroplet(width, height));
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    // Trigger burst on slide change
+    burstTriggerRef.current = () => {
+      if (width === 0 || height === 0) return;
+      const burstCount = 10;
+      for (let i = 0; i < burstCount; i++) {
+        puffs.push(new SmokePuff(width, height, true));
+      }
+    };
+
+    // Render loop
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Update and draw smoke puffs
+      for (let i = puffs.length - 1; i >= 0; i--) {
+        const p = puffs[i];
+        const alive = p.update(width, height);
+        if (alive) {
+          p.draw(ctx);
+        } else {
+          // If ambient puff, reset it; if burst puff, remove it
+          if (puffs.length > 16) {
+            puffs.splice(i, 1);
+          } else {
+            p.reset(width, height);
+          }
+        }
+      }
+
+      // Update and draw scent droplets
+      droplets.forEach((d) => {
+        d.update(width, height);
+        d.draw(ctx);
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
 
     return () => {
-      tween.kill();
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
-  // Hover pause & resume
-  useEffect(() => {
-    if (!animRef.current) return;
-    if (isPaused) {
-      animRef.current.pause();
-    } else {
-      animRef.current.resume();
+  // 2. Premium GSAP Cinematic Slide Transition with Smoke Mist Burst
+  const goToSlide = useCallback((targetIndex, direction = 1) => {
+    if (isAnimatingRef.current) return;
+    const nextIndex = (targetIndex + totalSlides) % totalSlides;
+    if (nextIndex === currentIndex) return;
+
+    isAnimatingRef.current = true;
+
+    // Trigger authentic mist burst on canvas
+    if (burstTriggerRef.current) {
+      burstTriggerRef.current();
     }
-  }, [isPaused]);
 
-  // Duplicate items for seamless continuous looping
-  const scrollItems = [...BOTTLE_ITEMS, ...BOTTLE_ITEMS];
+    const currentSlideEl = slideRefs.current[currentIndex];
+    const nextSlideEl = slideRefs.current[nextIndex];
 
-  const renderTrackItems = (isGrayscale = false) => {
-    return scrollItems.map((item, idx) => (
-      <div
-        key={`${isGrayscale ? "bw" : "color"}-${item.id}-${idx}`}
-        className="hero7-bottle-item"
-        onClick={handleCta}
-      >
-        {/* Soft atmospheric aura glow behind bottle */}
-        <div
-          className="hero7-bottle-aura"
-          style={{
-            background: `radial-gradient(circle at 50% 50%, ${item.glow} 0%, transparent 65%)`,
-          }}
-        />
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.inOut" },
+      onComplete: () => {
+        setCurrentIndex(nextIndex);
+        isAnimatingRef.current = false;
+        if (currentSlideEl) {
+          gsap.set(currentSlideEl, { zIndex: 0, opacity: 0 });
+        }
+      },
+    });
 
-        {/* Clean isolated perfume bottle (NO box, NO text, NO borders) */}
-        <img
-          src={item.image}
-          alt="Luxury Perfume Bottle"
-          className="hero7-bottle-img"
-          loading={idx < 4 ? "eager" : "lazy"}
-          decoding="async"
-          onError={(e) => {
-            if (item.fallback && e.target.src !== item.fallback) {
-              e.target.src = item.fallback;
-            }
-          }}
-        />
+    // Layer incoming slide on top
+    if (nextSlideEl) {
+      gsap.set(nextSlideEl, { zIndex: 2, opacity: 0, display: "block" });
+    }
+    if (currentSlideEl) {
+      gsap.set(currentSlideEl, { zIndex: 1 });
+    }
 
-        {/* Delicate pedestal floor reflection */}
-        <div className="hero7-bottle-reflection" />
-      </div>
-    ));
+    // A. Incoming Slide: Soft Focus Bloom & Gentle Parallax
+    if (nextSlideEl) {
+      const nextImg = nextSlideEl.querySelector(".hero-banner-image");
+
+      tl.fromTo(
+        nextSlideEl,
+        {
+          opacity: 0,
+          xPercent: direction * 5,
+        },
+        {
+          opacity: 1,
+          xPercent: 0,
+          duration: 1.15,
+        },
+        0
+      );
+
+      if (nextImg) {
+        tl.fromTo(
+          nextImg,
+          {
+            scale: 1.07,
+            filter: "blur(8px) brightness(1.15)",
+          },
+          {
+            scale: 1,
+            filter: "blur(0px) brightness(1)",
+            duration: 1.35,
+            ease: "power2.out",
+          },
+          0
+        );
+      }
+    }
+
+    // B. Outgoing Slide: Graceful Drift & Soft Dissolve
+    if (currentSlideEl) {
+      const currentImg = currentSlideEl.querySelector(".hero-banner-image");
+
+      tl.to(
+        currentSlideEl,
+        {
+          opacity: 0,
+          xPercent: direction * -4,
+          duration: 1.0,
+        },
+        0
+      );
+
+      if (currentImg) {
+        tl.to(
+          currentImg,
+          {
+            scale: 1.04,
+            filter: "blur(4px)",
+            duration: 1.05,
+          },
+          0
+        );
+      }
+    }
+
+    // C. Reset & Animate Progress Bar
+    if (progressRef.current) {
+      if (progressTweenRef.current) progressTweenRef.current.kill();
+      gsap.set(progressRef.current, { scaleX: 0 });
+      progressTweenRef.current = gsap.to(progressRef.current, {
+        scaleX: 1,
+        duration: 5.5,
+        ease: "none",
+        transformOrigin: "left center",
+      });
+    }
+  }, [currentIndex, totalSlides]);
+
+  const nextSlide = useCallback(() => {
+    goToSlide(currentIndex + 1, 1);
+  }, [currentIndex, goToSlide]);
+
+  const prevSlide = useCallback(() => {
+    goToSlide(currentIndex - 1, -1);
+  }, [currentIndex, goToSlide]);
+
+  // Autoplay loop every 5.5s
+  useEffect(() => {
+    if (isPaused) {
+      if (progressTweenRef.current) progressTweenRef.current.pause();
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+      return;
+    }
+
+    if (progressTweenRef.current) progressTweenRef.current.resume();
+
+    if (progressRef.current && !progressTweenRef.current) {
+      gsap.set(progressRef.current, { scaleX: 0 });
+      progressTweenRef.current = gsap.to(progressRef.current, {
+        scaleX: 1,
+        duration: 5.5,
+        ease: "none",
+        transformOrigin: "left center",
+      });
+    }
+
+    autoPlayTimerRef.current = setInterval(() => {
+      nextSlide();
+    }, 5500);
+
+    return () => {
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+    };
+  }, [isPaused, nextSlide]);
+
+  // Initial Mount: Reveal initial slide cleanly
+  useEffect(() => {
+    slideRefs.current.forEach((el, idx) => {
+      if (el) {
+        if (idx === 0) {
+          gsap.set(el, { opacity: 1, zIndex: 1, xPercent: 0 });
+          const img = el.querySelector(".hero-banner-image");
+          if (img) gsap.set(img, { scale: 1, filter: "blur(0px)" });
+        } else {
+          gsap.set(el, { opacity: 0, zIndex: 0, xPercent: 0 });
+        }
+      }
+    });
+  }, []);
+
+  // Touch swipe support for mobile
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e) => {
+    setIsPaused(true);
+    touchStartX.current = e.changedTouches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    setTimeout(() => setIsPaused(false), 2000);
   };
 
   return (
-    <section className="hero7-section" aria-label="Hero Showcase">
-      {/* Background ambient bloom */}
-      <div className="hero7-bg-glow" aria-hidden="true" />
-
-      {/* Top Header Content - GSAP Animated Masked Words & Interactive Tilt */}
-      <div
-        ref={headerContainerRef}
-        className="hero7-header"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      >
-        <h1 className="hero7-title">
-          <span className="hero7-mask">
-            <span
-              ref={(el) => (titleWordsRef.current[0] = el)}
-              className="hero7-word hero7-title-accent"
+    <section
+      ref={containerRef}
+      className="hero-slider-section"
+      aria-label="High Quality Hero Advertisements"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Full-width Carousel Viewport */}
+      <div ref={viewportRef} className="hero-slider-viewport">
+        {/* Slides Stack */}
+        <div className="hero-slides-stack">
+          {HERO_SLIDES.map((slide, idx) => (
+            <div
+              key={slide.id}
+              ref={(el) => (slideRefs.current[idx] = el)}
+              className={`hero-slide-item ${currentIndex === idx ? "active" : ""}`}
+              onClick={handleBannerClick}
             >
-              Pure
-              <span ref={accentLineRef} className="hero7-accent-line" />
-            </span>
-          </span>{" "}
-          <span className="hero7-mask">
-            <span
-              ref={(el) => (titleWordsRef.current[1] = el)}
-              className="hero7-word"
-            >
-              Luxury
-            </span>
-          </span>
-          <br />
-          <span className="hero7-mask">
-            <span
-              ref={(el) => (titleWordsRef.current[2] = el)}
-              className="hero7-word"
-            >
-              Fragrances
-            </span>
-          </span>
-        </h1>
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="hero-banner-image"
+                style={{ objectPosition: slide.objectPosition || "center top" }}
+                loading={idx === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+              <div className="hero-slide-overlay" />
+            </div>
+          ))}
+        </div>
 
-        <p ref={subTextRef} className="hero7-sub">
-          Expert picks for modern, handcrafted niche luxury perfumes.
-        </p>
+        {/* Pure Atmospheric Smoke & Perfume Mist Canvas (Zero Video Artifacts) */}
+        <canvas ref={canvasRef} className="hero-smoke-canvas" aria-hidden="true" />
 
-        <a
-          ref={ctaBtnRef}
-          href="#featured-collections"
-          className="hero7-pill-cta"
-          onClick={handleCta}
+        {/* Ambient Mist Vignette */}
+        <div className="hero-smoke-wisps" aria-hidden="true" />
+
+        {/* Prev / Next Navigation Arrows */}
+        <button
+          type="button"
+          className="hero-arrow-btn prev"
+          onClick={(e) => {
+            e.stopPropagation();
+            prevSlide();
+          }}
+          aria-label="Previous Slide"
         >
-          <span>Explore Collection</span>
-          <svg
-            className="hero7-cta-arrow"
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
           </svg>
-        </a>
+        </button>
+
+        <button
+          type="button"
+          className="hero-arrow-btn next"
+          onClick={(e) => {
+            e.stopPropagation();
+            nextSlide();
+          }}
+          aria-label="Next Slide"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
       </div>
 
-      {/* 3D Curved Perspective Carousel with B&W / Color Split */}
-      <div
-        className="hero7-viewport"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        {/* RIGHT LAYER: FULL VIBRANT COLOR */}
-        <div className="hero7-split-layer hero7-layer-color">
-          <div ref={trackColorRef} className="hero7-stage">
-            <div className="hero7-track">{renderTrackItems(false)}</div>
-          </div>
+      {/* Floating Bottom Navigation: Progress Bar & Minimal Luxury Dots (Zero Name Tags) */}
+      <div className="hero-slider-controls">
+        {/* Animated Progress Bar */}
+        <div className="hero-progress-rail">
+          <div ref={progressRef} className="hero-progress-bar" />
         </div>
 
-        {/* LEFT LAYER: BLACK & WHITE (CLIPPED TO 50%) */}
-        <div className="hero7-split-layer hero7-layer-bw">
-          <div ref={trackBwRef} className="hero7-stage">
-            <div className="hero7-track">{renderTrackItems(true)}</div>
-          </div>
+        {/* Minimal Luxury Dots (No Name Tags) */}
+        <div className="hero-slider-dots">
+          {HERO_SLIDES.map((slide, idx) => (
+            <button
+              key={slide.id}
+              type="button"
+              className={`hero-slider-dot ${currentIndex === idx ? "active" : ""}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                goToSlide(idx, idx > currentIndex ? 1 : -1);
+              }}
+              aria-label={`Slide ${idx + 1}`}
+            />
+          ))}
         </div>
-
-        {/* SIGNATURE CENTER GLOW BAR (VERTICAL LASER) WITH PARTICLES */}
-        <div className="hero7-laser-bar" aria-hidden="true">
-          <div className="hero7-laser-core" />
-          <div className="hero7-laser-halo" />
-
-          {/* Glowing flares along the beam */}
-          <div className="hero7-laser-flare top" />
-          <div className="hero7-laser-flare center" />
-          <div className="hero7-laser-flare bottom" />
-
-          {/* Floating animated particle sparks */}
-          <div className="hero7-particles">
-            {PARTICLES.map((p) => (
-              <span
-                key={p.id}
-                className="hero7-particle"
-                style={{
-                  left: `calc(50% + ${p.left}px)`,
-                  width: `${p.size}px`,
-                  height: `${p.size}px`,
-                  animationDuration: `${p.duration}s`,
-                  animationDelay: `${p.delay}s`,
-                  opacity: p.opacity,
-                }}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Side vignettes */}
-        <div className="hero7-vignette left" aria-hidden="true" />
-        <div className="hero7-vignette right" aria-hidden="true" />
       </div>
     </section>
   );
 }
-
